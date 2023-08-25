@@ -1,0 +1,47 @@
+{
+  "10": {
+    "id_project": "",
+    "orden": 1,
+    "titulo": "Gestion del Alcance"
+  },
+  "20": {
+    "id_project": "",
+    "orden": 2,
+    "titulo": "Gestion del Cronograma"
+  },
+  "30": {
+    "id_project": "",
+    "orden": 3,
+    "titulo": "Gestion del Costo"
+  },
+  "40": {
+    "id_project": "",
+    "orden": 4,
+    "titulo": "Plan de Gestion de la Calidad"
+  },
+  "60": {
+    "id_project": "",
+    "orden": 5,
+    "titulo": "Plan de Gestion de Recursos Humanos"
+  },
+  "70": {
+    "id_project": "",
+    "orden": 6,
+    "titulo": "Plan de Gestion de las Comunicaciones"
+  },
+  "80": {
+    "id_project": "",
+    "orden": 7,
+    "titulo": "Plan de Gestion de las Adquisiciones"
+  },
+  "90": {
+    "id_project": "",
+    "orden": 8,
+    "titulo": "Plan de Gestion de Riesgos, Interfaces y Cambios"
+  },
+  "05": {
+    "id_project": "",
+    "orden": 0,
+    "titulo": "Plan de Gestion de Proyectos"
+  }
+}

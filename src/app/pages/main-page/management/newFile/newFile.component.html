@@ -1,0 +1,98 @@
+<h2 mat-dialog-title class="h2-dialog">{{ 'new' | translate }}</h2>
+<!-- Se inicializa el Formulario -->
+
+<form autocomplete="off" [formGroup]="fmanage" (ngSubmit)="saveManage()">
+  <!-- Contenido del dialog -->
+  <mat-dialog-content class="mat-typography">
+    <!-- Contenido del dialog -->
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Columna 1 -->
+        <div class="col-sm-6">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-sm-12 mt-2">
+                <input
+                  type="date"
+                  placeholder="Fecha"
+                  id="fecha"
+                  class="form-control"
+                  formControlName="date"
+                />
+              </div>
+              <div class="col-sm-12 mt-2">
+                <input
+                  type="text"
+                  id="area"
+                  class="form-control"
+                  placeholder="Parent"
+                  formControlName="parent"
+                />
+                <!-- Tooltip de validacion del campo Area -->
+                <div class="invalid-tooltip">
+                  Please enter Parent
+                </div>
+              </div>
+              <div class="col-sm-12 mt-2">
+                <textarea
+                  id="details"
+                  rows="6"
+                  class="form-control"
+                  placeholder="Descripcion"
+                  formControlName="description">
+                </textarea>
+                <!-- Tooltip de validacion del campo referencia -->
+                <div class="invalid-tooltip">
+                  Se requieren descripcion.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Columna 2 -->
+        <div class="col-sm-6">
+          <div class="form-group">
+              <!-- Select Versiones-->
+            <div class="row">
+              <div class="col-sm-12 mt-2">
+                <input type="file" class="form-control" (change)="onFileSelected($event)">
+              </div>
+              <div class="col-sm-12 mt-2">
+                <select id="selectPhase" class="form-control" formControlName="version">
+                  <option selected disabled value="">{{ 'Seleccione version' }}</option>
+                  <option *ngFor="let fase of faseOptions" [value]="fase">{{ fase }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- Resto del código HTML... -->
+    </div>
+  </mat-dialog-content>
+  <!-- Resto del código HTML... -->
+  <!-- Acciones del Dialog -->
+  <mat-dialog-actions align="end" class="footer-dialog">
+    <!-- Container Bootstrap del contenido del las Acciones del Dialog -->
+    <div class="container-fluid">
+      <div class="row justify-content-end">
+        <div class="col-auto me-auto">
+          <!-- Boton de Cancelar -->
+          <button mat-button mat-dialog-close class="btn btn-secondary">
+            Cancelar
+          </button>
+        </div>
+        <div class="col-auto">
+          <!-- Boton de Guardar -->
+          <button type="submit" mat-button [mat-dialog-close]="true" cdkFocusInitial class="btn btn-primary">
+            Salvar
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-actions>
+</form>
+
+
+

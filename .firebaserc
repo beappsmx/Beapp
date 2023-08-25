@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "beapp-dev-8be63"
+  },
+  "targets": {
+    "beapp-dev-8be63": {
+      "hosting": {
+        "app-be": [
+          "beapp-dev-8be63"
+        ]
+      }
+    }
+  }
+}

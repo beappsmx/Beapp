@@ -1,0 +1,170 @@
+<aside class="main-sidebar sidebar-light-primary elevation-4">
+  <!-- Brand Logo -->
+  <a href="../../index3.html" class="brand-link">
+    <img
+      src="./assets/img/HCOLogo.png"
+      alt="HCO Logo"
+      class="brand-image img-circle elevation-0"
+      style="opacity: 0.8"
+    />
+    <div class="brand-text font-weight-bold">HCO</div>
+    <div
+      class="brand-text font-weight-bold"
+      style="font-size: 8px; color: #119da4; text-align: justify; margin-top: 0"
+    >
+      Consultoria & Servicios
+    </div>
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user (optional) -->
+    <div class="user-panel mt-4 pb-2 mb-2 brand-image">
+
+      <select
+        id="company" (change)="onCompanysSelected($event)"  class="form-control select-side"      >
+        <!--   <option selected disabled value="">   {{ 'company'| translate }}     </option> -->
+        <option *ngFor="let item of companyData" [value]="item.id_company">
+          {{ item.company }}
+        </option>
+      </select>
+
+      <select id="branchs" (change)="onBranchsSelected($event)" class="form-control select-side">
+        <!--      <option selected disabled value=""> Sucursales    </option> -->
+        <option *ngFor="let item of branchData" [value]="item.id_branchs">
+            {{ item.branchs }}
+        </option>
+      </select>
+
+      <select id="projects" (change)="onProjectSelected($event)" class="form-control select-side">
+        <!--       <option value="">Seleccione un proyecto</option> -->
+        <option *ngFor="let item of projectData" [value]="item.id_projects">
+          {{ item.projects }}
+        </option>
+      </select>
+    </div>
+
+
+    <!-- Sidebar Menu -->
+    <mat-list>
+      <!-- Menu Dashboard -->
+      <mat-expansion-panel id="expMenu">
+        <mat-expansion-panel-header class="panel-header">
+          <mat-panel-title>
+            <mat-icon matListItemIcon class="brand-image">dashboard</mat-icon>
+            <div matListItemTitle class="item-content-panel brand-text">Dashboard</div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-list-item routerLink="#" (click)="navigateToDshbPMO()">
+          <mat-icon matListItemIcon>apartment</mat-icon>
+          <div matListItemTitle class="item-content">PMO</div>
+        </mat-list-item>
+
+        <mat-list-item routerLink="#">
+          <mat-icon matListItemIcon>home_work</mat-icon>
+          <div matListItemTitle class="item-content">PM</div>
+        </mat-list-item>
+      </mat-expansion-panel>
+      <!-- Menu PMO -->
+      <mat-expansion-panel id="expMenu">
+        <mat-expansion-panel-header class="panel-header">
+          <mat-panel-title>
+            <mat-icon matListItemIcon class="brand-image">apartment</mat-icon>
+            <div matListItemTitle class="item-content-panel brand-text">PMO</div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-list-item routerLink="#" (click)="navigateToInterested()">
+          <mat-icon matListItemIcon>badge</mat-icon>
+          <div matListItemTitle class="item-content">Interesados</div>
+        </mat-list-item>
+        <mat-list-item routerLink="#" (click)="navigateToCommunications()">
+          <mat-icon matListItemIcon>share</mat-icon>
+          <div matListItemTitle class="item-content">Comunicaciones</div>
+        </mat-list-item>
+        <mat-list-item routerLink="#" (click)="navigateToRisk()">
+          <mat-icon matListItemIcon>query_stats</mat-icon>
+          <div matListItemTitle class="item-content">Riesgos</div>
+        </mat-list-item>
+        <mat-list-item routerLink="#" (click)="navigateToManagement()">
+          <mat-icon matListItemIcon>description</mat-icon>
+          <div matListItemTitle class="item-content">Gestion de Proyectos</div>
+        </mat-list-item>
+        <mat-list-item routerLink="#" (click)="navigateToLessons()">
+          <mat-icon matListItemIcon>task</mat-icon>
+          <div matListItemTitle class="item-content">Lecciones Aprendidas</div>
+        </mat-list-item>
+        <mat-list-item routerLink="#" (click)="navigateToTraining()">
+          <mat-icon matListItemIcon>history_edu</mat-icon>
+          <div matListItemTitle class="item-content">Gestion de Capacitaciones</div>
+        </mat-list-item>
+      </mat-expansion-panel>
+      <!-- Menu PM -->
+      <mat-expansion-panel id="expMenu">
+        <mat-expansion-panel-header class="panel-header">
+          <mat-panel-title>
+            <mat-icon matListItemIcon class="brand-image">home_work</mat-icon>
+            <div matListItemTitle class="item-content-panel brand-text">PM</div>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-list-item routerLink="#" (click)="navigateToCatalog()">
+          <mat-icon matListItemIcon>wysiwyg</mat-icon>
+          <div matListItemTitle class="item-content">Catalogo de Conceptos</div>
+        </mat-list-item>
+
+        <mat-list-item  routerLink="#" (click)="navigateToUsers()">
+          <mat-icon matListItemIcon>engineering</mat-icon>
+          <div matListItemTitle class="item-content">Catalogo de Personal</div>
+        </mat-list-item>
+
+        <mat-list-item routerLink="#" (click)="navigateToUsers()">
+          <mat-icon matListItemIcon>front_loader</mat-icon>
+          <div matListItemTitle class="item-content">Catalogo de Equipos</div>
+        </mat-list-item>
+
+        <mat-list-item routerLink="#" (click)="navigateToUsers()">
+          <mat-icon matListItemIcon>handyman</mat-icon>
+          <div matListItemTitle class="item-content">Catalogo de Herramientas</div>
+        </mat-list-item>
+
+      </mat-expansion-panel>
+      <!-- Menu Configuracion -->
+      <mat-expansion-panel id="expMenu">
+        <mat-expansion-panel-header class="panel-header">
+          <mat-panel-title>
+            <mat-icon matListItemIcon class="brand-image">admin_panel_settings</mat-icon>
+            <div matListItemTitle class="item-content-panel brand-text">Configuración</div>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-list-item routerLink="#" (click)="navigateToCompanys()">
+          <mat-icon matListItemIcon>apple</mat-icon>
+          <div matListItemTitle class="item-content">Empresas</div>
+        </mat-list-item>
+
+        <mat-list-item  routerLink="#" (click)="navigateToUsers()">
+          <mat-icon matListItemIcon>person</mat-icon>
+          <div matListItemTitle class="item-content">Usuarios</div>
+        </mat-list-item>
+
+        <mat-list-item routerLink="#">
+          <mat-icon matListItemIcon>android</mat-icon>
+          <div matListItemTitle class="item-content">Permisos</div>
+        </mat-list-item>
+
+        <mat-list-item routerLink="#" (click)="navigateToBranchs()">
+          <mat-icon matListItemIcon>android</mat-icon>
+          <div matListItemTitle class="item-content">Sucursales</div>
+        </mat-list-item>
+
+      </mat-expansion-panel>
+      <mat-list-item routerLink="#" (click)="authService.logout()">
+        <mat-icon matListItemIcon>logout</mat-icon>
+        <div matListItemTitle class="item-content brand-text">Salir</div>
+      </mat-list-item>
+    </mat-list>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+

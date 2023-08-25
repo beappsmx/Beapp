@@ -1,0 +1,313 @@
+<!--
+*-----------------------------------------------------------------------------------------------------------------------------------------*
+* Descripcion:    Dialog Editar Interesado                                                                                                *
+* Autor:          Heber Alejandro Arce Sanchez                                                                                            *
+* Version:        1.0a1                                                                                                                   *
+* Fecha Creacion: 09/06/2023                                                                                                              *
+*-----------------------------------------------------------------------------------------------------------------------------------------*
+* Log de Modificación                                                                                                                     *
+*                                                                                                                                         *
+*   Fecha           Programador            Correccion                                     Descripcion                                     *
+* 09/06/2023    Heber Alejandro Arce      s/n Solicitud           se crea el formulario a partir del dialog edit.component de usuarios    *
+*-----------------------------------------------------------------------------------------------------------------------------------------*
+-->
+<h2 mat-dialog-title class="h2-dialog">{{ 'msj_i1' | translate }}</h2>
+<!-- Se inicializa el Formulario -->
+<form autocomplete="off" [formGroup]="fis" (ngSubmit)="editInteres()">
+  <!-- Contenido del dialog -->
+  <mat-dialog-content class="mat-typography">
+    <!-- Contenido del dialog -->
+    <ng-container *ngIf="!loadData">
+      <!-- Container Bootstrap -->
+      <div class="container-fluid">
+        <!-- Fila 1 Bootstrap -->
+        <div class="row">
+          <!-- Columna 1.1 Bootstrap Izquierda-->
+          <div class="col-sm-6">
+            <!-- SubFila 1.1.1 Bootstrap Nombre-->
+            <div class="row mt-2">
+              <!-- SubColumna 1.1.1.1 Bootstrap Nombre-->
+              <div class="col-sm-12">
+                <!-- Campo de texto Nombre -->
+                <input
+                  type="text"
+                  id="InputName"
+                  class="form-control"
+                  placeholder="{{ 'name' | translate }}"
+                  formControlName="name"
+                  [ngClass]="{ 'is-invalid': name.invalid && (name.dirty || name.touched) }"
+                />
+                <!-- Tooltip de validación del campo Nombre -->
+                <div
+                  *ngIf="name.invalid && (name.dirty || name.touched)"
+                  class="invalid-tooltip">
+                  {{ 'rname' | translate }}
+                </div>
+              </div>
+            </div>
+            <!-- SubFila 1.1.2 Bootstrap Organizacion-->
+            <div class="row mt-2">
+              <!-- SubColumna 1.1.2.1 Bootstrap Organizacion-->
+              <div class="col-sm-12">
+                <!-- Campo de Seleccion Organizacion -->
+                <select
+                  name="format"
+                  id="format"
+                  class="form-control"
+                  formControlName="organization">
+                  <option
+                    selected
+                    disabled
+                    value="">
+                    {{ 'organ' | translate }}
+                  </option>
+                  <option
+                    *ngFor="let item of organizationData"
+                    [value]="item.organization">
+                    {{ item.organization }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <!-- SubFila 1.1.3 Bootstrap Puesto-->
+            <div class="row mt-2">
+              <!-- SubColumna 1.1.3.1 Bootstrap Puesto-->
+              <div class="col-sm-12">
+                <!-- Campo de texto Puesto -->
+                <input
+                  type="text"
+                  id="Inputpos"
+                  class="form-control"
+                  placeholder="{{ 'position' | translate }}"
+                  formControlName="position"
+                  [ngClass]="{ 'is-invalid': position.invalid && (position.dirty || position.touched) }" />
+                <!-- Tooltip de validacion del campo Puesto -->
+                <div
+                  *ngIf="position.invalid && (position.dirty || position.touched)"
+                  class="invalid-tooltip">
+                  Please enter a valid position.
+                </div>
+              </div>
+            </div>
+            <!-- SubFila 1.1.4 Bootstrap Rol-->
+            <div class="row mt-2">
+              <!-- SubColumna 1.1.4.1 Bootstrap Rol-->
+              <div class="col-sm-12">
+                <!-- Campo de texto Rol -->
+                <input
+                  type="text"
+                  id="Inputcount"
+                  class="form-control"
+                  placeholder="{{ 'rol' | translate }}"
+                  formControlName="role"
+                  [ngClass]="{ 'is-invalid': role.invalid && (role.dirty || role.touched) }" />
+                <!-- Tooltip de validacion del campo Rol -->
+                <div
+                  *ngIf="role.invalid && (role.dirty || role.touched)"
+                  class="invalid-tooltip">
+                  Please enter a valid role.
+                </div>
+              </div>
+            </div>
+            <!-- SubFila 1.1.5 Bootstrap Seguimiento-->
+            <div class="row mt-2">
+              <!-- SubColumna 1.1.5.1 Bootstrap Seguimiento-->
+              <div class="col-sm-12">
+                <!-- Campo de texto Seguimiento -->
+                <input
+                  type="text"
+                  id="Inputfollow"
+                  class="form-control"
+                  placeholder="{{ 'follow' | translate }}"
+                  formControlName="follow"
+                  [ngClass]="{ 'is-invalid': follow.invalid && (follow.dirty || follow.touched) }" />
+                <!-- Tooltip de validacion del campo Seguimiento -->
+                <div
+                  *ngIf="follow.invalid && (follow.dirty || follow.touched)"
+                  class="invalid-tooltip">
+                  Please enter a valid follow.
+                </div>
+              </div>
+            </div>
+            <!-- SubFila 1.1.6 Bootstrap email-->
+            <div class="row mt-2">
+              <!-- SubColumna 1.1.6.1 Bootstrap email-->
+              <div class="col-sm-12">
+                <!-- Campo de texto email -->
+                <input
+                  type="text"
+                  id="Inputemail"
+                  class="form-control"
+                  placeholder="{{ 'email' | translate }}"
+                  formControlName="email"
+                  [ngClass]="{ 'is-invalid': fis.controls.email.invalid && (fis.controls.email.dirty || fis.controls.email.touched) }" />
+                <!-- Tooltip de validacion del campo email -->
+                <div
+                  *ngIf="fis.controls.email.invalid && (fis.controls.email.dirty || fis.controls.email.touched)"
+                  class="invalid-tooltip">
+                  Please enter a valid email address.
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Columna 1.2 Bootstrap Derecha-->
+          <div class="col-sm-6">
+            <!-- SubFila 1.2.1 Bootstrap Imagen-->
+            <div class="row mt-2">
+              <!-- SubColumna 1.2.1.1 Bootstrap Imagen-->
+              <div class="col-sm-12">
+                <!-- Tarjeta de Imagen -->
+                <div class="card card-primary card-img">
+                  <div class="text-center">
+                    <label for="pictureUpload" class="mb-3">
+                      <img [src]="imageUrl" width="100" height="100" *ngIf="imageUrl" />
+                      {{ 'Avatar/Foto' | translate }}
+                    </label>
+                    <!-- Campo de archivo de Imagen -->
+                    <input type="file" id="pictureUpload" (change)="uploadImage($event)" style="display: none;" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <!-- SubColumna 1.1.6.1 Bootstrap phone-->
+              <div class="col-sm-12">
+                <!-- Campo de texto phone -->
+                <input
+                  type="text"
+                  id="Inputphone"
+                  class="form-control"
+                  placeholder="{{ 'phone' | translate }}"
+                  formControlName="phone"
+                  [ngClass]="{ 'is-invalid': fis.controls.phone.invalid && (fis.controls.phone.dirty || fis.controls.phone.touched) }"
+                />
+                <!-- Tooltip de validacion del campo phone -->
+                <div
+                  *ngIf="fis.controls.phone.invalid && (fis.controls.phone.dirty || fis.controls.phone.touched)"
+                  class="invalid-tooltip">
+                  Please enter a valid phone address.
+                </div>
+              </div>
+            </div>
+            <!-- SubFila 1.2.2 Bootstrap Impacto-->
+            <div class="row">
+              <!-- SubColumna 1.2.2.1 Bootstrap Impacto-->
+              <div class="col-sm-12 mt-2">
+                <!-- Panel de Expansion Impacto -->
+                <mat-accordion>
+                  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header class="panel-header">
+                      <mat-panel-title>
+                        {{ 'impact' | translate }}
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <!-- Contenido del Panel de Expansion Impacto -->
+                    <!-- SubFila 1.2.2.1.1 Bootstrap-->
+                    <div class="row">
+                      <!-- SubColumna 1.2.2.1.1.1 Bootstrap Interes-->
+                      <div class="col-sm-6 mt-2">
+                        <!-- Campo de Selección Interes -->
+                        <select
+                          name="interes"
+                          id="interes"
+                          class="form-control select-impact"
+                          formControlName="interes">
+                          <option
+                            selected value="">
+                            {{ 'interest' | translate }}
+                          </option>
+                          <option
+                            *ngFor="let n1 of numbers">
+                            {{ n1 }}
+                          </option>
+                        </select>
+                      </div>
+                      <!-- SubColumna 1.2.2.1.1.2 Bootstrap Influencia-->
+                      <div class="col-sm-6 mt-2">
+                        <!-- Campo de Selección Influencia -->
+                        <select
+                          name="influence"
+                          id="influence"
+                          class="form-control select-impact"
+                          formControlName="influence">
+                          <option
+                            selected
+                            value="">
+                            {{ 'influence' | translate }}
+                          </option>
+                          <option
+                            *ngFor="let n2 of numbers">
+                            {{ n2 }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <!-- SubFila 1.2.2.1.2 Bootstrap-->
+                    <div class="row">
+                      <!-- SubColumna 1.2.2.1.2.1 Bootstrap Poder-->
+                      <div class="col-sm-6 mt-2">
+                        <!-- Campo de Selección Poder -->
+                        <select
+                          name="poder"
+                          id="poder"
+                          class="form-control select-impact"
+                          formControlName="power">
+                          <option
+                            selected value="">
+                            {{ 'power' | translate }}
+                          </option>
+                          <option
+                            *ngFor="let n3 of numbers">
+                            {{ n3 }}
+                          </option>
+                        </select>
+                      </div>
+                      <!-- SubColumna 1.2.2.1.2.2 Bootstrap Promedio-->
+                      <div class="col-sm-6 mt-2">
+                        <!-- Campo de texto Promedio -->
+                        <input
+                          type="text"
+                          id="Inputph"
+                          class="form-control input-readonly"
+                          placeholder="avg"
+                          formControlName="avg"
+                          [value]="calcularAvg()"
+                        />
+                      </div>
+                    </div>
+                  </mat-expansion-panel>
+                </mat-accordion>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </mat-dialog-content>
+  <!-- Acciones del Dialog -->
+  <mat-dialog-actions align="end" class="footer-dialog">
+    <!-- Container Bootstrap del contenido del las Acciones del Dialog -->
+    <div class="container-fluid">
+      <div class="row justify-content-end">
+        <div class="col-auto me-auto">
+          <!-- Boton de Cancelar -->
+          <button mat-button mat-dialog-close class="btn btn-secondary">
+            Cancelar
+          </button>
+        </div>
+        <div class="col-auto">
+          <!-- Boton de Guardar -->
+          <button
+            type="submit"
+            mat-button
+            [mat-dialog-close]="true"
+            cdkFocusInitial
+            class="btn btn-primary"
+            [disabled]="fis.invalid">
+            Salvar
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-actions>
+</form>

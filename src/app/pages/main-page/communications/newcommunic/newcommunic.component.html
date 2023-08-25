@@ -1,0 +1,410 @@
+<!--
+*-----------------------------------------------------------------------------------------------------------------------------------------*
+* Descripcion:    Dialog Nueva comunicacion                                                                                                     *
+* Autor:          Heber Alejandro Arce                                                                                                    *
+* Version:        2.0a1                                                                                                                   *
+* Fecha Creacion: 24/07/2023                                                                                                              *
+*-----------------------------------------------------------------------------------------------------------------------------------------*
+* Log de Modificación                                                                                                                     *
+*                                                                                                                                         *
+*   Fecha           Programador            Correccion                                     Descripcion                                     *
+* 24/07/2023    Heber Alejandro Arce      s/n Solicitud      ReCreación del dialog, cambios del formulario a stepper y adecuaciones de    *
+*                                                            campos                                                                       *
+*-----------------------------------------------------------------------------------------------------------------------------------------*
+-->
+<h2 mat-dialog-title class="h2-dialog">{{ 'msj_c0' | translate }}</h2>
+<!-- Se inicializa el Formulario -->
+<form
+  autocomplete="off"
+  [formGroup]="fcommunications"
+  (ngSubmit)="saveCommunications()"
+>
+  <!-- Contenido del dialog -->
+  <mat-dialog-content class="mat-typography">
+    <ng-container>
+      <div class="container-fluid">
+        <mat-stepper
+          class="mat-horizontal-stepper"
+          [orientation]="(stepperOrientation | async)!"
+          formArrayName="formArray">
+          <!-- Primer form, captura de datos generales -->
+          <mat-step formGroupName="0" [stepControl]="formArray?.get([0])" label="{{ 'msj_r0' | translate }}">
+            <p>{{ 'msj_c1' | translate }}</p>
+            <div class="row row-cols-2 row-cols-md-2 mt-2">
+              <div class="col-sm-6 mt-2">
+                <!-- Select id del concepto -->
+                <select
+                  id="process"
+                  name="process"
+                  class="form-control"
+                  formControlName="process"
+                  required
+                  [ngClass]="{'is-invalid': fcommunications.get('formArray').get('0').get('process').invalid && fcommunications.get('formArray').get('0').get('process').touched}">
+                  <option selected value=""> {{ 'msj_c2' | translate }} </option>
+                  <option *ngFor="let proc of pmbok" [value]="proc">
+                    {{ proc }}
+                  </option>
+                </select>
+                <div class="invalid-tooltip">
+                  {{ 'msj_vselect' | translate }}
+                </div>
+              </div>
+              <div class="col-sm-6 mt-2">
+                <!-- Text Area Descripcion del riesgo -->
+                <input
+                  type="text"
+                  class="form-control"
+                  name="information"
+                  id="information"
+                  formControlName="information"
+                  placeholder="{{ 'msj_c3' | translate }}"
+                  required
+                  [ngClass]="{'is-invalid': fcommunications.get('formArray').get('0').get('information').invalid && (fcommunications.get('formArray').get('0').get('information').dirty || fcommunications.get('formArray').get('0').get('information').touched)}"/>
+                <div class="invalid-tooltip">
+                  {{ 'msj_vtxt' | translate }}
+                </div>
+              </div>
+              <div class="col-sm-6 mt-2">
+                <!-- Select id del concepto -->
+                <select
+                  id="format"
+                  name="format"
+                  class="form-control"
+                  formControlName="format"
+                  required
+
+                  [ngClass]="{'is-invalid': fcommunications.get('formArray').get('0').get('format').invalid && fcommunications.get('formArray').get('0').get('format').touched}">
+                  <option selected value=""> {{ 'format' | translate }} </option>
+                  <option *ngFor="let md of media" [value]="md">
+                    {{ md }}
+                  </option>
+                </select>
+                <div class="invalid-tooltip">
+                  {{ 'msj_vselect' | translate }}
+                </div>
+                <!-- Input adicional para capturar información cuando se selecciona "otros" -->
+                <input
+                  *ngIf="fcommunications.get('formArray').get('0').get('format').value === 'Otros'"
+                  [(ngModel)]="otrosInputValue"
+                  placeholder="{{ 'msj_c4' | translate }}"
+                  formControlName="formatO"
+                  class="form-control is-warning mt-2"
+                />
+              </div>
+
+              <div class="col-sm-6 mt-2">
+                <!-- Text Area Descripcion del riesgo -->
+                <input
+                  type="text"
+                  class="form-control"
+                  name="reference"
+                  id="reference"
+                  formControlName="reference"
+                  placeholder="{{ 'msj_c6' | translate }}"
+                  required
+                  (change)="onInteresSelect()"
+                  [ngClass]="{'is-invalid': fcommunications.get('formArray').get('0').get('reference').invalid && (fcommunications.get('formArray').get('0').get('reference').dirty || fcommunications.get('formArray').get('0').get('reference').touched)}"/>
+                <div class="invalid-tooltip">
+                  {{ 'msj_vtxt' | translate }}
+                </div>
+              </div>
+            </div>
+            <mat-divider class="mt-3 mb-3"></mat-divider>
+            <div>
+              <button mat-button matStepperNext class="btn btn-primary" type="button">{{ 'next' | translate }}</button>
+            </div>
+          </mat-step>
+          <!-- Segundo form, captura de Interesados de la comunicacion -->
+          <mat-step formGroupName="1" [stepControl]="formArray?.get([1])" label="{{ 'comunication' | translate }}">
+            <p>{{ 'msj_c7' | translate }}</p>
+            <div class="row row-cols-2 row-cols-md-2 mt-2">
+              <div class="col-sm-6 mt-2">
+                <div class="row row-cols-2 row-cols-md-2 mt-2">
+                  <div class="col-sm-10 mt-2">
+                    <!-- Text Area Descripcion del riesgo -->
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="area"
+                      id="area"
+                      formControlName="area"
+                      placeholder="{{ 'msj_c5' | translate }}"
+                      required
+                      [ngClass]="{'is-invalid': fcommunications.get('formArray').get('1').get('area').invalid && (fcommunications.get('formArray').get('1').get('area').dirty || fcommunications.get('formArray').get('1').get('area').touched)}"/>
+                    <div class="invalid-tooltip">
+                      {{ 'msj_vtxt' | translate }}
+                    </div>
+                  </div>
+                  <!-- Campo de Seleccion encargado del Riesgo, extrae de Interesados -->
+                  <div class="col-sm-10 mt-2">
+                    <select
+                      id="owner"
+                      class="form-control"
+                      formControlName="owner"
+                      (click)="onInteresSelect()"
+                      required
+                      [ngClass]="{'is-invalid': fcommunications.get('formArray').get('1').get('owner').invalid && fcommunications.get('formArray').get('1').get('owner').touched}">
+                      <option selected value="">{{ 'msj_c8' | translate }}</option>
+                      <option *ngFor="let item of interestedList" [value]="item.name">{{ item.name }}</option>
+                    </select>
+                    <div class="invalid-tooltip">
+                      {{ 'msj_vselect' | translate }}
+                    </div>
+                  </div>
+                  <div class="col-sm-2 mt-2">
+                    <button
+                      (click)="navigateToInterested()"
+                      mat-button
+                      mat-dialog-close
+                      matTooltip="{{ 'msj_r5' | translate }}"
+                      class="btn btn-sm btn-warning">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                  <div class="col-sm-10 mt-2">
+                    <!-- Text Area Descripcion del riesgo -->
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="group"
+                      id="group"
+                      formControlName="group"
+                      placeholder="{{ 'msj_c10' | translate }}"
+                      required
+                      [ngClass]="{'is-invalid': fcommunications.get('formArray').get('1').get('group').invalid && (fcommunications.get('formArray').get('1').get('group').dirty || fcommunications.get('formArray').get('1').get('group').touched)}"/>
+                    <div class="invalid-tooltip">
+                      {{ 'msj_vtxt' | translate }}
+                    </div>
+                  </div>
+                  <div class="col-sm-10 mt-2">
+                    <mat-accordion>
+                      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header class="panel-header">
+                          <mat-panel-title>
+                            {{ 'msj_c11' | translate }}
+                          </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="row">
+                          <div class="col-sm-12 mt-2">
+                            <select
+                              id="freq"
+                              class="form-control"
+                              formControlName="freq"
+                              required
+                              [ngClass]="{'is-invalid': fcommunications.get('formArray').get('1').get('freq').invalid && fcommunications.get('formArray').get('1').get('freq').touched}">
+                              <option selected value="">{{ 'frequence' | translate }}</option>
+                              <option *ngFor="let item of frq" [value]="item">{{ item }}</option>
+                            </select>
+                            <div class="invalid-tooltip">
+                              {{ 'msj_vselect' | translate }}
+                            </div>
+                          </div>
+                          <div class="col-sm-6 mt-2 mb-3">
+                            <!-- Text Area Descripcion del riesgo -->
+                            <input
+                              type="date"
+                              class="form-control"
+                              name="dayini"
+                              id="dayini"
+                              formControlName="dayini"
+                              required
+                              [ngClass]="{'is-invalid': fcommunications.get('formArray').get('1').get('dayini').invalid && (fcommunications.get('formArray').get('1').get('dayini').dirty || fcommunications.get('formArray').get('1').get('dayini').touched)}"/>
+                            <div class="invalid-tooltip">
+                              {{ 'msj_vdte' | translate }}
+                            </div>
+                          </div>
+                          <div class="col-sm-6 mt-2 mb-3">
+                            <!-- Text Area Descripcion del riesgo -->
+                            <input
+                              type="time"
+                              class="form-control"
+                              name="timeini"
+                              id="timeini"
+                              formControlName="timeini"
+                              required
+                              [ngClass]="{'is-invalid': fcommunications.get('formArray').get('1').get('timeini').invalid && (fcommunications.get('formArray').get('1').get('timeini').dirty || fcommunications.get('formArray').get('1').get('timeini').touched)}"/>
+                            <div class="invalid-tooltip">
+                              {{ 'msj_vtme' | translate }}
+                            </div>
+                          </div>
+                        </div>
+                      </mat-expansion-panel>
+                    </mat-accordion>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 mt-2">
+                <div class="row row-cols-1">
+                  <div class="col-sm-12">
+                    <h5>{{ 'msj_c9' | translate }}:</h5>
+                  </div>
+                  <div class="col-sm-12" style="max-height: 160px; overflow-y: auto;">
+                    <mat-selection-list (selectionChange)="onSelectionChange($event)" required formControlName="interested_comm">
+                      <mat-list-option *ngFor="let interested of availableUsers" [value]="interested">
+                        <span matListItemTitle class="item-content">{{ interested.name }}</span>
+                        <span matListItemLine class="item-mail">{{ interested.email }}</span>
+                      </mat-list-option>
+                    </mat-selection-list>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <mat-divider class="mt-3 mb-3"></mat-divider>
+            <div>
+              <button mat-button matStepperPrevious class="btn btn-primary" type="button">{{ 'back' | translate }}</button>
+              <button mat-button matStepperNext class="btn btn-primary ml-2" type="button">{{ 'next' | translate }}</button>
+            </div>
+          </mat-step>
+          <!-- Final, Revision para guardar -->
+          <mat-step label="{{ 'finish' | translate }}">
+            <p>{{ 'msj_r7' | translate }}</p>
+            <div class="row row-cols-2 row-cols-md-2 mt-2">
+              <div class="col-sm-6 mt-2">
+                <div class="row row-cols-4 row-cols-md-4 row-cols-sm-4">
+                  <div class="col-sm-12 subt-head text-center">
+                    {{ 'msj_c12' | translate }}
+                  </div>
+                  <div class="col-sm-3 col-md-3 subt-row">
+                    {{ 'name' | translate }}
+                  </div>
+                  <div class="col-sm-3 col-md-3 subt-cell">
+                    {{ fcommunications.get('formArray').get('0').get('information').value }}
+                  </div>
+                  <div class="col-sm-3 col-md-3 subt-row">
+                    {{ 'format' | translate }}
+                  </div>
+                  <div class="col-sm-3 col-md-3 subt-cell">
+                    <ng-container *ngIf="fcommunications.get('formArray').get('0').get('format').value === 'Otros'; else notOtros">
+                      {{ fcommunications.get('formArray').get('0').get('formatO').value }}
+                    </ng-container>
+                    <ng-template #notOtros>
+                      {{ fcommunications.get('formArray').get('0').get('format').value }}
+                    </ng-template>
+                  </div>
+                  <div class="col-sm-3 col-md-3 subt-row">
+                    {{ 'msj_c2' | translate }}
+                  </div>
+                  <div class="col-sm-3 col-md-3 subt-cell">
+                    {{ fcommunications.get('formArray').get('0').get('process').value }}
+                  </div>
+                  <div class="col-sm-3 col-md-3 subt-row">
+                    {{ 'reference' | translate }}
+                  </div>
+                  <div class="col-sm-3 col-md-3 subt-cell">
+                    {{ fcommunications.get('formArray').get('0').get('reference').value }}
+                  </div>
+                  <div class="col-sm-12 subt-head2 text-center">
+                    {{ 'msj_c11' | translate }}
+                  </div>
+                  <div class="col-sm-3 col-md-3 subt-row">
+                    {{ 'frequence' | translate }}
+                  </div>
+                  <div class="col-sm-3 col-md-3 subt-cell">
+                    {{ fcommunications.get('formArray').get('1').get('freq').value }}
+                  </div>
+                  <div class="col-sm-3 col-md-3 subt-row">
+                    {{ 'time' | translate }}
+                  </div>
+                  <div class="col-sm-3 col-md-3 subt-cell">
+                    {{ fcommunications.get('formArray').get('1').get('timeini').value }}
+                  </div>
+                  <div class="col-sm-3 col-md-3 subt-row">
+                    {{ 'msj_c14' | translate }}
+                  </div>
+                  <div class="col-sm-3 col-md-3 subt-cell">
+                    {{ fcommunications.get('formArray').get('1').get('dayini').value }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 mt-2">
+                <div class="row row-cols-2 row-cols-md-2 row-cols-sm-2 ml-1">
+                  <div class="col-sm-12 subt-head text-center">
+                    {{ 'msj_c13' | translate }}
+                  </div>
+                  <div class="col-sm-6 col-md-6 subt-row">
+                    {{ 'msj_c5' | translate }}
+                  </div>
+                  <div class="col-sm-6 col-md-6 subt-cell">
+                    {{ fcommunications.get('formArray').get('1').get('area').value }}
+                  </div>
+                  <div class="col-sm-6 col-md-6 subt-row">
+                    {{ 'msj_c8' | translate }}
+                  </div>
+                  <div class="col-sm-6 col-md-6 subt-cell">
+                    {{ fcommunications.get('formArray').get('1').get('owner').value }}
+                  </div>
+                  <div class="col-sm-6 col-md-6 subt-row">
+                    {{ 'msj_c10' | translate }}
+                  </div>
+                  <div class="col-sm-6 col-md-6 subt-cell">
+                    {{ fcommunications.get('formArray').get('1').get('group').value }}
+                  </div>
+                  <div class="col-sm-12 col-md-12 text-center subt-head2">
+                    {{ 'interes' | translate }}
+                  </div>
+                  <div class="col-sm-6 col-md-6 subt-row">
+                    {{ 'name' | translate }}
+                  </div>
+                  <div class="col-sm-6 col-md-6 subt-row">
+                    {{ 'email' | translate }}
+                  </div>
+                  <div class="col-sm-12 col-md-12">
+                    <div *ngFor="let int of selectedOptions; let i = index">
+                      <div class="row row-cols-2 row-cols-md-2 row-cols-sm-2">
+                        <div class="col-md-6 col-sm-6 mt-1 subt-cell2">
+                          {{ int.name }}
+                        </div>
+                        <div class="col-md-6 col-sm-6 mt-1 subt-cell2">
+                          {{ int.email }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <mat-divider class="mt-3 mb-3"></mat-divider>
+            <div>
+              <button mat-button matStepperPrevious class="btn btn-primary" type="button">{{ 'back' | translate }}</button>
+            </div>
+          </mat-step>
+
+        </mat-stepper>
+      </div>
+    </ng-container>
+  </mat-dialog-content>
+  <!-- Acciones del Dialog -->
+  <mat-dialog-actions align="end" class="footer-dialog">
+    <!-- Container Bootstrap del contenido del las Acciones del Dialog -->
+    <div class="container-fluid">
+      <div class="row justify-content-end">
+        <div class="col-auto me-auto">
+          <!-- Boton de Cancelar -->
+
+          <button
+            mat-button
+            mat-dialog-close
+            class="btn btn-secondary">
+            {{ 'cancel' | translate }}
+          </button>
+        </div>
+        <div class="col-auto">
+          <!-- Boton de Guardar -->
+          <button
+            type="submit"
+            mat-button
+            [mat-dialog-close]="true"
+            cdkFocusInitial
+            class="btn btn-primary"
+            >
+            {{ 'save' | translate }}
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </mat-dialog-actions>
+</form>
+
+

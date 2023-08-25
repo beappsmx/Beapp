@@ -1,0 +1,506 @@
+<!--
+*-----------------------------------------------------------------------------------------------------------------------------------------*
+* Descripcion:    Dialog Edit Riesgo                                                                                                     *
+* Autor:          Heber Alejandro Arce                                                                                                    *
+* Version:        1.0a1                                                                                                                   *
+* Fecha Creacion: 10/07/2023                                                                                                              *
+*-----------------------------------------------------------------------------------------------------------------------------------------*
+* Log de Modificación                                                                                                                     *
+*                                                                                                                                         *
+*   Fecha           Programador            Correccion                                     Descripcion                                     *
+* 10/07/2023    Heber Alejandro Arce      s/n Solicitud      Creación del dialog                                                          *
+* 10/08/2023    Heber Alejandro Arce      s/n Solicitud      Adeciacion del dialog                                                        *
+*-----------------------------------------------------------------------------------------------------------------------------------------*
+-->
+<h2 mat-dialog-title class="h2-dialog">{{ 'newrisk' | translate }}</h2>
+<!-- Se inicializa el Formulario -->
+<form
+  autocomplete="off"
+  [formGroup]="form_risk"
+  (ngSubmit)="editRisk()"
+>
+  <!-- Contenido del dialog -->
+  <mat-dialog-content class="mat-typography">
+    <ng-container>
+      <div class="container-fluid">
+        <mat-stepper
+          class="mat-horizontal-stepper"
+          [orientation]="(stepperOrientation | async)!"
+          formArrayName="formArray">
+          <mat-step formGroupName="0" [stepControl]="formArray?.get([0])" label="{{ 'msj_r0' | translate }}">
+            <p>{{ 'msj_r1' | translate }}</p>
+            <div class="row row-cols-2 row-cols-md-2 mt-2">
+              <div class="col-sm-5 mt-2">
+                <!-- Text Area Descripcion del riesgo -->
+                <textarea
+                  class="form-control"
+                  name="description"
+                  id="description"
+                  formControlName="description"
+                  placeholder="{{ 'description' | translate }}"
+                  rows="3"
+                  required
+                  [ngClass]="{'is-invalid': form_risk.get('formArray').get('0').get('description').invalid && (form_risk.get('formArray').get('0').get('description').dirty || form_risk.get('formArray').get('0').get('description').touched)}">
+                </textarea>
+                <!-- Tooltip de validacion del campo description -->
+                <div class="invalid-tooltip">
+                  {{ 'msj_vtxt' | translate }}
+                </div>
+              </div>
+              <div class="col-sm-5 mt-2 offset-md-1">
+                <div class="row row-cols-1 row-cols-md-1">
+                  <div class="col-sm-12">
+                    <!-- Select id del concepto
+                    <select
+                      id="id_concept"
+                      name="id_concept"
+                      class="form-control"
+                      formControlName="id_concept"
+                      required
+                      [ngClass]="{'is-invalid': form_risk.get('formArray').get('0').get('id_concept').invalid && form_risk.get('formArray').get('0').get('id_concept').touched}">
+                      <option selected value=""> {{ 'concept' | translate }} </option>
+                      <option *ngFor="let valconc of conceptsList" [value]="valconc.actividad">
+                        {{ valconc.actividad }}
+                      </option>
+                    </select>
+                    <div class="invalid-tooltip">
+                      {{ 'msj_vselect' | translate }}
+                    </div>-->
+                    <input
+                      type="text"
+                      id="id_concept"
+                      class="form-control"
+                      placeholder="Concepto"
+                      formControlName="id_concept"
+
+                    />
+                  </div>
+                  <div class="col-sm-12 mt-2">
+                    <!-- Select Fase del proyecto -->
+                    <select
+                      class="form-control"
+                      name="phase"
+                      id="phase"
+                      formControlName="phase"
+                      required
+                      [ngClass]="{'is-invalid': form_risk.get('formArray').get('0').get('phase').invalid && form_risk.get('formArray').get('0').get('phase').touched}">
+                      <option selected value="">{{ 'phase' | translate }}</option>
+                      <option>Inicio</option>
+                      <option>Planeación</option>
+                      <option>Ejecución</option>
+                      <option>Monitoreo y Control</option>
+                      <option>Cierre</option>
+                      <option>Otros</option>
+                    </select>
+                    <div class="invalid-tooltip">
+                      {{ 'msj_vselect' | translate }}
+                    </div>
+                    <!-- Input adicional para capturar información cuando se selecciona "otros" -->
+                    <input
+                      *ngIf="form_risk.get('formArray').get('0').get('phase').value === 'Otros'"
+                      [(ngModel)]="otrosInputValue"
+                      placeholder="Otra Fase"
+                      formControlName="oPhase"
+                      class="form-control is-warning mt-2"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-5 mt-2">
+                <!-- Campo de Seleccion respuesta al riesgo -->
+                <select
+                  class="form-control"
+                  name="response"
+                  id="response"
+                  formControlName="response"
+                  required
+                  [ngClass]="{'is-invalid': form_risk.get('formArray').get('0').get('response').invalid && form_risk.get('formArray').get('0').get('response').touched}">
+                  <option selected value="">{{ 'response' | translate }}</option>
+                  <option>{{ 'avoid' | translate }}</option>
+                  <option>{{ 'transfer' | translate }}</option>
+                  <option>{{ 'mitigate' | translate }}</option>
+                  <option>{{ 'accept' | translate }}</option>
+                </select>
+                <div class="invalid-tooltip">
+                  {{ 'msj_vselect' | translate }}
+                </div>
+              </div>
+            </div>
+            <mat-divider class="mt-3 mb-3"></mat-divider>
+            <div>
+              <button mat-button matStepperNext class="btn btn-primary" type="button">{{ 'next' | translate }}</button>
+            </div>
+          </mat-step>
+
+          <mat-step formGroupName="1" [stepControl]="formArray?.get([1])" label="{{ 'impact' | translate }}">
+            <p>{{ 'msj_r2' | translate }}</p>
+            <div class="row row-cols-2 row-cols-md-2 mt-2">
+              <div class="col-sm-6 mt-2">
+                <div class="row row-cols-2 row-cols-md-2">
+                  <div class="col-sm-4">
+                    <h5>{{ 'probability' | translate }}:</h5>
+                  </div>
+                  <div class="col-sm-3">
+                    <select
+                      class="form-control"
+                      name="probability"
+                      id="probability"
+                      formControlName="probability"
+                      required
+                      [ngClass]="{'is-invalid': form_risk.get('formArray').get('1').get('probability').invalid && form_risk.get('formArray').get('1').get('probability').touched}">
+                      <option selected value="">0</option>
+                      <option *ngFor="let probability of numbers">
+                        {{ probability }}
+                      </option>
+                    </select>
+                    <div class="invalid-tooltip">
+                      {{ 'msj_vselect' | translate }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 mt-2">
+                <div class="row row-cols-2 row-cols-md-2">
+                  <div class="col-sm-4">
+                    <h5>{{ 'scope' | translate }}:</h5>
+                  </div>
+                  <div class="col-sm-3">
+                    <select
+                      class="form-control"
+                      name="imp_scope"
+                      id="imp_scope"
+                      formControlName="imp_scope"
+                      required
+                      [ngClass]="{'is-invalid': form_risk.get('formArray').get('1').get('imp_scope').invalid && form_risk.get('formArray').get('1').get('imp_scope').touched}">
+                      <option selected value="">0</option>
+                      <option *ngFor="let scope of numbers">
+                        {{ scope }}
+                      </option>
+                    </select>
+                    <div class="invalid-tooltip">
+                      {{ 'msj_vselect' | translate }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 mt-2">
+                <div class="row row-cols-2 row-cols-md-2">
+                  <div class="col-sm-4">
+                    <h5>{{ 'time' | translate }}:</h5>
+                  </div>
+                  <div class="col-sm-3">
+                    <select
+                      class="form-control"
+                      name="imp_time"
+                      id="imp_time"
+                      formControlName="imp_time"
+                      required
+                      [ngClass]="{'is-invalid': form_risk.get('formArray').get('1').get('imp_time').invalid && form_risk.get('formArray').get('1').get('imp_time').touched}">
+                      <option selected value="">0</option>
+                      <option *ngFor="let time of numbers">
+                        {{ time }}
+                      </option>
+                    </select>
+                    <div class="invalid-tooltip">
+                      {{ 'msj_vselect' | translate }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 mt-2">
+                <div class="row row-cols-2 row-cols-md-2">
+                  <div class="col-sm-4">
+                    <h5>{{ 'cost' | translate }}:</h5>
+                  </div>
+                  <div class="col-sm-3">
+                    <select
+                      class="form-control"
+                      name="imp_cost"
+                      id="imp_cost"
+                      formControlName="imp_cost"
+                      required
+                      [ngClass]="{'is-invalid': form_risk.get('formArray').get('1').get('imp_cost').invalid && form_risk.get('formArray').get('1').get('imp_cost').touched}">
+                      <option selected value="">0</option>
+                      <option *ngFor="let cost of numbers">
+                        {{ cost }}
+                      </option>
+                    </select>
+                    <div class="invalid-tooltip">
+                      {{ 'msj_vselect' | translate }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 mt-2">
+                <div class="row row-cols-2 row-cols-md-2">
+                  <div class="col-sm-4">
+                    <h5>{{ 'quality' | translate }}:</h5>
+                  </div>
+                  <div class="col-sm-3">
+                    <select
+                      class="form-control"
+                      name="imp_quality"
+                      id="imp_quality"
+                      formControlName="imp_quality"
+                      required
+                      [ngClass]="{'is-invalid': form_risk.get('formArray').get('1').get('imp_quality').invalid && form_risk.get('formArray').get('1').get('imp_quality').touched}">
+                      <option selected value="">0</option>
+                      <option *ngFor="let quality of numbers">
+                        {{ quality }}
+                      </option>
+                    </select>
+                    <div class="invalid-tooltip">
+                      {{ 'msj_vselect' | translate }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 mt-2">
+                <div class="row row-cols-2 row-cols-md-2">
+                  <div class="col-sm-4">
+                    <h5>{{ 'msj_r3' | translate }}:</h5>
+                  </div>
+                  <div class="col-sm-3">
+                    <input
+                      type="text"
+                      id="imp_score"
+                      class="form-control input-readonly"
+                      placeholder="0"
+                      formControlName="imp_score"
+                      [value]="calcularScore()"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <mat-divider class="mt-3 mb-3"></mat-divider>
+            <div>
+              <button mat-button matStepperPrevious class="btn btn-primary" type="button">{{ 'back' | translate }}</button>
+              <button mat-button matStepperNext class="btn btn-primary ml-2" type="button">{{ 'next' | translate }}</button>
+            </div>
+          </mat-step>
+
+          <mat-step formGroupName="2" [stepControl]="formArray?.get([2])" label="Personal">
+            <p>{{ 'msj_r4' | translate }}</p>
+            <div class="row row-cols-2 row-cols-md-2 mt-2">
+              <div class="col-sm-6 mt-2">
+                <div class="row row-cols-2 row-cols-md-2">
+                  <!-- Campo de Seleccion Dueño del Riesgo, extrae de Interesados -->
+                  <div class="col-sm-10">
+                    <select
+                      id="owner"
+                      class="form-control"
+                      formControlName="owner"
+                      (click)="onInteresSelect()"
+                      multiple="multiple"
+                      [ngClass]="{'is-invalid': form_risk.get('formArray').get('2').get('owner').invalid && form_risk.get('formArray').get('2').get('owner').touched}">
+                      <option selected disabled value="">{{ 'owner' | translate }}</option>
+                      <option *ngFor="let item of interestedList" [value]="item.name">{{ item.name }}</option>
+                    </select>
+                    <div class="invalid-tooltip">
+                      {{ 'msj_vselect' | translate }}
+                    </div>
+                  </div>
+                  <div class="col-sm-2">
+                    <button
+                      (click)="navigateToInterested()"
+                      mat-button
+                      mat-dialog-close
+                      matTooltip="{{ 'msj_r5' | translate }}"
+                      class="btn btn-sm btn-warning">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                  <!-- Campo de Seleccion encargado del Riesgo, extrae de Interesados -->
+                  <div class="col-sm-10 mt-2">
+                    <select
+                      id="closing_incharge"
+                      class="form-control"
+                      formControlName="closing_incharge"
+                      [ngClass]="{'is-invalid': form_risk.get('formArray').get('2').get('closing_incharge').invalid && form_risk.get('formArray').get('2').get('closing_incharge').touched}">
+                      <option selected value="">{{ 'inchargec' | translate }}</option>
+                      <option *ngFor="let item of interestedList" [value]="item.name">{{ item.name }}</option>
+                    </select>
+                    <div class="invalid-tooltip">
+                      {{ 'msj_vselect' | translate }}
+                    </div>
+                  </div>
+                  <div class="col-sm-2 mt-2">
+                    <button
+                      (click)="navigateToInterested()"
+                      mat-button
+                      mat-dialog-close
+                      matTooltip="{{ 'msj_r5' | translate }}"
+                      class="btn btn-sm btn-warning">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 mt-2">
+                <div class="row row-cols-1">
+                  <div class="col-sm-12">
+                    <h5>{{ 'msj_r6' | translate }}:</h5>
+                  </div>
+                  <div class="col-sm-12" style="max-height: 160px; overflow-y: auto;">
+                    <mat-selection-list
+                      (selectionChange)="onSelectionChange($event)"
+                      [formControl]="interesControl">
+                      <mat-list-option *ngFor="let interested of interestedList" [value]="interested">
+                        <span matListItemTitle class="item-content">{{ interested.name }}</span>
+                        <span matListItemLine class="item-mail">{{ interested.email }}</span>
+                      </mat-list-option>
+                    </mat-selection-list>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <mat-divider class="mt-3 mb-3"></mat-divider>
+            <div>
+              <button mat-button matStepperPrevious class="btn btn-primary" type="button">{{ 'back' | translate }}</button>
+              <button mat-button matStepperNext class="btn btn-primary ml-2" type="button">{{ 'next' | translate }}</button>
+            </div>
+          </mat-step>
+
+          <mat-step label="{{ 'finish' | translate }}">
+            <p>{{ 'msj_r7' | translate }}</p>
+            <div class="row row-cols-2 row-cols-md-2 mt-2">
+              <div class="col-sm-2">
+                <h5 class="t1">{{ 'description' | translate }}:</h5>
+              </div>
+              <div class="col-sm-10">
+                <h5><pre>{{ form_risk.get('formArray').get('0').get('description').value }}</pre></h5>
+              </div>
+            </div>
+            <div class="row row-cols-3 row-cols-md-3 mt-2">
+              <div class="col-sm-4">
+                <div class="row row-cols-2 row-cols-md-2">
+                  <div class="col-sm-5">
+                    <h5 class="t1">{{ 'concept' | translate }}:</h5>
+                  </div>
+                  <div class="col-sm-7">
+                    <h5>{{ form_risk.get('formArray').get('0').get('id_concept').value }}</h5>
+                  </div>
+                  <div class="col-sm-5">
+                    <h5 class="t1">{{ 'response' | translate }}:</h5>
+                  </div>
+                  <div class="col-sm-7">
+                    <h5>{{ form_risk.get('formArray').get('0').get('response').value }}</h5>
+                  </div>
+                  <div class="col-sm-5">
+                    <h5 class="t1">{{ 'phase' | translate }}:</h5>
+                  </div>
+                  <div class="col-sm-7">
+                    <h5>{{ form_risk.get('formArray').get('0').get('phase').value }}</h5>
+                  </div>
+                  <div class="col-sm-5">
+                    <h5 class="t1">{{ 'owner' | translate }}:</h5>
+                  </div>
+                  <div class="col-sm-7">
+                    <h5>{{ form_risk.get('formArray').get('2').get('owner').value }}</h5>
+                  </div>
+                  <div class="col-sm-5">
+                    <h5 class="t1">{{ 'inchargec' | translate }}:</h5>
+                  </div>
+                  <div class="col-sm-7">
+                    <h5>{{ form_risk.get('formArray').get('2').get('closing_incharge').value }}</h5>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="row row-cols-2 row-cols-md-2">
+                  <div class="col-sm-6">
+                    <h5 class="t1">{{ 'probability' | translate }}:</h5>
+                  </div>
+                  <div class="col-sm-6">
+                    <h5>{{ form_risk.get('formArray').get('1').get('probability').value }}</h5>
+                  </div>
+                  <div class="col-sm-6">
+                    <h5 class="t1">{{ 'scope' | translate }}:</h5>
+                  </div>
+                  <div class="col-sm-6">
+                    <h5>{{ form_risk.get('formArray').get('1').get('imp_scope').value }}</h5>
+                  </div>
+                  <div class="col-sm-6">
+                    <h5 class="t1">{{ 'time' | translate }}:</h5>
+                  </div>
+                  <div class="col-sm-6">
+                    <h5>{{ form_risk.get('formArray').get('1').get('imp_time').value }}</h5>
+                  </div>
+                  <div class="col-sm-6">
+                    <h5 class="t1">{{ 'cost' | translate }}:</h5>
+                  </div>
+                  <div class="col-sm-6">
+                    <h5>{{ form_risk.get('formArray').get('1').get('imp_cost').value }}</h5>
+                  </div>
+                  <div class="col-sm-6">
+                    <h5 class="t1">{{ 'quality' | translate }}:</h5>
+                  </div>
+                  <div class="col-sm-6">
+                    <h5>{{ form_risk.get('formArray').get('1').get('imp_quality').value }}</h5>
+                  </div>
+                  <div class="col-sm-6">
+                    <h5 class="t1">{{ 'msj_r3' | translate }}:</h5>
+                  </div>
+                  <div class="col-sm-6">
+                    <h5>{{ calcularScore() }}</h5>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-5">
+                <div class="row row-cols-1 row-cols-md-1">
+                  <div class="col-sm-12">
+                    <h5 class="t1">{{ 'msj_r6' | translate }}:</h5>
+                  </div>
+                  <div class="col-sm-12" style="max-height: 160px; overflow-y: auto;">
+                    <mat-list>
+                      <mat-list-item *ngFor="let interested of selectedOptions">
+                        <span matListItemTitle class="item-content">{{ interested.name }}</span>
+                        <span matListItemLine class="item-mail">{{ interested.email }}</span>
+                      </mat-list-item>
+                    </mat-list>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <mat-divider class="mt-3 mb-3"></mat-divider>
+            <div>
+              <button mat-button matStepperPrevious class="btn btn-primary" type="button">{{ 'back' | translate }}</button>
+            </div>
+          </mat-step>
+        </mat-stepper>
+      </div>
+    </ng-container>
+  </mat-dialog-content>
+  <!-- Acciones del Dialog -->
+  <mat-dialog-actions align="end" class="footer-dialog">
+    <!-- Container Bootstrap del contenido del las Acciones del Dialog -->
+    <div class="container-fluid">
+      <div class="row justify-content-end">
+        <div class="col-auto me-auto">
+          <!-- Boton de Cancelar -->
+
+          <button
+            mat-button
+            mat-dialog-close
+            class="btn btn-secondary">
+            {{ 'cancel' | translate }}
+          </button>
+        </div>
+        <div class="col-auto">
+          <!-- Boton de Guardar -->
+          <button
+            type="submit"
+            mat-button
+            [mat-dialog-close]="true"
+            cdkFocusInitial
+            class="btn btn-primary"
+            >
+            {{ 'save' | translate }}
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </mat-dialog-actions>
+</form>

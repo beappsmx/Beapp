@@ -1,0 +1,426 @@
+<h2 mat-dialog-title class="h2-dialog">{{ 'new' | translate }}</h2>
+
+<div *ngIf="data.formType === 'fcourses'">
+
+  <form
+autocomplete="off"
+[formGroup]="fcourses"
+(ngSubmit)="saveCourses()">
+
+<!-- Contenido del dialog -->
+<!-- Resto del código HTML... -->
+
+<!-- Contenido del dialog -->
+<mat-dialog-content class="mat-typography">
+<!-- Contenido del dialog -->
+<ng-container>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <!-- Left Group -->
+      <div class="form-group">
+        <!-- Container Bootstrap -->
+        <div class="container-fluid">
+          <!-- Fila 1 Bootstrap -->
+          <div class="row">
+            <!-- Columna 1.1 Bootstrap Izquierda-->
+            <div class="col-sm-12">
+               <!-- SubFila 1.1.2 Bootstrap information-->
+              <div class="row mt-2">
+                <!-- SubColumna 1.1.2.1 Bootstrap information-->
+                <div class="col-sm-12">
+                  <!-- Campo de Nombre del Course -->
+                  <input type="text" id="idname" class="form-control" placeholder="{{ 'name' | translate }} {{ 'course' | translate}}"
+                      formControlName="name" />
+                  <!-- Tooltip de validacion del campo information -->
+                  <div class="invalid-tooltip">
+                    {{ 'requires'  | translate }}   {{ 'name'  | translate }}
+                  </div>
+                </div>
+              </div>
+
+                <!-- SubFila 1.1.2 Bootstrap information-->
+               <div class="row mt-2">
+                 <!-- SubColumna 1.1.2.1 Bootstrap information-->
+                 <div class="col-sm-12">
+
+                    <select id="selectedInst" class="form-control" formControlName="instructor">
+                      <option selected disabled value=""> {{ 'instructors' | translate }} </option>
+                      <option *ngFor="let item of instructorsList" [value]="item.name">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                 </div>
+               </div>
+
+              <!-- SubFila 1.1.4 Bootstrap Feha Inicio-->
+              <div class="row mt-2">
+                <!-- SubColumna 1.1.4.1 Bootstrap Fecha Inicio-->
+                <div class="col-sm-12">
+
+                  <input type="date" id="ds" class="form-control" placeholder=" {{ 'date' | translate }} {{ 'start' | translate }} "
+                      formControlName="dates" />
+                  <!-- Tooltip de validacion del campo Area -->
+                  <div class="invalid-tooltip">
+                    {{ 'requires'  | translate }}   {{ 'date'  | translate }}
+                  </div>
+                </div>
+              </div>
+
+                <!-- SubFila 1.1.4 Bootstrap Feha fin-->
+                <div class="row mt-2">
+                  <!-- SubColumna 1.1.4.1 Bootstrap Fecha Fin-->
+                  <div class="col-sm-12">
+
+                    <input type="date" id="de" class="form-control" placeholder="{{ 'date' | translate }} {{ 'end' | translate }}"
+                      formControlName="datee" />
+                    <!-- Tooltip de validacion del campo Area -->
+                    <div class="invalid-tooltip">
+                      {{ 'requires'  | translate }}   {{ 'date'  | translate }}
+                    </div>
+                  </div>
+                </div>
+
+
+                     <!-- SubFila 1.1.4 Bootstrap Lugar Curso-->
+                     <div class="row mt-2">
+
+                      <div class="col-sm-12">
+
+                        <input type="text" class="form-control" placeholder="{{ 'place' | translate }} "
+                            formControlName="place" />
+                        <!-- Tooltip de validacion del campo Area -->
+                        <div class="invalid-tooltip">
+                          {{ 'requires'  | translate }}   {{ 'place'  | translate }}
+                        </div>
+                      </div>
+                    </div>
+
+
+                      <!-- SubFila 1.1.4 Bootstrap Horario-->
+                      <div class="row mt-2">
+
+                        <div class="col-sm-12">
+
+                          <input type="text" class="form-control" placeholder="{{ 'schedule' | translate }} "
+                              formControlName="schedule" />
+                          <!-- Tooltip de validacion del campo Area -->
+                          <div class="invalid-tooltip">
+                            {{ 'requires'  | translate }}   {{ 'schedule'  | translate }}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row mt-2">
+                        <!-- SubFila 1.1.6 Bootstrap Descripcion-->
+                        <div class="col-sm-12">
+                            <!-- Campo de texto Referencia -->
+                           <textarea id="details" rows="3" class="form-control" placeholder="{{ 'description' | translate }}"
+                                          formControlName="event"></textarea>
+                                <!-- Tooltip de validacion del campo referencia -->
+                             <div class="invalid-tooltip">
+                              {{ 'requires' | translate }} {{ 'description' | translate }}
+                              </div>
+                        </div>
+                      </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <!-- Right Group -->
+      <div class="form-group">
+        <!-- Container Bootstrap -->
+        <div class="container-fluid">
+          <!-- Fila 1 Bootstrap -->
+          <div class="row">
+
+          <!-- SubFila 1.1.4 Bootstrap Botones-->
+          <h2>Soportes</h2>
+          <div class="button-group">
+            <table>
+              <tr>
+                <td>
+                    <input type="file" (change)="selectFile1($event)" id="fileInput1" hidden>
+                    <label for="fileInput1" class="custom-file-button">
+                      <span class="icon"> ➕ </span> <!-- Aquí puedes utilizar tu icono personalizado, p. ej. una etiqueta <i> con una clase de icono -->
+                      Manual
+                    </label>
+                  </td>
+
+                  <td>
+                        <input type="file" (change)="selectFile2($event)" id="fileInput2" hidden>
+                        <label for="fileInput2" class="custom-file-button2">
+                          <span class="icon"> ➕  </span> <!-- Aquí puedes utilizar tu icono personalizado, p. ej. una etiqueta <i> con una clase de icono -->
+                          Presentacion
+                        </label>
+                  </td>
+
+                 <td>
+                      <input type="file" (change)="selectFile3($event)" id="fileInput3" hidden>
+                      <label for="fileInput3" class="custom-file-button3">
+                        <span class="icon"> ➕  </span> <!-- Aquí puedes utilizar tu icono personalizado, p. ej. una etiqueta <i> con una clase de icono -->
+                           Lista
+                      </label>
+                  </td>
+
+              </tr>
+            </table>
+          </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</ng-container>
+</mat-dialog-content>
+
+<!-- Resto del código HTML... -->
+
+
+<!-- Acciones del Dialog -->
+<mat-dialog-actions align="end" class="footer-dialog">
+<!-- Container Bootstrap del contenido del las Acciones del Dialog -->
+<div class="container-fluid">
+  <div class="row justify-content-end">
+    <div class="col-auto me-auto">
+      <!-- Boton de Cancelar -->
+      <button mat-button mat-dialog-close class="btn btn-secondary">
+        Cancelar
+      </button>
+
+    </div>
+
+    <div class="col-auto">
+      <!-- Boton de Guardar -->
+      <button type="submit" mat-button [mat-dialog-close]="true" cdkFocusInitial class="btn btn-primary">
+        Salvar
+      </button>
+    </div>
+
+
+  </div>
+</div>
+</mat-dialog-actions>
+  </form>
+</div>
+
+<div *ngIf="data.formType === 'finstructors'">
+
+  <form
+autocomplete="off"
+[formGroup]="finstructors"
+(ngSubmit)="saveInstructors()">
+
+<!-- Contenido del dialog -->
+<!-- Resto del código HTML... -->
+
+<!-- Contenido del dialog -->
+<mat-dialog-content class="mat-typography">
+<!-- Contenido del dialog -->
+<ng-container>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <!-- Left Group -->
+      <div class="form-group">
+        <!-- Container Bootstrap -->
+        <div class="container-fluid">
+          <!-- Fila 1 Bootstrap -->
+          <div class="row">
+            <!-- Columna 1.1 Bootstrap Izquierda-->
+            <div class="col-sm-12">
+               <!-- SubFila 1.1.2 Bootstrap information-->
+
+               <div class="row mt-2">
+                <!-- SubColumna 1.1.2.1 Bootstrap information-->
+                <div class="col-sm-12">
+                  <!-- Campo de Nombre  -->
+                  <input type="text" id="idname" class="form-control" placeholder="{{ 'name' | translate }} "
+                      formControlName="name" />
+                  <!-- Tooltip de validacion del campo information -->
+                  <div class="invalid-tooltip">
+                    {{ 'requires'  | translate }}   {{ 'name'  | translate }}
+                  </div>
+                </div>
+              </div>
+
+                     <!-- SubFila 1.1.4 Bootstrap Phone-->
+                    <div class="row mt-2">
+                          <div class="col-md-6">
+                             <div class="form-group">
+                                <input type="text" class="form-control" placeholder="{{ 'phone' | translate }} "
+                                    formControlName="phone" />
+                             </div>
+                          </div>
+
+                          <!-- SubFila 1.1.4 Bootstrap Email-->
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <input type="text" class="form-control" placeholder="{{ 'email' | translate }} "
+                                    formControlName="email" />
+                              </div>
+                            </div>
+                     </div>
+
+                    <!-- SubFila 1.1.4 Bootstrap Address-->
+                    <div class="row mt-2">
+                      <div class="col-sm-12">
+                        <input type="text" class="form-control" placeholder="{{ 'address' | translate }} "
+                            formControlName="address" />
+                      </div>
+                    </div>
+
+                      <!-- SubFila 1.1.4 Bootstrap RFC-->
+                      <div class="row mt-2">
+                        <div class="col-sm-12">
+                          <input type="text" class="form-control" placeholder="{{ 'rfc' | translate }} "
+                              formControlName="rfc" />
+                          <!-- Tooltip de validacion del campo Area -->
+                          <div class="invalid-tooltip">
+                            {{ 'requires'  | translate }}   {{ 'rfc'  | translate }}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row mt-2">
+                        <!-- SubFila 1.1.6 Bootstrap Program-->
+                        <div class="col-sm-12">
+                            <!-- Campo de texto Referencia -->
+                           <textarea id="details" rows="2" class="form-control" placeholder="{{ 'description' | translate }} {{ 'programa' | translate }}"
+                                          formControlName="program"></textarea>
+                                <!-- Tooltip de validacion del campo referencia -->
+                             <div class="invalid-tooltip">
+                              {{ 'requires' | translate }} {{ 'description' | translate }}
+                              </div>
+                        </div>
+                      </div>
+
+                         <!-- SubFila 1.1.4 Bootstrap RFC-->
+                          <div class="row mt-2">
+                              <div class="col-sm-12">
+                                 <input type="text" class="form-control" placeholder="{{ 'speciality' | translate }} {{ 'certifications' | translate }} "
+                                        formControlName="speciality" />
+                                  <!-- Tooltip de validacion del campo Area -->
+                                    <div class="invalid-tooltip">
+                                           {{ 'requires'  | translate }}   {{ 'speciality'  | translate }}
+                                    </div>
+                                </div>
+                          </div>
+
+                    <!-- SubFila 1.1.4 Bootstrap Invoice y Qualification-->
+                  <div class="row mt-2">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="{{ 'invoice' | translate }}" formControlName="invoice" />
+                        <!-- Tooltip de validacion del campo Invoice -->
+                        <div class="invalid-tooltip">
+                          {{ 'requires'  | translate }} {{ 'invoice'  | translate }}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="{{ 'qualification' | translate }}" formControlName="qualification" />
+                        <!-- Tooltip de validacion del campo Qualification -->
+                        <div class="invalid-tooltip">
+                          {{ 'requires'  | translate }} {{ 'qualification'  | translate }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <!-- Right Group -->
+      <div class="form-group">
+        <!-- Container Bootstrap -->
+        <div class="container-fluid">
+          <!-- Fila 1 Bootstrap -->
+          <div class="row">
+
+          <!-- SubFila 1.1.4 Bootstrap Botones-->
+          <h2>Soportes</h2>
+          <div class="button-group">
+            <table>
+              <tr>
+                <td>
+                    <input type="file" (change)="selectFile4($event)" id="fileInput4" hidden>
+                    <label for="fileInput4" class="custom-file-button">
+                      <span class="icon"> ➕ </span> <!-- Aquí puedes utilizar tu icono personalizado, p. ej. una etiqueta <i> con una clase de icono -->
+                     CV
+                    </label>
+                  </td>
+
+                  <td>
+                        <input type="file" (change)="selectFile5($event)" id="fileInput5" hidden>
+                        <label for="fileInput5" class="custom-file-button2">
+                          <span class="icon"> ➕  </span> <!-- Aquí puedes utilizar tu icono personalizado, p. ej. una etiqueta <i> con una clase de icono -->
+                          Respaldo
+                        </label>
+                  </td>
+
+                 <td>
+                      <input type="file" (change)="selectFile6($event)" id="fileInput6" hidden>
+                      <label for="fileInput6" class="custom-file-button3">
+                        <span class="icon"> ➕  </span> <!-- Aquí puedes utilizar tu icono personalizado, p. ej. una etiqueta <i> con una clase de icono -->
+                           Evaluacion
+                      </label>
+                  </td>
+
+              </tr>
+            </table>
+          </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</ng-container>
+</mat-dialog-content>
+
+<!-- Resto del código HTML... -->
+
+
+<!-- Acciones del Dialog -->
+<mat-dialog-actions align="end" class="footer-dialog">
+<!-- Container Bootstrap del contenido del las Acciones del Dialog -->
+<div class="container-fluid">
+  <div class="row justify-content-end">
+    <div class="col-auto me-auto">
+      <!-- Boton de Cancelar -->
+      <button mat-button mat-dialog-close class="btn btn-secondary">
+        Cancelar
+      </button>
+
+    </div>
+
+    <div class="col-auto">
+      <!-- Boton de Guardar -->
+      <button type="submit" mat-button [mat-dialog-close]="true" cdkFocusInitial class="btn btn-primary">
+        Salvar
+      </button>
+    </div>
+
+
+  </div>
+</div>
+</mat-dialog-actions>
+  </form>
+
+</div>
+

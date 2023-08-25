@@ -1,0 +1,104 @@
+
+<mat-dialog-content >
+
+  <div class="card card-warning">
+
+      <div class="card-header">
+
+         	<h2 class="card-title mb-0">Editar Sucursal</h2>
+        <button type="button" class="close" mat-dialog-close >&times;</button>
+
+    </div>
+
+    <form
+      autocomplete="off"
+      [formGroup]="f"
+      (ngSubmit)="editBranch()">
+
+      <div class="card-body">
+
+       <ng-container *ngIf="!loadData">
+
+            <mat-dialog-actions>
+                  <div class="form-group col-md-6 mb-3">
+
+                        <label for="InputName">Nombre</label>
+                        <input  type="text" id="name" class="form-control"
+                        placeholder="Nombre" formControlName="name"
+                      >
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="InputMuni">Municipio</label>
+                        <input type="text" id="municipality" class="form-control"
+                        placeholder="Municipio" formControlName="municipality"
+                        >
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="InputLocal">Localidad</label>
+                        <input type="text" id="locality" class="form-control"
+                          placeholder="Localidad" formControlName="locality"
+                          >
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="InputStreet">Calle</label>
+                        <input type="text" id="street" class="form-control"
+                        placeholder="Calle" formControlName="street"
+                        >
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="Input">Colonia</label>
+                        <input type="text" id="colony" class="form-control"
+                        placeholder="Colonia" formControlName="colony"
+                        >
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="Input">Codigo Postal</label>
+                        <input type="text" id="cp" class="form-control"
+                        placeholder="Codigo Postal" formControlName="cp"
+                        >
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="Input">No. Exterior</label>
+                        <input type="text" id="number_exterior" class="form-control"
+                        placeholder="Num. Exterior" formControlName="number_exterior"
+                        >
+                    </div>
+
+                      <div class="col-md-6 mb-3">
+                        <label for="Input">No. Interior</label>
+                        <input type="text" id="number_interior" class="form-control"
+                        placeholder="Num. Interior" formControlName="number_interior"
+                        >
+
+                    </div>
+        </mat-dialog-actions>
+        </ng-container>
+
+            <div *ngIf="loadData" class="overlay">
+                <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+            </div>
+
+
+      </div>
+
+
+      <div class="card-footer">
+        <button mat-dialog-close="btn btn-secondary float right">Cancelar</button>
+        <button type="submit" class="btn btn-warning float-right">Salvar</button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</mat-dialog-content>
+

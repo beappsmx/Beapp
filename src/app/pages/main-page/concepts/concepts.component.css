@@ -1,0 +1,12 @@
+.multi-line-description {
+  white-space: normal;
+  word-break: break-word;
+}
+
+.green-text {
+  color: green;
+}
+
+.red-text {
+  color: red;
+}

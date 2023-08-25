@@ -1,0 +1,582 @@
+<!--
+*-----------------------------------------------------------------------------------------------------------------------------------------*
+* Descripcion:    Dialog Nuevo Accion de Mitigación                                                                                       *
+* Autor:          Heber Alejandro Arce                                                                                                    *
+* Version:        1.0a1                                                                                                                   *
+* Fecha Creacion: 10/07/2023                                                                                                              *
+*-----------------------------------------------------------------------------------------------------------------------------------------*
+* Log de Modificación                                                                                                                     *
+*                                                                                                                                         *
+*   Fecha           Programador            Correccion                                     Descripcion                                     *
+* 10/07/2023    Heber Alejandro Arce      s/n Solicitud      Creación del dialog                                                          *
+*-----------------------------------------------------------------------------------------------------------------------------------------*
+-->
+<h2 mat-dialog-title class="h2-dialog">{{ 'newaction' | translate }}</h2>
+<!-- Se inicializa el Formulario -->
+<form
+  autocomplete="off"
+  [formGroup]="faction"
+  (ngSubmit)="saveAction()"
+>
+<!-- Contenido del dialog -->
+<mat-dialog-content class="mat-typography">
+  <!-- Contenido del dialog -->
+  <ng-container>
+    <div class="container-fluid">
+      <mat-stepper
+          class="mat-horizontal-stepper"
+          [orientation]="(stepperOrientation | async)!"
+          formArrayName="formArray">
+          <!-- Acciones de mitigacion -->
+          <mat-step formGroupName="0" [stepControl]="formArray?.get([0])" label="{{ 'msj_r9' | translate }}">
+            <p>{{ 'msj_r12' | translate }}</p>
+            <div class="row row-cols-2 row-cols-md-2 mt-2">
+              <div class="col-sm-6 mt-2">
+                <!-- Text Area Descripcion del riesgo -->
+                <textarea
+                  class="form-control"
+                  name="adescription"
+                  id="adescription"
+                  formControlName="adescription"
+                  placeholder="{{ 'description' | translate }}"
+                  rows="5"
+                  required
+                  [ngClass]="{'is-invalid': faction.get('formArray').get('0').get('adescription').invalid && (faction.get('formArray').get('0').get('adescription').dirty || faction.get('formArray').get('0').get('adescription').touched)}">
+                </textarea>
+                <!-- Tooltip de validacion del campo description -->
+                <div class="invalid-tooltip">
+                  {{ 'msj_vtxt' | translate }}
+                </div>
+              </div>
+              <div class="col-sm-6 mt-2">
+                <div class="row row-cols-1 row-cols-md-1">
+                  <div class="col-sm-6">
+                    <h5>Fecha de inicio</h5>
+                  </div>
+                  <div class="col-sm-6">
+                    <input
+                      type="date"
+                      class="form-control"
+                      name="startDate"
+                      id="startDate"
+                      formControlName="startDate"
+                      required
+                      [ngClass]="{'is-invalid': faction.get('formArray').get('0').get('startDate').invalid && (faction.get('formArray').get('0').get('startDate').dirty || faction.get('formArray').get('0').get('startDate').touched)}"/>
+                    <div class="invalid-tooltip">
+                      {{ 'msj_vdte' | translate }}
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <h5>Fecha de termino</h5>
+                  </div>
+                  <div class="col-sm-6 mt-2">
+                    <input
+                      type="date"
+                      class="form-control"
+                      name="endDate"
+                      id="endDate"
+                      formControlName="endDate"
+                      required
+                      [ngClass]="{'is-invalid': faction.get('formArray').get('0').get('endDate').invalid && (faction.get('formArray').get('0').get('endDate').dirty || faction.get('formArray').get('0').get('endDate').touched)}"/>
+                    <div class="invalid-tooltip">
+                      {{ 'msj_vdte' | translate }}
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <h5>Fecha de monitoreo</h5>
+                  </div>
+                  <div class="col-sm-6 mt-2">
+                    <input
+                      type="date"
+                      class="form-control"
+                      name="monitoring_date"
+                      id="monitoring_date"
+                      formControlName="monitoring_date"
+                      required
+                      [ngClass]="{'is-invalid': faction.get('formArray').get('0').get('monitoring_date').invalid && (faction.get('formArray').get('0').get('monitoring_date').dirty || faction.get('formArray').get('0').get('monitoring_date').touched)}"/>
+                    <div class="invalid-tooltip">
+                      {{ 'msj_vdte' | translate }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <mat-divider class="mt-3 mb-3"></mat-divider>
+            <div>
+              <button mat-button matStepperNext class="btn btn-primary" type="button">{{ 'next' | translate }}</button>
+            </div>
+          </mat-step>
+
+          <!-- Recursos para las acciones de mitigacion -->
+          <mat-step formGroupName="1" [stepControl]="formArray?.get([1])" label="{{ 'msj_r10' | translate }}">
+            <p>{{ 'msj_r13' | translate }}</p>
+            <div class="row row-cols-2 row-cols-md-2 mt-2">
+              <div class="col-md-5 mt-2">
+                <div class="row row-cols-2 row-cols-md-2">
+                  <div class="col-md-12">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="rdescription"
+                      id="rdescription"
+                      formControlName="rdescription"
+                      placeholder="{{ 'resource' | translate }}"
+                    />
+                  </div>
+                  <div class="col-md-6 mt-2">
+                    <input
+                      type="number"
+                      class="form-control"
+                      name="quantity"
+                      id="quantity"
+                      formControlName="quantity"
+                      placeholder="{{ 'quantity' | translate }}"
+                    />
+                  </div>
+                  <div class="col-md-6 mt-2">
+                    <select
+                      id="unit"
+                      class="form-control"
+                      formControlName="unit">
+                      <option selected value="">{{ 'unit' | translate }}</option>
+                      <option *ngFor="let u of units" [value]="u">{{ u }}</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6 mt-2">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                      </div>
+                      <input
+                        type="number"
+                        class="form-control"
+                        name="cost"
+                        id="cost"
+                        formControlName="cost"
+                        placeholder="{{ 'cost' | translate }}"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-2 offset-4 mt-2">
+                    <button
+                      mat-button
+                      matTooltip="{{ 'msj_r14' | translate }}"
+                      class="btn btn-sm btn-warning"
+                      type="button"
+                      (click)="addResource()">
+                      <i class="fas fa-arrow-right"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-7 mt-2">
+                <div class="row row-cols-1 row-cols-md-1">
+                  <div class="col-md-12">
+                    <div class="row row-cols-4 row-cols-md-4">
+                      <div class="col-md-2 subt-head">
+                      </div>
+                      <div class="col-md-3 subt-head">
+                        {{ 'resource' | translate }}
+                      </div>
+                      <div class="col-md-2 subt-head">
+                        {{ 'quantity' | translate }}
+                      </div>
+                      <div class="col-md-2 subt-head">
+                        {{ 'unit' | translate }}
+                      </div>
+                      <div class="col-md-3 subt-head">
+                        {{ 'cost' | translate }}
+                      </div>
+                    </div>
+                    <div *ngFor="let res of resources; let i = index">
+                      <div class="row row-cols-4 row-cols-md-4">
+                        <div class="col-md-2 mt-1 resources">
+                          <button
+                            mat-button
+                            matTooltip="{{ 'msj_r14' | translate }}"
+                            class="btn btn-sm btn-danger"
+                            type="button"
+                            (click)="deleteResource(i)">
+                            <i class="fas fa-minus"></i>
+                          </button>
+                        </div>
+                        <div class="col-md-3 mt-1 subt-row">
+                          {{ res.rdescription }}
+                        </div>
+                        <div class="col-md-2 mt-1 subt-row">
+                          {{ res.quantity }}
+                        </div>
+                        <div class="col-md-2 mt-1 subt-row">
+                          {{ res.unit }}
+                        </div>
+                        <div class="col-md-3 mt-1 subt-row">
+                          {{ res.cost | currency:'MXN' }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-5 offset-sm-7 mt-2">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">{{ 'total' | translate }} $</span>
+                      </div>
+                      <input
+                        type="number"
+                        class="form-control"
+                        name="total_cost"
+                        id="total_cost"
+                        formControlName="total_cost"
+                        placeholder="{{ 'total' | translate }}"
+                        [value]="sumResource()"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <mat-divider class="mt-3 mb-3"></mat-divider>
+            <div>
+              <button mat-button matStepperPrevious class="btn btn-primary" type="button">{{ 'back' | translate }}</button>
+              <button mat-button matStepperNext class="btn btn-primary ml-2" type="button">{{ 'next' | translate }}</button>
+            </div>
+          </mat-step>
+
+          <!-- Revision del riesgo -->
+          <mat-step formGroupName="2" [stepControl]="formArray?.get([2])" label="{{ 'msj_r11' | translate }}">
+            <p>{{ 'msj_r15' | translate }}</p>
+            <div class="row row-cols-2 row-cols-md-2 mt-2">
+              <div class="col-sm-6 mt-2">
+                <div class="row row-cols-2 row-cols-md-2">
+                  <div class="col-sm-4">
+                    <h5>{{ 'probability' | translate }}:</h5>
+                  </div>
+                  <div class="col-sm-3">
+                    <select
+                      class="form-control"
+                      name="rprobability"
+                      id="rprobability"
+                      formControlName="rprobability"
+                      required
+                      [ngClass]="{'is-invalid': faction.get('formArray').get('2').get('rprobability').invalid && faction.get('formArray').get('2').get('rprobability').touched}">
+                      <option selected value="">0</option>
+                      <option *ngFor="let probability of numbers">
+                        {{ probability }}
+                      </option>
+                    </select>
+                    <div class="invalid-tooltip">
+                      {{ 'msj_vselect' | translate }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 mt-2">
+                <div class="row row-cols-2 row-cols-md-2">
+                  <div class="col-sm-4">
+                    <h5>{{ 'scope' | translate }}:</h5>
+                  </div>
+                  <div class="col-sm-3">
+                    <select
+                      class="form-control"
+                      name="rimp_scope"
+                      id="rimp_scope"
+                      formControlName="rimp_scope"
+                      required
+                      [ngClass]="{'is-invalid': faction.get('formArray').get('2').get('rimp_scope').invalid && faction.get('formArray').get('2').get('rimp_scope').touched}">
+                      <option selected value="">0</option>
+                      <option *ngFor="let scope of numbers">
+                        {{ scope }}
+                      </option>
+                    </select>
+                    <div class="invalid-tooltip">
+                      {{ 'msj_vselect' | translate }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 mt-2">
+                <div class="row row-cols-2 row-cols-md-2">
+                  <div class="col-sm-4">
+                    <h5>{{ 'time' | translate }}:</h5>
+                  </div>
+                  <div class="col-sm-3">
+                    <select
+                      class="form-control"
+                      name="rimp_time"
+                      id="rimp_time"
+                      formControlName="rimp_time"
+                      required
+                      [ngClass]="{'is-invalid': faction.get('formArray').get('2').get('rimp_time').invalid && faction.get('formArray').get('2').get('rimp_time').touched}">
+                      <option selected value="">0</option>
+                      <option *ngFor="let time of numbers">
+                        {{ time }}
+                      </option>
+                    </select>
+                    <div class="invalid-tooltip">
+                      {{ 'msj_vselect' | translate }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 mt-2">
+                <div class="row row-cols-2 row-cols-md-2">
+                  <div class="col-sm-4">
+                    <h5>{{ 'cost' | translate }}:</h5>
+                  </div>
+                  <div class="col-sm-3">
+                    <select
+                      class="form-control"
+                      name="rimp_cost"
+                      id="rimp_cost"
+                      formControlName="rimp_cost"
+                      required
+                      [ngClass]="{'is-invalid': faction.get('formArray').get('2').get('rimp_cost').invalid && faction.get('formArray').get('2').get('rimp_cost').touched}">
+                      <option selected value="">0</option>
+                      <option *ngFor="let cost of numbers">
+                        {{ cost }}
+                      </option>
+                    </select>
+                    <div class="invalid-tooltip">
+                      {{ 'msj_vselect' | translate }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 mt-2">
+                <div class="row row-cols-2 row-cols-md-2">
+                  <div class="col-sm-4">
+                    <h5>{{ 'quality' | translate }}:</h5>
+                  </div>
+                  <div class="col-sm-3">
+                    <select
+                      class="form-control"
+                      name="rimp_quality"
+                      id="rimp_quality"
+                      formControlName="rimp_quality"
+                      required
+                      [ngClass]="{'is-invalid': faction.get('formArray').get('2').get('rimp_quality').invalid && faction.get('formArray').get('2').get('rimp_quality').touched}">
+                      <option selected value="">0</option>
+                      <option *ngFor="let quality of numbers">
+                        {{ quality }}
+                      </option>
+                    </select>
+                    <div class="invalid-tooltip">
+                      {{ 'msj_vselect' | translate }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 mt-2">
+                <div class="row row-cols-2 row-cols-md-2">
+                  <div class="col-sm-4">
+                    <h5>{{ 'msj_r3' | translate }}:</h5>
+                  </div>
+                  <div class="col-sm-3">
+                    <input
+                      type="text"
+                      id="rimp_score"
+                      class="form-control input-readonly"
+                      placeholder="0"
+                      formControlName="rimp_score"
+                      [value]="calcularScore()"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row row-cols-2 row-cols-md-2 mt-2">
+              <div class="col-sm-12 mt-2">
+                <!-- Text Area Descripcion del riesgo -->
+                <textarea
+                  class="form-control"
+                  name="observations"
+                  id="observations"
+                  formControlName="observations"
+                  placeholder="{{ 'observations' | translate }}"
+                  rows="3"
+                  required
+                  [ngClass]="{'is-invalid': faction.get('formArray').get('2').get('observations').invalid && (faction.get('formArray').get('2').get('observations').dirty || faction.get('formArray').get('2').get('observations').touched)}">
+                </textarea>
+                <!-- Tooltip de validacion del campo description -->
+                <div class="invalid-tooltip">
+                  {{ 'msj_vtxt' | translate }}
+                </div>
+              </div>
+            </div>
+            <mat-divider class="mt-3 mb-3"></mat-divider>
+            <div>
+              <button mat-button matStepperPrevious class="btn btn-primary" type="button">{{ 'back' | translate }}</button>
+              <button mat-button matStepperNext class="btn btn-primary ml-2" type="button">{{ 'next' | translate }}</button>
+            </div>
+          </mat-step>
+
+          <!-- Validacion -->
+          <mat-step label="{{ 'finish' | translate }}">
+            <p>{{ 'msj_r7' | translate }}</p>
+            <div class="row row-cols-2 row-cols-md-2 mt-2">
+              <div class="col-sm-6">
+                <div class="row row-cols-6 row-cols-md-6">
+                  <div class="col-sm-12 text-center subt-head">
+                    Revision del Impacto
+                  </div>
+                  <div class="col-sm-2 text-right subt-row">
+                    Alcance
+                  </div>
+                  <div class="col-sm-2 text-center subt-cell">
+                    {{ faction.get('formArray').get('2').get('rimp_scope').value }}
+                  </div>
+                  <div class="col-sm-2 text-right subt-row">
+                    Tiempo
+                  </div>
+                  <div class="col-sm-2 text-center subt-cell">
+                    {{ faction.get('formArray').get('2').get('rimp_time').value }}
+                  </div>
+                  <div class="col-sm-2 text-right subt-row">
+                    Prob.
+                  </div>
+                  <div class="col-sm-2 text-center subt-cell">
+                    {{ faction.get('formArray').get('2').get('rprobability').value }}
+                  </div>
+                </div>
+                <div class="row row-cols-6 row-cols-md-6">
+                  <div class="col-sm-2 text-right subt-row">
+                    Costo
+                  </div>
+                  <div class="col-sm-2 text-center subt-cell">
+                    {{ faction.get('formArray').get('2').get('rimp_cost').value }}
+                  </div>
+                  <div class="col-sm-2 text-right subt-row">
+                    Calidad
+                  </div>
+                  <div class="col-sm-2 text-center subt-cell">
+                    {{ faction.get('formArray').get('2').get('rimp_quality').value }}
+                  </div>
+                  <div class="col-sm-2 text-right subt-row">
+                    Calif.
+                  </div>
+                  <div class="col-sm-2 text-center subt-cell">
+                    {{ calcularScore() }}
+                  </div>
+                </div>
+                <div class="row row-cols-4 row-cols-md-4">
+                  <div class="col-sm-12 text-center subt-head">
+                    Accion de mitigacion
+                  </div>
+                  <div class="col-sm-3 text-center subt-row">
+                    Descipcion
+                  </div>
+                  <div class="col-sm-9 text-left subt-cell">
+                    {{ faction.get('formArray').get('0').get('adescription').value }}
+                  </div>
+                  <div class="col-sm-3 text-center subt-row">
+                    Inicio
+                  </div>
+                  <div class="col-sm-9 text-left subt-cell2">
+                    {{ faction.get('formArray').get('0').get('startDate').value }}
+                  </div>
+                  <div class="col-sm-3 text-center subt-row">
+                    Termino
+                  </div>
+                  <div class="col-sm-9 text-left subt-cell2">
+                    {{ faction.get('formArray').get('0').get('endDate').value }}
+                  </div>
+                  <div class="col-sm-3 text-center subt-row">
+                    Monitoreo
+                  </div>
+                  <div class="col-sm-9 text-left subt-cell2">
+                    {{ faction.get('formArray').get('0').get('monitoring_date').value }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="row row-cols-4 row-cols-md-4">
+                  <div class="col-sm-12 text-center subt-head">
+                    Observaciones sobre el riesgo
+                  </div>
+                  <div class="col-sm-12 text-center subt-cell">
+                    {{ faction.get('formArray').get('2').get('observations').value }}
+                  </div>
+                  <div class="col-sm-12 text-center subt-head">
+                    Recursos
+                  </div>
+                  <div class="col-md-4 col-sm-4 text-center subt-row">
+                    Descripcion
+                  </div>
+                  <div class="col-md-3 col-sm-3 text-center subt-row">
+                    Cantidad
+                  </div>
+                  <div class="col-md-2 col-sm-2 text-center subt-row">
+                    Unidad
+                  </div>
+                  <div class="col-md-3 col-sm-3 text-center subt-row">
+                    Costo
+                  </div>
+                </div>
+                <div *ngFor="let res of resources; let i = index">
+                  <div class="row row-cols-4 row-cols-md-4">
+                    <div class="col-md-4 col-sm-4 mt-1 subt-cell2">
+                      {{ res.rdescription }}
+                    </div>
+                    <div class="col-md-3 col-sm-3 mt-1 text-center subt-cell">
+                      {{ res.quantity }}
+                    </div>
+                    <div class="col-md-2 col-sm-2 mt-1 text-center subt-cell">
+                      {{ res.unit }}
+                    </div>
+                    <div class="col-md-3 col-sm-3 mt-1 subt-cell">
+                      {{ res.cost | currency:'MXN' }}
+                    </div>
+                  </div>
+                </div>
+                <div class="row row-cols-4 row-cols-md-4">
+                  <div class="col-md-4 col-sm-4 offset-5 text-center subt-row">
+                    Costo Total
+                  </div>
+                  <div class="col-md-3 col-sm-3 subt-cell">
+                    {{ sumResource() | currency:'MXN' }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <mat-divider class="mt-3 mb-3"></mat-divider>
+            <div>
+              <button mat-button matStepperPrevious class="btn btn-primary" type="button">{{ 'back' | translate }}</button>
+            </div>
+          </mat-step>
+      </mat-stepper>
+    </div>
+  </ng-container>
+</mat-dialog-content>
+
+<!-- Resto del código HTML... -->
+
+
+  <!-- Acciones del Dialog -->
+  <mat-dialog-actions align="end" class="footer-dialog">
+    <!-- Container Bootstrap del contenido del las Acciones del Dialog -->
+    <div class="container-fluid">
+      <div class="row justify-content-end">
+        <div class="col-auto me-auto">
+          <!-- Boton de Cancelar -->
+          <button
+            mat-button
+            mat-dialog-close
+            class="btn btn-secondary">
+            Cancelar
+          </button>
+        </div>
+        <div class="col-auto">
+          <!-- Boton de Guardar -->
+          <button
+            type="submit"
+            mat-button
+            [mat-dialog-close]="true"
+            cdkFocusInitial
+            class="btn btn-primary"
+            >
+            Salvar
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-actions>
+</form>

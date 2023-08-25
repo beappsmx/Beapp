@@ -1,0 +1,482 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>{{ "risk" | translate }}</h1>
+        </div>
+        <div class="col-sm-6"></div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xxl-2 col-xl-4 col-lg-4 col-md-4">
+        <!-- Profile Image -->
+        <div class="card card-primary card-outline">
+          <div class="card-body box-profile">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="text-center">
+                  <img
+                    img
+                    src="../assets/img/gr.png"
+                    class="rounded-circle"
+                    width="100"
+                    alt="User profile picture"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <h3 class="profile-username text-center">
+                  {{ profile.description }}
+                </h3>
+                <div class="dropdown-divider mt-2 mb-4"></div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <p class="text-muted text-center" style="font-size: 18px">
+                  {{ profile.owner }}
+                </p>
+                <div class="dropdown-divider mt-2 mb-4"></div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                <div
+                  class="d-flex justify-content-xl-end justify-content-center d-inline text-nowrap"
+                  style="font-weight: bold; font-size: 11px; color: #595959"
+                >
+                {{ "concept" | translate }}
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                <div
+                  class="d-flex justify-content-xl-start justify-content-center d-inline text-nowrap"
+                  style="font-size: 10px; font-weight: normal; color: #4f6d7a"
+                >
+                {{ profile.id_concept }}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                <div
+                  class="d-flex justify-content-xl-end justify-content-center d-inline text-nowrap"
+                  style="font-weight: bold; font-size: 11px; color: #595959"
+                >
+                {{ "phase" | translate }}
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                <div
+                  class="d-flex justify-content-xl-start justify-content-center d-inline text-nowrap"
+                  style="font-size: 10px; font-weight: normal; color: #4f6d7a"
+                >
+                {{ profile.phase }}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                <div
+                  class="d-flex justify-content-xl-end justify-content-center d-inline text-nowrap"
+                  style="font-weight: bold; font-size: 11px; color: #595959"
+                >
+                {{ "response" | translate }}
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                <div
+                  class="d-flex justify-content-xl-start justify-content-center d-inline text-nowrap"
+                  style="font-size: 10px; font-weight: normal; color: #4f6d7a"
+                >
+                {{ profile.response }}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                <div
+                  class="d-flex justify-content-xl-end justify-content-center d-inline text-nowrap"
+                  style="font-weight: bold; font-size: 11px; color: #595959"
+                >
+                {{ "probability" | translate }}
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                <div
+                  class="d-flex justify-content-xl-start justify-content-center d-inline text-nowrap"
+                  style="font-size: 10px; font-weight: normal; color: #4f6d7a"
+                >
+                {{ profile.probability }}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                <div
+                  class="d-flex justify-content-xl-end justify-content-center d-inline text-nowrap"
+                  style="font-weight: bold; font-size: 11px; color: #595959"
+                >
+                {{ "status" | translate }}
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                <div
+                  class="d-flex justify-content-xl-start justify-content-center d-inline text-nowrap"
+                  style="font-size: 10px; font-weight: normal; color: #4f6d7a"
+                >
+                {{ profile.status }}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="dropdown-divider mt-2 mb-4"></div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                <div
+                  class="d-flex justify-content-xl-end justify-content-center d-inline text-nowrap"
+                  style="font-weight: bold; font-size: 11px; color: #595959"
+                >
+                {{ "maction" | translate }}
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                <div
+                  class="d-flex justify-content-xl-start justify-content-center d-inline text-nowrap"
+                  style="font-size: 10px; font-weight: normal; color: #4f6d7a"
+                >
+                {{ selectedAction.adescription }}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="dropdown-divider mt-2 mb-4"></div>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-9">
+                <button
+                  mat-button
+                  mat-dialog-close
+                  class="btn btn-primary btn-block"
+                >
+                  {{ "print" | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.card -->
+      </div>
+      <div class="col-xxl-10 col-xl-8 col-lg-8 col-md-8">
+        <mat-card class="card">
+          <mat-card-header class="card-header p-2">
+            <mat-card-title>
+              <ul class="nav nav-pills">
+                <li class="nav-item tab-nav"><div class="nav-link active" data-toggle="tab" (click)="onTabSelected('registry')">{{ "registry" | translate }}</div></li>
+                <li class="nav-item tab-nav"><div class="nav-link" data-toggle="tab" (click)="onTabSelected('treatment')">{{ "treatment" | translate }}</div></li>
+                <li class="nav-item tab-nav"><div class="nav-link" data-toggle="tab" (click)="onTabSelected('tracking')">{{ "tracking" | translate }}</div></li>
+              </ul>
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="tab-pane" [class.active]="selectedTab === 'registry'" *ngIf="selectedTab === 'registry'">
+              <mat-card class="card mt-3">
+                <mat-card-header class="card-header p-2">
+                  <mat-card-title-group class="card-title">
+                    <mat-card-title>
+                      <div class="row">
+                        <div class="col">
+                          <button class="btn btn-block bg-primary" type="button" (click)="newRisk()">{{'new' | translate }}</button>
+                        </div>
+                      </div>
+                    </mat-card-title>
+                      <div class="col-xl-4 col-lg-4 col-md-4">
+                        <input class="form-control" placeholder="{{'search' | translate}}" matInput (keyup)="applyFilter(dataSourceRisk, $event)" #search>
+                      </div>
+                  </mat-card-title-group>
+                </mat-card-header>
+                <div class="mat-table-container mat-elevation-z2 m-3">
+                  <table [hidden]="loadData" mat-table [dataSource]="dataSourceRisk" matSort matSortStart="desc">
+
+                    <!-- ID Column-->
+                    <ng-container matColumnDef="id">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                      <td mat-cell *matCellDef="let row"> {{row.pos}}</td>
+                    </ng-container>
+
+                    <!-- Description Column -->
+                    <ng-container matColumnDef="description">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'description' | translate}}</th>
+                      <td mat-cell *matCellDef="let row"> {{row.description}} </td>
+                    </ng-container>
+
+                    <!-- Owner Column -->
+                    <ng-container matColumnDef="owner">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'owner' | translate}}</th>
+                      <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.owner}} </td>
+                    </ng-container>
+
+                    <!-- Status Column -->
+                    <ng-container matColumnDef="status">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'status' | translate}}</th>
+                      <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.status}} </td>
+                    </ng-container>
+
+                    <!-- Actions Column -->
+                    <ng-container matColumnDef="actions">
+                      <th mat-header-cell *matHeaderCellDef> {{'actions' | translate}} </th>
+                      <td mat-cell *matCellDef="let row" class="text-nowrap">
+                        <button
+                          class="btn btn-sm btn-warning mr-1"
+                          (click)="showProfile(row)" >
+                          <i class="fas fa-eye"></i>
+                        </button>
+                        <button
+                        class="btn btn-sm btn-dark mr-1"
+                        (click)="editRisk(row.id)" >
+                          <i class="fas fa-pencil-alt"></i>
+                        </button>
+                        <button
+                        class="btn btn-sm btn-danger"
+                        (click)="deleteRisk(row.id)" >
+                        <i class="fas fa-trash"></i>
+                        </button>
+                      </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumnsRisk"  class="header-tabla"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumnsRisk;" class="fila-tabla element-row"></tr>
+
+                    <!-- Row shown when there is no matching data. -->
+                    <tr class="mat-row" *matNoDataRow>
+                      <td class="mat-cell" colspan="4">{{ "msj_r8" | translate }} "{{search.value}}"</td>
+                    </tr>
+                  </table>
+                  <div *ngIf="loadData" class="text-center m-5">
+                    <div class="spinner-border"></div>
+                  </div>
+                </div>
+              </mat-card>
+              <div class="card-footer bg-white">
+                <mat-paginator
+                  #MatPaginatorTab1
+                  [pageSizeOptions]="pageSizeOptions"
+                  [pageSize]="pageSize"
+                  [pageIndex]="pageIndex"
+                  [length]="risks.length"
+                  showFirstLastButtons
+                  class="text-nowrap paginador">
+                </mat-paginator>
+              </div>
+            </div>
+            <div class="tab-pane" [class.active]="selectedTab === 'treatment'" *ngIf="selectedTab === 'treatment'">
+              <mat-card class="card mt-3">
+                <mat-card-header class="card-header p-2">
+                  <mat-card-title-group class="card-title">
+                    <mat-card-title>
+                      <div class="row">
+                        <div class="col">
+                          <button class="btn btn-block bg-primary" type="button" (click)="newAction()">{{'actions' | translate }}</button>
+                        </div>
+                      </div>
+                    </mat-card-title>
+                      <div class="col-xl-4 col-lg-4 col-md-4">
+                        <input class="form-control" placeholder="{{'search' | translate}}" matInput (keyup)="applyFilter(dataSourceActions, $event)" #search
+                        >
+                      </div>
+                  </mat-card-title-group>
+                </mat-card-header>
+                <div class="mat-table-container mat-elevation-z2 m-3">
+                  <table [hidden]="loadData2" mat-table matSort matSortStart="desc" [dataSource]="dataSourceActions">
+
+                    <!-- id_action Column -->
+                    <ng-container matColumnDef="id_action">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+                      <td mat-cell *matCellDef="let row"> {{row.pos}} </td>
+                      <td mat-footer-cell *matFooterCellDef></td>
+                    </ng-container>
+
+                    <!-- adescription Column -->
+                    <ng-container matColumnDef="adescription">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'description' | translate}}</th>
+                      <td mat-cell *matCellDef="let row"> {{row.adescription}} </td>
+                      <td mat-footer-cell *matFooterCellDef></td>
+                    </ng-container>
+
+                    <!-- startdate Column -->
+                    <ng-container matColumnDef="startDate">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'start date' | translate}}</th>
+                      <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.startDate}} </td>
+                      <td mat-footer-cell *matFooterCellDef></td>
+                    </ng-container>
+
+                    <!-- enddate Column -->
+                    <ng-container matColumnDef="endDate">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'end date' | translate}}</th>
+                      <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.endDate}} </td>
+                      <td mat-footer-cell *matFooterCellDef> Total </td>
+                    </ng-container>
+
+                    <!-- total cost Column -->
+                    <ng-container matColumnDef="total_cost">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'total cost' | translate}}</th>
+                      <td mat-cell *matCellDef="let row"> {{row.total_cost | currency}} </td>
+                      <td mat-footer-cell *matFooterCellDef>{{getTotalCost() | currency}}</td>
+                    </ng-container>
+
+                    <!-- Actions Column -->
+                    <ng-container matColumnDef="actions">
+                      <th mat-header-cell *matHeaderCellDef> {{'actions' | translate}} </th>
+                      <td mat-cell *matCellDef="let row" class="text-nowrap">
+                        <button
+                          class="btn btn-sm btn-warning mr-1"
+                          (click)="selectAction(row)" >
+                          <i class="fas fa-eye"></i>
+                        </button>
+                        <button
+                        class="btn btn-sm btn-dark mr-1"
+                        (click)="editAction(row.id)" >
+                          <i class="fas fa-pencil-alt"></i>
+                        </button>
+                        <button
+                        class="btn btn-sm btn-primary mr-1"
+                        (click)="newResource(row.id)" >
+                          <i class="fas fa-puzzle-piece"></i>
+                        </button>
+                        <button
+                        class="btn btn-sm btn-danger"
+                        (click)="deleteAction(row.id)" >
+                        <i class="fas fa-trash"></i>
+                        </button>
+                      </td>
+                      <td mat-footer-cell *matFooterCellDef></td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumnsActions"  class="header-tabla"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumnsActions" class="fila-tabla element-row"></tr>
+                    <tr mat-footer-row *matFooterRowDef="displayedColumnsActions"></tr>
+                    <!-- Row shown when there is no matching data. -->
+                    <tr class="mat-row" *matNoDataRow>
+                      <td class="mat-cell" colspan="4">{{ "msj_r8" | translate }} "{{search.value}}"</td>
+                    </tr>
+                  </table>
+                  <div *ngIf="loadData2" class="text-center m-5">
+                    <div class="spinner-border"></div>
+                  </div>
+                </div>
+              </mat-card>
+              <div class="card-footer bg-white">
+                <mat-paginator
+                  #MatPaginatorTab2
+                  [pageSizeOptions]="pageSizeOptions"
+                  [pageSize]="pageSize"
+                  [pageIndex]="pageIndex"
+                  [length]="actions.length"
+                  showFirstLastButtons
+                  class="text-nowrap paginador">
+                </mat-paginator>
+              </div>
+            </div>
+            <div class="tab-pane" [class.active]="selectedTab === 'tracking'" *ngIf="selectedTab === 'tracking'">
+              <mat-card class="card mt-3">
+                <mat-card-header class="card-header p-2">
+                  <mat-card-title-group class="card-title">
+                    <mat-card-title>
+                      <div class="row">
+                        <div class="col">
+                          <button class="btn btn-block bg-primary" type="button" (click)="newTracking()">{{'new' | translate }}</button>
+                        </div>
+                      </div>
+                    </mat-card-title>
+                      <div class="col-xl-4 col-lg-4 col-md-4">
+                        <input class="form-control" placeholder="{{'search' | translate}}" #search  (keyup)="applyFilter(dataSourceTracking, $event)"
+                        >
+                      </div>
+                  </mat-card-title-group>
+                </mat-card-header>
+                <div class="mat-table-container mat-elevation-z2 m-3">
+                  <table [hidden]="loadData3" mat-table [dataSource]="dataSourceTracking" matSort matSortStart="desc">
+
+                    <!-- id tracking Column -->
+                    <ng-container matColumnDef="id_tracking">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+                      <td mat-cell *matCellDef="let row"> {{row.numberposition}} </td>
+                      <td mat-footer-cell *matFooterCellDef></td>
+                    </ng-container>
+
+                    <!-- reg_date Column -->
+                    <ng-container matColumnDef="reg_date">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'date' | translate}} </th>
+                      <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.reg_date}} </td>
+                      <td mat-footer-cell *matFooterCellDef></td>
+                    </ng-container>
+
+                    <!-- observations Column -->
+                    <ng-container matColumnDef="observations">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'observations' | translate}} </th>
+                      <td mat-cell *matCellDef="let row"> {{row.observations}} </td>
+                      <td mat-footer-cell *matFooterCellDef>Total</td>
+                    </ng-container>
+
+                    <!-- progress Column -->
+                    <ng-container matColumnDef="progress">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'progress' | translate}} </th>
+                      <td mat-cell *matCellDef="let row"> {{row.progress | percent: '1.2-2'}} </td>
+                      <td mat-footer-cell *matFooterCellDef>{{getTotalProgTracking() | percent: '1.2-2'}}</td>
+                    </ng-container>
+
+                    <!-- Actions Column -->
+                    <ng-container matColumnDef="actions">
+                      <th mat-header-cell *matHeaderCellDef> {{'actions' | translate}} </th>
+                      <td mat-cell *matCellDef="let row" class="text-nowrap">
+                        <button
+                        class="btn btn-sm btn-danger"
+                        (click)="deleteTracking(row.id, row.progress)" >
+                        <i class="fas fa-trash"></i>
+                        </button>
+                      </td>
+                      <td mat-footer-cell *matFooterCellDef></td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumnsTracking"  class="header-tabla"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumnsTracking" class="fila-tabla element-row"></tr>
+                    <tr mat-footer-row *matFooterRowDef="displayedColumnsTracking"></tr>
+                    <!-- Row shown when there is no matching data. -->
+                    <tr class="mat-row" *matNoDataRow>
+                      <td class="mat-cell" colspan="4">{{ "msj_r8" | translate }} "{{search.value}}"</td>
+                    </tr>
+                  </table>
+                  <div *ngIf="loadData3" class="text-center m-5">
+                    <div class="spinner-border"></div>
+                  </div>
+                </div>
+              </mat-card>
+              <div class="card-footer bg-white">
+                <mat-paginator
+                #MatPaginatorTab3
+                [pageSizeOptions]="pageSizeOptions"
+                [pageSize]="pageSize"
+                [pageIndex]="pageIndex"
+                [length]="tracking.length"
+                showFirstLastButtons
+                class="text-nowrap paginador">></mat-paginator>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
+

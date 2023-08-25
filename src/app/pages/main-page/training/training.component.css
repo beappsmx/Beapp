@@ -1,0 +1,29 @@
+th{
+  color: #FFFFFF;
+  font-weight: normal;
+  font-size: 12px;
+}
+td {
+  color: #595959;
+  font-weight: normal;
+  font-size: 11px;
+}
+tr.element-row:hover {
+  background: whitesmoke;
+}
+tr.mat-mdc-footer-row td {
+  font-weight: bold;
+}
+.fila-tabla{
+  height: 30px;
+}
+.header-tabla {
+  height: 40px;
+  background-color: #19747e;
+}
+.paginador{
+  font-size: 10px;
+}
+.mat-paginator select{
+  font-size: 10px;
+}

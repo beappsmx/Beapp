@@ -1,0 +1,49 @@
+/*
+*-----------------------------------------------------------------------------------------------------------------------------------------*
+* Descripcion:    Hoja de estilos Dialog Nuevo leccion                                                                                    *
+* Autor:          Heber Alejandro Arce Sanchez                                                                                            *
+* Version:        1.0a1                                                                                                                   *
+* Fecha Creacion: 03/08/2023                                                                                                              *
+*-----------------------------------------------------------------------------------------------------------------------------------------*
+* Log de Modificación                                                                                                                     *
+*                                                                                                                                         *
+*   Fecha           Programador            Correccion                                     Descripcion                                     *
+*03/08/2023    Heber Alejandro Arce      s/n Solicitud       Se crea hoja de estilos en base a interesados                                *
+*-----------------------------------------------------------------------------------------------------------------------------------------*
+*/
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48;
+}
+th{
+  color: #FFFFFF;
+  font-weight: normal;
+  font-size: 12px;
+}
+td {
+  color: #595959;
+  font-weight: normal;
+  font-size: 11px;
+}
+tr.element-row:hover {
+  background: whitesmoke;
+}
+tr.mat-mdc-footer-row td {
+  font-weight: bold;
+}
+.fila-tabla{
+  height: 30px;
+}
+.header-tabla {
+  height: 40px;
+  background-color: #19747e;
+}
+.paginador{
+  font-size: 10px;
+}
+.mat-paginator select{
+  font-size: 10px;
+}

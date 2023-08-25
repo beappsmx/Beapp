@@ -1,0 +1,345 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" >
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>{{ "msj_l0" | translate }}</h1>
+        </div>
+        <div class="col-sm-6">
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xxl-2 col-xl-4 col-lg-4 col-md-4">
+        <!-- Profile Image -->
+        <div class="card card-primary card-outline">
+          <div class="card-body box-profile">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="text-center">
+                  <img
+                    img
+                    src="../assets/img/pp.png"
+                    class="rounded-circle"
+                    width="100"
+                    alt="User profile picture"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <h3 class="profile-username text-center">
+                  {{ profile.typemeeting }}
+                </h3>
+                <div class="dropdown-divider mt-2 mb-4"></div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <p class="text-muted text-center" style="font-size: 14px">
+                  <strong> {{ 'date' | translate }} </strong>
+                </p>
+                <p class="text-muted text-center" style="font-size: 12px">
+                  {{ profile.datep }}
+                </p>
+                <div class="dropdown-divider mt-2 mb-4"></div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <p class="text-muted text-center" style="font-size: 14px">
+                    <strong>{{ 'place' | translate }}</strong>
+                </p>
+                <p class="text-muted text-center" style="font-size: 12px">
+                  {{ profile.place }}
+                </p>
+
+                <div class="dropdown-divider mt-2 mb-4"></div>
+
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <p class="text-muted text-center" style="font-size: 14px">
+                  <strong> {{ 'time' | translate }} </strong>
+                </p>
+                <p class="text-muted text-center" style="font-size: 13px">
+                  {{ profile.timep }}
+                </p>
+
+                <div class="dropdown-divider mt-2 mb-4"></div>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="text-center">
+                  <a [href]="profile.file" target="_blank">
+                    <span class="material-symbols-outlined" style="font-size: 38px;">file_open</span>
+                  </a>
+                  <div></div>
+                  <i class="mdi mdi-file"></i> Listado Firmado
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-md-9 text-center mt-2">
+                <button class="btn btn-primary btn-block" (click)="reportAll()" >
+                  All Lesson
+                </button>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-md-9 text-center mt-2">
+                <button class="btn btn-success btn-block" (click)="reportOne()">
+                  One Lessons
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.card -->
+      </div>
+
+      <div class="col-xxl-10 col-xl-8 col-lg-8 col-md-8">
+        <mat-card class="card">
+          <mat-card-header class="card-header p-2">
+            <mat-card-title>
+              <ul class="nav nav-pills">
+                <li class="nav-item tab-nav"><div class="nav-link active" data-toggle="tab" (click)="onTabSelected('meeting')">{{'meeting' | translate }}</div></li>
+                <li class="nav-item tab-nav"><div class="nav-link" data-toggle="tab" (click)="onTabSelected('lessons')">{{ 'lessons' | translate }}</div></li>
+              </ul>
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="tab-pane" [class.active]="selectedTab === 'meeting'" *ngIf="selectedTab === 'meeting'">
+              <mat-card class="card mt-3">
+                <mat-card-header class="card-header p-2">
+                  <mat-card-title-group class="card-title">
+                    <mat-card-title>
+                      <div class="row">
+                        <div class="col">
+                          <button class="btn btn-block bg-primary" type="button" (click)="newLessons('flessons')">{{'new' | translate }}</button>
+                        </div>
+                      </div>
+                    </mat-card-title>
+                    <div class="col-xl-4 col-lg-4 col-md-4">
+                      <input
+                        class="form-control"
+                        placeholder="{{'search' | translate}}"
+                        (keyup)="applyFilter(lessonsDataSource, $event)"
+                        #search
+                      />
+                    </div>
+                  </mat-card-title-group>
+                </mat-card-header>
+                <div class="mat-table-container mat-elevation-z2 m-3">
+                  <table [hidden]="loadData" mat-table [dataSource]="lessonsDataSource" matSort matSortStart="desc">
+
+                    <!-- No. Consecutivo Column -->
+                    <ng-container matColumnDef="numberposition">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+                      <td mat-cell *matCellDef="let element" class="text-nowrap"> {{element.numberposition}} </td>
+                    </ng-container>
+
+                    <!-- Type meeting -->
+                    <ng-container *ngIf="!screenSizeSM" matColumnDef="type">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-nowrap"> {{'type' | translate}} </th>
+                      <td mat-cell *matCellDef="let element" class="text-nowrap"> {{element.typemeeting}} </td>
+                    </ng-container>
+
+                    <!-- Place meeting -->
+                    <ng-container *ngIf="!screenSizeSM" matColumnDef="place">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-nowrap"> {{'place' | translate}} </th>
+                      <td mat-cell *matCellDef="let element" class="multi-line-description"> {{element.place}} </td>
+                    </ng-container>
+
+                    <!-- Date of meeting -->
+                    <ng-container *ngIf="!screenSizeSM" matColumnDef="date">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-nowrap"> {{'date' | translate}} </th>
+                      <td mat-cell *matCellDef="let element" class="text-nowrap"> {{element.datep}} </td>
+                    </ng-container>
+
+                    <!-- Time of meeting -->
+                    <ng-container *ngIf="!screenSizeSM" matColumnDef="time">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-nowrap"> {{'time' | translate}} </th>
+                      <td mat-cell *matCellDef="let element" class="text-nowrap"> {{element.timep}} </td>
+                    </ng-container>
+
+                    <!-- Actions Column -->
+                    <ng-container matColumnDef="actions">
+                      <th mat-header-cell *matHeaderCellDef> {{'actions' | translate}} </th>
+                      <td mat-cell *matCellDef="let element" class="text-nowrap">
+                        <button
+                          class="btn btn-sm btn-warning mr-1"
+                          (click)="showProfile(element)">
+                          <i class="fas fa-eye"></i>
+                        </button>
+                        <button
+                        class="btn btn-sm btn-dark mr-1"
+                        (click)="editLessons(element.id)">
+                          <i class="fas fa-pencil-alt"></i>
+                        </button>
+                        <button
+                        class="btn btn-sm btn-danger"
+                        (click)="deleteLessons(element.id)">
+                        <i class="fas fa-trash"></i>
+                        </button>
+                      </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColmeeting" class="header-tabla"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColmeeting;" class="fila-tabla element-row"></tr>
+                    <!-- Row shown when there is no matching data. -->
+                    <tr class="mat-row" *matNoDataRow>
+                      <td class="mat-cell" colspan="4">{{ "msj_r8" | translate }} "{{search.value}}"</td>
+                    </tr>
+                  </table>
+                  <div *ngIf="loadData" class="text-center m-5">
+                    <div class="spinner-border"></div>
+                  </div>
+                </div>
+              </mat-card>
+              <div class="card-footer bg-white">
+                <mat-paginator
+                  #MatPaginatorTab1
+                  [pageSizeOptions]="pageSizeOptions"
+                  [pageSize]="pageSize"
+                  [pageIndex]="pageIndex"
+                  [length]="meeting.length"
+                  showFirstLastButtons
+                  class="text-nowrap paginador">
+                </mat-paginator>
+              </div>
+            </div>
+
+            <div class="tab-pane" [class.active]="selectedTab === 'lessons'" *ngIf="selectedTab === 'lessons'">
+
+              <mat-card class="card mt-3">
+                <mat-card-header class="card-header p-2">
+                  <mat-card-title-group class="card-title">
+                    <mat-card-title>
+                      <div class="row">
+                        <div class="col">
+                          <button class="btn btn-block bg-primary" type="button" (click)="newLearned('flearned')">{{'new' | translate }}</button>
+                        </div>
+
+                      </div>
+
+                    </mat-card-title>
+                      <div class="col-xl-4 col-lg-4 col-md-4">
+                        <input
+                          class="form-control"
+                          placeholder="{{'search' | translate}}"
+                          (keyup)="applyFilter(learnedDataSource, $event)"
+                          #search
+                        />
+                      </div>
+                  </mat-card-title-group>
+
+                </mat-card-header>
+                <div class="mat-table-container mat-elevation-z2 m-3">
+                  <table [hidden]="loadData" mat-table [dataSource]="learnedDataSource" matSort matSortStart="desc">
+
+                    <!-- No. Consecutivo Column -->
+                    <ng-container matColumnDef="numberposition">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+                      <td mat-cell *matCellDef="let element" class="text-nowrap"> {{element.numberposition}} </td>
+                    </ng-container>
+
+                      <!-- Lessons -->
+                      <ng-container *ngIf="!screenSizeSM" matColumnDef="concept">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-nowrap"> {{'concept' | translate}} </th>
+                        <td mat-cell *matCellDef="let element" class="text-nowrap"> {{element.concept}} </td>
+                      </ng-container>
+
+                    <!-- Lessons -->
+                    <ng-container *ngIf="!screenSizeSM" matColumnDef="lessons">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-nowrap"> {{'lessons' | translate}} </th>
+                      <td mat-cell *matCellDef="let element" class="text-nowrap"> {{element.lessonlearned}} </td>
+                    </ng-container>
+
+                    <!-- Evidence -->
+                    <ng-container *ngIf="!screenSizeSM" matColumnDef="evidence">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-nowrap"> {{'evidence' | translate}} </th>
+                      <td mat-cell *matCellDef="let element" class="text-nowrap">
+                        <button
+                            class="btn btn-sm btn-check mr-1"
+                            (click)="openLink(element.evidenced)">
+                            <mat-icon>open_in_new</mat-icon>
+                         </button>
+                    </ng-container>
+
+                    <!-- Signed -->
+                    <ng-container *ngIf="!screenSizeSM" matColumnDef="signed">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-nowrap"> {{'signed' | translate}} </th>
+                      <td mat-cell *matCellDef="let element" class="text-nowrap">
+                         <button
+                            class="btn btn-sm btn-check mr-1"
+                            (click)="openLink(element.signed)">
+                            <mat-icon>file_open</mat-icon>
+                         </button>
+                    </ng-container>
+
+                    <!-- Actions Column -->
+                    <ng-container matColumnDef="actions">
+                      <th mat-header-cell *matHeaderCellDef> {{'actions' | translate}} </th>
+                      <td mat-cell *matCellDef="let element" class="text-nowrap">
+                        <button
+                          class="btn btn-sm btn-warning mr-1"
+                          (click)="showProfile(element)">
+                          <i class="fas fa-eye"></i>
+                        </button>
+                        <button
+                        class="btn btn-sm btn-dark mr-1"
+                        (click)="editLessons(element.id)">
+                          <i class="fas fa-pencil-alt"></i>
+                        </button>
+                        <button
+                        class="btn btn-sm btn-danger"
+                        (click)="deleteLessons(element.id)">
+                        <i class="fas fa-trash"></i>
+                        </button>
+                      </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedCollessons" class="header-tabla"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedCollessons;" class="fila-tabla element-row"></tr>
+                    <!-- Row shown when there is no matching data. -->
+                    <tr class="mat-row" *matNoDataRow>
+                      <td class="mat-cell" colspan="4">{{ "msj_r8" | translate }} "{{search.value}}"</td>
+                    </tr>
+                  </table>
+                  <div *ngIf="loadData" class="text-center m-5">
+                    <div class="spinner-border"></div>
+                  </div>
+                </div>
+              </mat-card>
+              <div class="card-footer bg-white">
+                <mat-paginator
+                  #MatPaginatorTab2
+                  [pageSizeOptions]="pageSizeOptions"
+                  [pageSize]="pageSize"
+                  [pageIndex]="pageIndex"
+                  [length]="meeting.length"
+                  showFirstLastButtons
+                  class="text-nowrap paginador">
+                </mat-paginator>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
+
+

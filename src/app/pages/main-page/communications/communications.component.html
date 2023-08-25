@@ -1,0 +1,304 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>{{ 'comunication' | translate }}</h1>
+        </div>
+        <div class="col-sm-6"></div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xxl-2 col-xl-4 col-lg-4 col-md-4">
+        <!-- Profile Image -->
+        <div class="card card-primary card-outline">
+          <div class="card-body box-profile">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="text-center">
+                  <img
+                    img
+                    src="../assets/img/gc.png"
+                    class="rounded-circle"
+                    width="100"
+                    alt="User profile picture"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <h3 class="profile-username text-center">
+                  {{ profile.procces }}
+                </h3>
+                <div class="dropdown-divider mt-2 mb-4"></div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <p class="text-muted text-center" style="font-size: 18px">
+                  {{ profile.information }}
+                </p>
+                <p class="text-muted text-center">
+                  {{ profile.owner }}
+                </p>
+                <div class="dropdown-divider mt-2 mb-4"></div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                <div
+                  class="d-flex justify-content-xl-end justify-content-center d-inline text-nowrap"
+                  style="font-weight: bold; font-size: 11px; color: #595959"
+                >
+                  Formato
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                <div
+                  class="d-flex justify-content-xl-start justify-content-center d-inline text-nowrap"
+                  style="font-size: 10px; font-weight: normal; color: #4f6d7a"
+                >
+                {{ profile.format }}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                <div
+                  class="d-flex justify-content-xl-end justify-content-center d-inline text-nowrap"
+                  style="font-weight: bold; font-size: 11px; color: #595959"
+                >
+                  Reponsable de Comunicar
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                <div
+                  class="d-flex justify-content-xl-start justify-content-center d-inline text-nowrap"
+                  style="font-size: 10px; font-weight: normal; color: #4f6d7a"
+                >
+                {{ profile.area }}
+
+
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                <div
+                  class="d-flex justify-content-xl-end justify-content-center d-inline text-nowrap"
+                  style="font-weight: bold; font-size: 11px; color: #595959"
+                >
+                  Referencia Contractual
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                <div
+                  class="d-flex justify-content-xl-start justify-content-center d-inline text-nowrap"
+                  style="font-size: 10px; font-weight: normal; color: #4f6d7a"
+                >
+                {{ profile.reference }}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                <div
+                  class="d-flex justify-content-xl-end justify-content-center d-inline text-nowrap"
+                  style="font-weight: bold; font-size: 11px; color: #595959"
+                >
+                  Grupo Interesado
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                <div
+                  class="d-flex justify-content-xl-start justify-content-center d-inline text-nowrap"
+                  style="font-size: 10px; font-weight: normal; color: #4f6d7a"
+                >
+                {{ profile.group }}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="dropdown-divider mt-2 mb-4"></div>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-9">
+                <button
+                  mat-button
+                  mat-dialog-close
+                  class="btn btn-primary btn-block"
+                  (click)="generarReporte()"
+                >
+                  {{ "print" | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.card -->
+      </div>
+      <div class="col-xxl-10 col-xl-8 col-lg-8 col-md-8">
+        <mat-card class="card">
+          <mat-card-header class="card-header p-2">
+            <mat-card-title>
+              <ul class="nav nav-pills">
+                <li class="nav-item tab-nav"><div class="nav-link active" data-toggle="tab" (click)="onTabSelected('comunication')">Comunicacion</div></li>
+                <li class="nav-item tab-nav"><div class="nav-link" data-toggle="tab" (click)="onTabSelected('follow')">Seguimiento</div></li>
+              </ul>
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="tab-pane" [class.active]="selectedTab === 'comunication'" *ngIf="selectedTab === 'comunication'">
+              <mat-card class="card mt-3">
+                <mat-card-header class="card-header p-2">
+                  <mat-card-title-group class="card-title">
+                    <mat-card-title>
+                      <div class="row">
+                        <div class="col">
+                          <button class="btn btn-block bg-primary" type="button" (click)="newCommunications()">{{'new' | translate }}</button>
+                        </div>
+                      </div>
+                    </mat-card-title>
+                      <div class="col-xl-4 col-lg-4 col-md-4">
+                        <input class="form-control" placeholder="{{'search' | translate}}"
+                        (keyup)="applyFilter(comDataSource, $event)">
+                      </div>
+                  </mat-card-title-group>
+                </mat-card-header>
+                <div class="mat-table-container mat-elevation-z2 m-3">
+                  <table [hidden]="loadData" mat-table [dataSource]="comDataSource" matSort matSortStart="desc">
+
+                    <!-- No. Consecutivo Column -->
+                    <ng-container matColumnDef="numberposition">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+                      <td mat-cell *matCellDef="let element" class="text-nowrap"> {{element.pos}} </td>
+                    </ng-container>
+
+                    <!-- Proceso PMBOK Column -->
+                    <ng-container *ngIf="!screenSizeSM" matColumnDef="procces">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-nowrap"> {{'process' | translate}} </th>
+                      <td mat-cell *matCellDef="let element" class="text-nowrap"> {{element.procces}} </td>
+                    </ng-container>
+
+                    <!-- Informacion del Proyecto Column -->
+                    <ng-container *ngIf="!screenSizeSM" matColumnDef="information">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-nowrap"> {{'proyectinfo' | translate}} </th>
+                      <td mat-cell *matCellDef="let element" class="text-nowrap"> {{element.information}} </td>
+                    </ng-container>
+
+                    <!-- Dueño del Documento Column -->
+                    <ng-container *ngIf="!screenSizeSM" matColumnDef="owner">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-nowrap"> {{'owner' | translate}} </th>
+                      <td mat-cell *matCellDef="let element" class="text-nowrap"> {{element.owner}} </td>
+                    </ng-container>
+
+                    <!-- Actions Column -->
+                    <ng-container matColumnDef="actions">
+                      <th mat-header-cell *matHeaderCellDef> {{'actions' | translate}} </th>
+                      <td mat-cell *matCellDef="let element" class="text-nowrap">
+                        <button
+                          class="btn btn-sm btn-warning mr-1"
+                          (click)="showProfile(element)">
+                          <i class="fas fa-eye"></i>
+                        </button>
+                        <button
+                        class="btn btn-sm btn-dark mr-1"
+                        (click)="editCommunic(element.id)">
+                          <i class="fas fa-pencil-alt"></i>
+                        </button>
+                        <button
+                        class="btn btn-sm btn-danger"
+                        (click)="deleteCommunic(element.id)">
+                        <i class="fas fa-trash"></i>
+                        </button>
+                      </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header-tabla"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="fila-tabla element-row"></tr><!-- Row shown when there is no matching data. -->
+                  </table>
+                  <div *ngIf="loadData" class="text-center m-5">
+                    <div class="spinner-border"></div>
+                  </div>
+                </div>
+              </mat-card>
+              <div class="card-footer bg-white">
+                <mat-paginator [hidden]="loadData" [pageSizeOptions]="[15, 20, 25]" showFirstLastButtons  class="text-nowrap paginador"></mat-paginator>
+              </div>
+            </div>
+            <div class="tab-pane" [class.active]="selectedTab === 'follow'" *ngIf="selectedTab === 'follow'">
+              <mat-card class="card mt-3">
+                <mat-card-header class="card-header p-2">
+                  <mat-card-title>
+                    <button class="btn btn-block bg-primary" type="button" (click)="newFollow(profile.id)">{{'new' | translate }}</button>
+                  </mat-card-title>
+                </mat-card-header>
+                <div class="row mt-4">
+                  <div class="col-sm-6 col-md-6">
+                    <mat-card class="ml-2">
+                      <mat-calendar
+                        [(selected)]="slDate"
+                        [dateClass]="dateClass">
+                      </mat-calendar>
+                    </mat-card>
+                  </div>
+                  <div class="col-sm-6 col-md-6">
+                    <div class="row">
+                      <div class="col-sm-11 col-md-11 subt-head text-center">
+                        Informacion a comunicar
+                      </div>
+                      <div class="col-sm-5 col-md-5 subt-row">
+                        Nombre del documento:
+                      </div>
+                      <div class="col-sm-6 col-md-6 subt-cell">
+                        {{ profile.information }}
+                      </div>
+                      <div class="col-sm-5 col-md-5 subt-row">
+                        Formato:
+                      </div>
+                      <div class="col-sm-6 col-md-6 subt-cell">
+                        {{ profile.format }}
+                      </div>
+                      <div class="col-sm-5 col-md-5 subt-row">
+                        Referencia Contractual:
+                      </div>
+                      <div class="col-sm-6 col-md-6 subt-cell">
+                        {{ profile.reference }}
+                      </div>
+                      <div class="col-sm-5 col-md-5 subt-row">
+                        Proceso PMBOK:
+                      </div>
+                      <div class="col-sm-6 col-md-6 subt-cell">
+                        {{ profile.procces }}
+                      </div>
+                      <div class="col-sm-11 col-md-11 subt-head2 text-center">
+                        ¿Cada cuanto lo comunica?
+                      </div>
+                      <div class="col-sm-5 col-md-5 subt-row">
+                        Frecuencia:
+                      </div>
+                      <div class="col-sm-6 col-md-6 subt-cell">
+                        {{ profile.frequence }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-card>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
+

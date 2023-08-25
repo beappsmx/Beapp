@@ -1,0 +1,413 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>{{ "dashboard" | translate }}</h1>
+        </div>
+        <div class="col-sm-6"></div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
+        <mat-card class="card">
+          <mat-card-header class="card-header p-2">
+            <mat-card-title>
+              <ul class="nav nav-pills">
+                <li class="nav-item tab-nav"><div class="nav-link active" data-toggle="tab" (click)="onTabSelected('interested')">{{ "interested" | translate }}</div></li>
+                <li class="nav-item tab-nav"><div class="nav-link" data-toggle="tab" (click)="onTabSelected('communications')">{{ "communications" | translate }}</div></li>
+                <li class="nav-item tab-nav"><div class="nav-link" data-toggle="tab" (click)="onTabSelected('risk')">{{ "risk" | translate }}</div></li>
+              </ul>
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="tab-pane" [class.active]="selectedTab === 'interested'" *ngIf="selectedTab === 'interested'">
+              <mat-card class="card mt-3">
+                <mat-card-header class="card-header p-2">
+                  <mat-card-title-group class="card-title">
+                    <mat-card-title>
+                      <div class="row">
+                        <div class="col">
+                          <button class="btn btn-block bg-primary" type="button">{{'print' | translate }}</button>
+                        </div>
+                      </div>
+                    </mat-card-title>
+                    Dashboard Interesados
+                  </mat-card-title-group>
+                </mat-card-header>
+                <div class="row">
+                  <div class="col-md-4">
+                    <mat-card class="card mt-2 ml-2">
+                      <mat-card-header class="card-header p-2">
+                        <mat-card-title class="titleGraph">
+                          Grafica de Calor Interesados
+                        </mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <div id="chart">
+                          <apx-chart
+                          [series]="chartOptions.series"
+                          [chart]="chartOptions.chart"
+                          [dataLabels]="chartOptions.dataLabels"
+                          [xaxis]="chartOptions.xaxis"
+                          [tooltip]="chartOptions.tooltip"
+                          [annotations]="chartOptions.annotations"
+                          [plotOptions]="chartOptions.plotOptions"
+                          >
+                          </apx-chart>
+                        </div>
+                      </mat-card-content>
+                    </mat-card>
+                  </div>
+                  <div class="col-md-4">
+                    <mat-card class="card mt-2">
+                      <mat-card-header class="card-header p-2">
+                        <mat-card-title class="titleGraph">
+                          Interesados X Organizacion
+                        </mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <div id="chart2">
+                          <apx-chart
+                            [series]="chartOptions2.series"
+                            [chart]="chartOptions2.chart"
+                            [dataLabels]="chartOptions2.dataLabels"
+                            [plotOptions]="chartOptions2.plotOptions"
+                            [yaxis]="chartOptions2.yaxis"
+                            [xaxis]="chartOptions2.xaxis"
+                            [legend]="chartOptions2.legend"
+                            [colors]="chartOptions2.colors"
+                            [tooltip]="chartOptions2.tooltip"
+                            [grid]="chartOptions2.grid"
+                          ></apx-chart>
+                        </div>
+                      </mat-card-content>
+                    </mat-card>
+                  </div>
+                  <div class="col-md-4">
+                    <mat-card class="card mt-2 mr-2">
+                      <mat-card-header class="card-header p-2">
+                        <mat-card-title class="titleGraph">
+                          Interesados X Area
+                        </mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <div id="chart3">
+                          <apx-chart
+                            [series]="chartOptions3.series"
+                            [chart]="chartOptions3.chart"
+                            [dataLabels]="chartOptions3.dataLabels"
+                            [plotOptions]="chartOptions3.plotOptions"
+                            [yaxis]="chartOptions3.yaxis"
+                            [xaxis]="chartOptions3.xaxis"
+                            [legend]="chartOptions3.legend"
+                            [colors]="chartOptions3.colors"
+                            [tooltip]="chartOptions3.tooltip"
+                            [grid]="chartOptions3.grid"
+                          ></apx-chart>
+                        </div>
+                      </mat-card-content>
+                    </mat-card>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-card class="card mt-2 ml-2">
+                      <mat-card-header class="card-header p-2">
+                        <mat-card-title class="titleGraph">
+                          Interes
+                        </mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <div id="chart4">
+                          <apx-chart
+                            [series]="chartOptions4.series"
+                            [chart]="chartOptions4.chart"
+                            [labels]="chartOptions4.labels"
+                            [plotOptions]="chartOptions4.plotOptions"
+                            [responsive]="chartOptions4.responsive"
+                          ></apx-chart>
+                        </div>
+                      </mat-card-content>
+                    </mat-card>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-card class="card mt-2 ml-2">
+                      <mat-card-header class="card-header p-2">
+                        <mat-card-title class="titleGraph">
+                          Influencia
+                        </mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <div id="chart5">
+                          <apx-chart
+                            [series]="chartOptions5.series"
+                            [chart]="chartOptions5.chart"
+                            [labels]="chartOptions5.labels"
+                            [plotOptions]="chartOptions5.plotOptions"
+                            [responsive]="chartOptions5.responsive"
+                          ></apx-chart>
+                        </div>
+                      </mat-card-content>
+                    </mat-card>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-card class="card mt-2 ml-2">
+                      <mat-card-header class="card-header p-2">
+                        <mat-card-title class="titleGraph">
+                          Poder
+                        </mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <div id="chart6">
+                          <apx-chart
+                            [series]="chartOptions6.series"
+                            [chart]="chartOptions6.chart"
+                            [labels]="chartOptions6.labels"
+                            [plotOptions]="chartOptions6.plotOptions"
+                            [responsive]="chartOptions6.responsive"
+                          ></apx-chart>
+                        </div>
+                      </mat-card-content>
+                    </mat-card>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-card class="card mt-2 ml-2">
+                      <mat-card-header class="card-header p-2">
+                        <mat-card-title class="titleGraph">
+                          Ponderacion
+                        </mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <div id="chart7">
+                          <apx-chart
+                            [series]="chartOptions7.series"
+                            [chart]="chartOptions7.chart"
+                            [labels]="chartOptions7.labels"
+                            [plotOptions]="chartOptions7.plotOptions"
+                            [responsive]="chartOptions7.responsive"
+                          ></apx-chart>
+                        </div>
+                      </mat-card-content>
+                    </mat-card>
+                  </div>
+                </div>
+              </mat-card>
+            </div>
+            <div class="tab-pane" [class.active]="selectedTab === 'communications'" *ngIf="selectedTab === 'communications'">
+              <mat-card class="card mt-3">
+                <mat-card-header class="card-header p-2">
+                  <mat-card-title-group class="card-title">
+                    <mat-card-title>
+                      <div class="row">
+                        <div class="col">
+                          <button class="btn btn-block bg-primary" type="button">{{'print' | translate }}</button>
+                        </div>
+                      </div>
+                    </mat-card-title>
+                    Dashboard Comunicaciones
+                  </mat-card-title-group>
+                </mat-card-header>
+                <div class="row">
+                  <div class="col-md-4">
+                    <mat-card class="card mt-2 ml-2">
+                      <mat-card-header class="card-header p-2">
+                        <mat-card-title class="titleGraph">
+                          Grafica de Proceso PMBOK
+                        </mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <div id="chart8">
+                          <apx-chart
+                            [series]="chartOptions8.series"
+                            [chart]="chartOptions8.chart"
+                            [plotOptions]="chartOptions8.plotOptions"
+                            [labels]="chartOptions8.labels"
+                          ></apx-chart>
+                        </div>
+                      </mat-card-content>
+                    </mat-card>
+                  </div>
+                  <div class="col-md-4">
+                    <mat-card class="card mt-2">
+                      <mat-card-header class="card-header p-2">
+                        <mat-card-title class="titleGraph">
+                          Formato /  Medio
+                        </mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <div id="chart2">
+                          <apx-chart
+                            [series]="chartOptions2.series"
+                            [chart]="chartOptions2.chart"
+                            [dataLabels]="chartOptions2.dataLabels"
+                            [plotOptions]="chartOptions2.plotOptions"
+                            [yaxis]="chartOptions2.yaxis"
+                            [xaxis]="chartOptions2.xaxis"
+                            [legend]="chartOptions2.legend"
+                            [colors]="chartOptions2.colors"
+                            [tooltip]="chartOptions2.tooltip"
+                            [grid]="chartOptions2.grid"
+                          ></apx-chart>
+                        </div>
+                      </mat-card-content>
+                    </mat-card>
+                  </div>
+                  <div class="col-md-4">
+                    <mat-card class="card mt-2 mr-2">
+                      <mat-card-header class="card-header p-2">
+                        <mat-card-title class="titleGraph">
+                          Responsable de Comuinicacion
+                        </mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <div id="chart2">
+                          <apx-chart
+                            [series]="chartOptions2.series"
+                            [chart]="chartOptions2.chart"
+                            [dataLabels]="chartOptions2.dataLabels"
+                            [plotOptions]="chartOptions2.plotOptions"
+                            [yaxis]="chartOptions2.yaxis"
+                            [xaxis]="chartOptions2.xaxis"
+                            [legend]="chartOptions2.legend"
+                            [colors]="chartOptions2.colors"
+                            [tooltip]="chartOptions2.tooltip"
+                            [grid]="chartOptions2.grid"
+                          ></apx-chart>
+                        </div>
+                      </mat-card-content>
+                    </mat-card>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-card class="card mt-2 ml-2">
+                      <mat-card-header class="card-header p-2">
+                        <mat-card-title class="titleGraph">
+                          Dueño del documento
+                        </mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <div id="chart2">
+                          <apx-chart
+                            [series]="chartOptions2.series"
+                            [chart]="chartOptions2.chart"
+                            [dataLabels]="chartOptions2.dataLabels"
+                            [plotOptions]="chartOptions2.plotOptions"
+                            [yaxis]="chartOptions2.yaxis"
+                            [xaxis]="chartOptions2.xaxis"
+                            [legend]="chartOptions2.legend"
+                            [colors]="chartOptions2.colors"
+                            [tooltip]="chartOptions2.tooltip"
+                            [grid]="chartOptions2.grid"
+                          ></apx-chart>
+                        </div>
+                      </mat-card-content>
+                    </mat-card>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-card class="card mt-2 ml-2">
+                      <mat-card-header class="card-header p-2">
+                        <mat-card-title class="titleGraph">
+                          Frecuencia / Tiempo
+                        </mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <div id="chart2">
+                          <apx-chart
+                            [series]="chartOptions2.series"
+                            [chart]="chartOptions2.chart"
+                            [dataLabels]="chartOptions2.dataLabels"
+                            [plotOptions]="chartOptions2.plotOptions"
+                            [yaxis]="chartOptions2.yaxis"
+                            [xaxis]="chartOptions2.xaxis"
+                            [legend]="chartOptions2.legend"
+                            [colors]="chartOptions2.colors"
+                            [tooltip]="chartOptions2.tooltip"
+                            [grid]="chartOptions2.grid"
+                          ></apx-chart>
+                        </div>
+                      </mat-card-content>
+                    </mat-card>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-card class="card mt-2 ml-2">
+                      <mat-card-header class="card-header p-2">
+                        <mat-card-title class="titleGraph">
+                          Interesados x documento
+                        </mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <div id="chart2">
+                          <apx-chart
+                            [series]="chartOptions2.series"
+                            [chart]="chartOptions2.chart"
+                            [dataLabels]="chartOptions2.dataLabels"
+                            [plotOptions]="chartOptions2.plotOptions"
+                            [yaxis]="chartOptions2.yaxis"
+                            [xaxis]="chartOptions2.xaxis"
+                            [legend]="chartOptions2.legend"
+                            [colors]="chartOptions2.colors"
+                            [tooltip]="chartOptions2.tooltip"
+                            [grid]="chartOptions2.grid"
+                          ></apx-chart>
+                        </div>
+                      </mat-card-content>
+                    </mat-card>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-card class="card mt-2 ml-2">
+                      <mat-card-header class="card-header p-2">
+                        <mat-card-title class="titleGraph">
+                          Receptores X Numero de Documentos
+                        </mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <div id="chart2">
+                          <apx-chart
+                            [series]="chartOptions2.series"
+                            [chart]="chartOptions2.chart"
+                            [dataLabels]="chartOptions2.dataLabels"
+                            [plotOptions]="chartOptions2.plotOptions"
+                            [yaxis]="chartOptions2.yaxis"
+                            [xaxis]="chartOptions2.xaxis"
+                            [legend]="chartOptions2.legend"
+                            [colors]="chartOptions2.colors"
+                            [tooltip]="chartOptions2.tooltip"
+                            [grid]="chartOptions2.grid"
+                          ></apx-chart>
+                        </div>
+                      </mat-card-content>
+                    </mat-card>
+                  </div>
+                </div>
+              </mat-card>
+
+            </div>
+            <div class="tab-pane" [class.active]="selectedTab === 'risk'" *ngIf="selectedTab === 'risk'">
+              <mat-card class="card mt-3">
+                <mat-card-header class="card-header p-2">
+                  <mat-card-title-group class="card-title">
+                    <mat-card-title>
+                      <div class="row">
+                        <div class="col">
+                          <button class="btn btn-block bg-primary" type="button">{{'print' | translate }}</button>
+                        </div>
+                      </div>
+                    </mat-card-title>
+                    Dashboard Riesgos
+                  </mat-card-title-group>
+                </mat-card-header>
+
+              </mat-card>
+
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
+

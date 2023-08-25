@@ -1,0 +1,34 @@
+{
+  "rules": {
+    "storage": {
+      "$file": {
+        "read": true,
+        "write": false
+      }
+    }
+  },
+  "hosting": {
+    "public": "dist/Beapp",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  },
+  "database": {
+    "rules": {
+      "storage": {
+        "$file": {
+          "read": true,
+          "write": false
+        }
+      }
+    }
+  }
+}

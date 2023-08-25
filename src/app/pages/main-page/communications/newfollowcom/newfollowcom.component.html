@@ -1,0 +1,97 @@
+<!--
+*-----------------------------------------------------------------------------------------------------------------------------------------*
+* Descripcion:    Dialog Nuevo Seguimiento comunicacion                                                                                   *
+* Autor:          Heber Alejandro Arce Sanchez                                                                                            *
+* Version:        1.0a1                                                                                                                   *
+* Fecha Creacion: 28/05/2023                                                                                                              *
+*-----------------------------------------------------------------------------------------------------------------------------------------*
+* Log de Modificación                                                                                                                     *
+*                                                                                                                                         *
+*   Fecha           Programador            Correccion                                     Descripcion                                     *
+* 28/06/2023    Heber Alejandro Arce      s/n Solicitud     Creacion del dialog en base al dialog de nueva comunicacion                   *
+*-----------------------------------------------------------------------------------------------------------------------------------------*
+-->
+<h2 mat-dialog-title class="h2-dialog">{{ 'msj_c15' | translate }}</h2>
+<!-- Se inicializa el Formulario -->
+<form autocomplete="off" (ngSubmit)="saveFollow()" [formGroup]="fdocumentscom">
+  <!-- Contenido del dialog -->
+  <mat-dialog-content class="mat-typography">
+    <!-- Contenido del dialog -->
+    <ng-container>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-6">
+            <!-- Left Group -->
+            <div class="form-group">
+              <!-- Container Bootstrap -->
+              <div class="container-fluid">
+                <!-- Fila 1 Bootstrap -->
+                <div class="row mt-2">
+                  <input type="date" id="date" class="form-control" name="date" disabled value="{{formDate}}">
+                </div>
+                <div class="row mt-2">
+                  <textarea id="description" class="form-control" name="description" formControlName="description" required placeholder="Comentarios"></textarea>
+                </div>
+                <div class="row mt-2">
+                  <input type="file" id="picture" class="form-control" name="picture" formControlName="picture" (change)="adjuntarArchivos($event)" multiple>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <!-- Right Group -->
+            <div class="form-group">
+              <!-- Container Bootstrap -->
+              <div class="container-fluid">
+                <!-- Fila 1 Bootstrap -->
+                <div class="row">
+                  <mat-list>
+                    <mat-list-item class="item-title">
+                      <span matListItemTitle>Interesados (Receptor)</span>
+                    </mat-list-item>
+                    <mat-list-item *ngFor="let detail of interestedDetail">
+                      <span matListItemTitle class="item-content">{{ detail.name }}</span>
+                      <span matListItemLine class="item-mail">{{ detail.email }}</span>
+                    </mat-list-item>
+                  </mat-list>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </mat-dialog-content>
+
+  <!-- Acciones del Dialog -->
+  <mat-dialog-actions align="end" class="footer-dialog">
+    <!-- Container Bootstrap del contenido del las Acciones del Dialog -->
+    <div class="container-fluid">
+      <div class="row justify-content-end">
+        <div class="col-auto me-auto">
+          <!-- Boton de Cancelar -->
+          <button
+            mat-button
+            mat-dialog-close
+            class="btn btn-secondary">
+            {{ 'cancel' | translate }}
+          </button>
+        </div>
+        <div class="col-auto">
+          <!-- Boton de Guardar -->
+          <button
+            type="submit"
+            mat-button
+            [mat-dialog-close]="true"
+            cdkFocusInitial
+            class="btn btn-primary"
+            >
+            Salvar
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-actions>
+</form>

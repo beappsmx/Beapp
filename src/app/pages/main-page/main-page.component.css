@@ -1,0 +1,76 @@
+th {
+  color: #FFFFFF;
+  font-weight: normal;
+  font-size: 12px;
+}
+
+td {
+  color: #595959;
+  font-weight: normal;
+  font-size: 11px;
+}
+
+tr.element-row:hover {
+  background: whitesmoke;
+}
+
+/* Estilos de las celdas de encabezado */
+.mat-mdc-card-title {
+  line-height: 20px;
+  font-size: 14px;
+}
+
+/* Estilos de las filas */
+.fila-tabla {
+  height: 30px;
+}
+
+.header-tabla {
+  height: 40px;
+  background-color: #19747e;
+}
+
+/* Estilos de las columnas */
+.mat-column-numberposition {
+  width: 10%;
+  max-width: 50px;
+  min-width: 30px;
+}
+
+/* Estilos del paginador */
+.paginador {
+  font-size: 10px;
+}
+
+.mat-paginator select {
+  font-size: 10px;
+}
+
+/* Estilos de las celdas secundarias */
+.subt-cell {
+  font-size: 9px;
+  background-color: #fff;
+}
+
+.subt-cell2 {
+  font-size: 9px;
+  background-color: #fff8ec;
+}
+
+.subt-row {
+  font-size: 9px;
+  background-color: #f3f2f2;
+}
+
+/* Estilos del encabezado de las celdas secundarias */
+.subt-head {
+  font-size: 10px;
+  color: #fff;
+  background-color: #4b3f72;
+}
+
+.subt-head2 {
+  font-size: 10px;
+  color: #fff;
+  background-color: #99c24d;
+}

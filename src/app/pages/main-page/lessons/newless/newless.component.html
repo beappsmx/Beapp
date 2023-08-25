@@ -1,0 +1,345 @@
+<h2 mat-dialog-title class="h2-dialog">{{ 'newcomunic' | translate }}</h2>
+<!-- Se inicializa el Formulario -->
+<div *ngIf="data.formType === 'flessons'">
+  <form autocomplete="off" [formGroup]="flessons" (ngSubmit)="saveLessons()">
+    <!-- Contenido del dialog -->
+    <mat-dialog-content class="mat-typography">
+      <!-- Contenido del dialog -->
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-6">
+            <!-- Left Group -->
+            <div class="form-group">
+
+              <!-- Fila 1 Bootstrap -->
+              <div class="row">
+                <!-- Columna 1.1 Bootstrap Izquierda-->
+                <div class="col-sm-12">
+
+                  <!-- SubFila 1.1.1 Bootstrap Proceso-->
+                  <div class="row mt-2">
+                    <!-- SubColumna 1.1.1.1 Bootstrap Proceso-->
+                    <div class="col-sm-12">
+                      <h1 class="smaller-title">Tipo de Reunión</h1>
+                      <div>
+                        <input
+                          type="checkbox"
+                          id="Registro"
+                          (change)="onCheckboxChange($event)"
+                          [checked]="flessons.get('typemeeting').value === 'reunionRegistro'">
+                        <label for="reunionRegistro">Registro</label>
+                      </div>
+                      <div>
+                        <input
+                          type="checkbox"
+                          id="Presentacion"
+                          (change)="onCheckboxChange($event)"
+                          [checked]="flessons.get('typemeeting').value === 'reunionPresentacion'">
+                        <label for="reunionPresentacion">Presentación</label>
+                      </div>
+                      <div>
+                        Fecha
+                        <input type="date" id="fecha" formControlName="datep">
+                      </div>
+                    </div>
+                  </div>
+                  <!-- SubFila 1.1.2 Bootstrap information-->
+                  <div class="row mt-2">
+                    <!-- SubColumna 1.1.2.1 Bootstrap information-->
+                    <div class="col-sm-12">
+                      <!-- Campo de Nombre del Documento -->
+                      <input
+                        type="text"
+                        id="information"
+                        class="form-control"
+                        placeholder="Hora"
+                        formControlName="timep"
+                      />
+                      <!-- Tooltip de validacion del campo information -->
+                      <div class="invalid-tooltip">
+                        Please enter a valid position.
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- SubFila 1.1.4 Bootstrap Area-->
+                  <div class="row mt-2">
+                    <!-- SubColumna 1.1.4.1 Bootstrap Area-->
+                    <div class="col-sm-12">
+                      <!-- Campo de texto Area Responsable -->
+                      <input
+                        type="text"
+                        id="area"
+                        class="form-control"
+                        placeholder="Lugar de la Reunion"
+                        formControlName="place"
+                      />
+                      <!-- Tooltip de validacion del campo Area -->
+                      <div class="invalid-tooltip">
+                        Please enter a valid role.
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- SubFila 1.1.6 Bootstrap Detallles-->
+                  <div class="row mt-2">
+                    <!-- SubColumna 1.1.6.1 Bootstrap Referencia -->
+                    <div class="col-sm-12">
+                      <!-- Campo de texto Referencia -->
+                      <textarea
+                        id="details"
+                        rows="6"
+                        class="form-control"
+                        placeholder="Detalles"
+                        formControlName="details">
+                      </textarea>
+                      <!-- Tooltip de validacion del campo referencia -->
+                      <div class="invalid-tooltip">
+                        Se requieren detalles.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <!-- Right Group -->
+            <div class="form-group">
+              <!-- Container Bootstrap -->
+              <div class="container-fluid">
+                <!-- Fila 1 Bootstrap -->
+                <div class="row">
+
+                  <!-- Columna 1.1 Bootstrap Derecha -->
+                  <div class="col-sm-12">
+                    <div class="row mt-2">
+                      <div class="col-sm-10">
+                        <select id="selectedUsers" class="form-control">
+                          <option selected disabled value=""> {{ 'interes' | translate }} </option>
+                          <option *ngFor="let item of interestedList" [value]="item.name">
+                            {{ item.name }}
+                          </option>
+                        </select>
+                      </div>
+                      <div class="col-sm-2">
+                        <button
+                          type="button"
+                          class="btn btn-primary"
+                          (click)="addSelectedInterested()">
+                          {{'add' | translate }}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-12 mt-2">
+                    <ul class="list-group mt-12" id="selectedUsersList">
+                      <!-- Iterar sobre los interesados seleccionados y mostrarlos en la lista -->
+                      <li class="list-group-item" *ngFor="let selected of selectedInterested; let i = index">
+                        {{ selected.name }}
+                        <button type="button" class="btn btn-danger btn-sm" (click)="removeSelectedInterested(i)">Eliminar</button>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-sm-12 mt-2">
+                    <input type="file" (change)="onFileSelected($event)">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-dialog-content>
+    <!-- Acciones del Dialog -->
+    <mat-dialog-actions align="end" class="footer-dialog">
+      <!-- Container Bootstrap del contenido del las Acciones del Dialog -->
+      <div class="container-fluid">
+        <div class="row justify-content-end">
+          <div class="col-auto me-auto">
+            <!-- Boton de Cancelar -->
+            <button mat-button mat-dialog-close class="btn btn-secondary">
+              Cancelar
+            </button>
+          </div>
+          <div class="col-auto">
+            <!-- Boton de Guardar -->
+            <button type="submit" mat-button [mat-dialog-close]="true" cdkFocusInitial class="btn btn-primary">
+              Salvar
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-dialog-actions>
+  </form>
+</div>
+
+<div *ngIf="data.formType === 'flearned'">
+  <form autocomplete="off" [formGroup]="flearned" (ngSubmit)="saveLearned()">
+    <!-- Contenido del dialog -->
+    <mat-dialog-content class="mat-typography">
+      <!-- Contenido del dialog -->
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-6">
+            <!-- Left Group -->
+            <div class="form-group">
+              <!-- Container Bootstrap -->
+              <div class="container-fluid">
+                <!-- Fila 1 Bootstrap -->
+                <div class="row">
+                  <!-- Columna 1.1 Bootstrap Izquierda-->
+                  <div class="col-sm-12 mt-2">
+                    <select id="selectedUsers" class="form-control" formControlName="people">
+                      <option selected disabled value=""> {{ 'interes' | translate }} </option>
+                      <option *ngFor="let item of interestedList" [value]="item.name">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col-sm-12 mt-2">
+                    <select id="selectConcepts" class="form-control" formControlName="concept">
+                      <option selected disabled value=""> {{ 'concepts' | translate }} </option>
+                      <option *ngFor="let valconc of conceptsList" [value]="valconc.actividad">
+                        {{ valconc.actividad }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col-sm-12 mt-2">
+                    <!-- Campo de texto Area Responsable -->
+                    <input type="text" id="area" class="form-control" placeholder="Referencia Contraactual"
+                           formControlName="reference" />
+                    <!-- Tooltip de validacion del campo Area -->
+                    <div class="invalid-tooltip">
+                      Please enter a valid role.
+                    </div>
+                  </div>
+                  <div class="col-sm-12 mt-2">
+                    <!-- Campo de texto Referencia -->
+                    <input type="text" id="area" class="form-control" placeholder="Etapa del Proyecto*"
+                    formControlName="stage" />
+                    <!-- Tooltip de validacion del campo referencia -->
+                    <div class="invalid-tooltip">
+                      Se requieren detalles.
+                    </div>
+                  </div>
+                  <div class="col-sm-12 mt-2">
+                    <select id="selectPhase" class="form-control" formControlName="phase">
+                       <option selected disabled value="">{{ 'Seleccione una fase' }}</option>
+                       <option *ngFor="let fase of faseOptions" [value]="fase">{{ fase }}</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-12 mt-2">
+                    <!-- Campo de texto Referencia -->
+                    <input type="text" id="area" class="form-control" placeholder="Proceso/Procedimiento*"
+                    formControlName="procces" />
+                    <!-- Tooltip de validacion del campo referencia -->
+                    <div class="invalid-tooltip">
+                      Se requieren detalles.
+                    </div>
+                  </div>
+                  <div class="col-sm-12 mt-2">
+                    <!-- Campo de texto Referencia -->
+                    <textarea id="details" rows="4" class="form-control" placeholder="Tecnologia y Equipo Involucrado*"
+                              formControlName="technology"></textarea>
+                    <!-- Tooltip de validacion del campo referencia -->
+                    <div class="invalid-tooltip">
+                      Se requieren detalles.
+                    </div>
+                  </div>
+                  <div class="col-sm-12 mt-2">
+                    <!-- Campo de texto Referencia -->
+                    <textarea
+                      id="details"
+                      rows="3"
+                      class="form-control"
+                      placeholder="Descripcion del Evento*"
+                      formControlName="event">
+                    </textarea>
+                    <!-- Tooltip de validacion del campo referencia -->
+                    <div class="invalid-tooltip">
+                      Se requieren detalles.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <!-- Right Group -->
+            <div class="form-group">
+              <!-- Container Bootstrap -->
+              <div class="container-fluid">
+                <!-- Fila 1 Bootstrap -->
+                <div class="row">
+                  <div class="col-sm-12 mt-2">
+                    <textarea id="details" rows="3" class="form-control" placeholder="Descripcion de la Leccion Aprendida*"
+                              formControlName="lessonlearned"></textarea>
+                    <!-- Tooltip de validacion del campo referencia -->
+                    <div class="invalid-tooltip">
+                      Se requieren detalles.
+                    </div>
+                  </div>
+                  <div class="col-sm-12 mt-2">
+                    <textarea id="details" rows="3" class="form-control" placeholder="Consecuencias Negativas*"
+                              formControlName="conseqn"></textarea>
+                    <!-- Tooltip de validacion del campo referencia -->
+                    <div class="invalid-tooltip">
+                      Se requieren detalles.
+                    </div>
+                  </div>
+                  <div class="col-sm-12 mt-2">
+                    <!-- Campo de texto Referencia -->
+                    <textarea id="details" rows="3" class="form-control" placeholder="Consecuencias Positivas*"
+                              formControlName="conseqp"></textarea>
+                    <!-- Tooltip de validacion del campo referencia -->
+                    <div class="invalid-tooltip">
+                      Se requieren detalles.
+                    </div>
+                  </div>
+                  <div class="col-sm-12 mt-2">
+                    <!-- Campo de texto Referencia -->
+                    <textarea id="details" rows="3" class="form-control" placeholder="Acciones para evitar recurrencia Procurar Repeticion*"
+                              formControlName="actionsf"></textarea>
+                    <!-- Tooltip de validacion del campo referencia -->
+                    <div class="invalid-tooltip">
+                      Se requieren detalles.
+                    </div>
+                  </div>
+                  <div class="col-sm-12 mt-2">
+                    <input type="file" (change)="onFileSelected($event)">
+                  </div>
+                  <div class="col-sm-12 mt-2">
+                    <input type="file" (change)="onFileSelected2($event)">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-dialog-content>
+    <!-- Acciones del Dialog -->
+    <mat-dialog-actions align="end" class="footer-dialog">
+      <!-- Container Bootstrap del contenido del las Acciones del Dialog -->
+      <div class="container-fluid">
+        <div class="row justify-content-end">
+          <div class="col-auto me-auto">
+            <!-- Boton de Cancelar -->
+            <button mat-button mat-dialog-close class="btn btn-secondary">
+              Cancelar
+            </button>
+          </div>
+          <div class="col-auto">
+            <!-- Boton de Guardar -->
+            <button type="submit" mat-button [mat-dialog-close]="true" cdkFocusInitial class="btn btn-primary">
+              Salvar
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-dialog-actions>
+  </form>
+</div>

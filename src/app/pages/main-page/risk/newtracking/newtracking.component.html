@@ -1,0 +1,145 @@
+<!--
+*-----------------------------------------------------------------------------------------------------------------------------------------*
+* Descripcion:    Dialog Nuevo Seguimiento de Riesgo                                                                                      *
+* Autor:          Heber Alejandro Arce                                                                                                    *
+* Version:        1.0a1                                                                                                                   *
+* Fecha Creacion: 10/07/2023                                                                                                              *
+*-----------------------------------------------------------------------------------------------------------------------------------------*
+* Log de Modificación                                                                                                                     *
+*                                                                                                                                         *
+*   Fecha           Programador            Correccion                                     Descripcion                                     *
+* 10/07/2023    Heber Alejandro Arce      s/n Solicitud      Creación del dialog                                                          *
+*-----------------------------------------------------------------------------------------------------------------------------------------*
+-->
+<h2 mat-dialog-title class="h2-dialog">{{ 'newtracking' | translate }}</h2>
+<!-- Se inicializa el Formulario -->
+<form
+  autocomplete="off"
+  [formGroup]="ftracking"
+  (ngSubmit)="saveTracking()"
+>
+<!-- Contenido del dialog -->
+<mat-dialog-content class="mat-typography">
+  <!-- Contenido del dialog -->
+  <ng-container>
+    <div class="container-fluid">
+      <div class="row row-cols-2 row-cols-md-2 row-cols-sm-2 mt-2">
+        <div class="col-sm-6 mt-2">
+          <div class="row row-cols-2 row-cols-md-2">
+            <div class="col-sm-4 subt-row">
+              Fecha Actual
+            </div>
+            <div class="col-sm-8 subt-cell">
+              {{ fechaFormateada }}
+            </div>
+            <div class="col-sm-12 mt-2">
+              <!-- Text Area Observaciones del Seguimiento -->
+              <textarea
+                class="form-control"
+                name="observations"
+                id="observations"
+                formControlName="observations"
+                placeholder="{{ 'observations' | translate }}"
+                rows="5"
+                required
+                [ngClass]="{'is-invalid': ftracking.get('observations').invalid && (ftracking.get('observations').dirty || ftracking.get('observations').touched)}">
+              </textarea>
+              <!-- Tooltip de validacion del campo description -->
+              <div class="invalid-tooltip">
+                {{ 'msj_vtxt' | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 mt-2">
+          <div class="row row-cols-2 row-cols-md-2">
+            <div class="col-sm-12 subt-head2 text-center">
+              Avances
+            </div>
+            <div class="col-sm-6 subt-row mt-1">
+              Programado
+            </div>
+            <div class="col-sm-6 subt-cell mt-1">
+              <input
+                type="text"
+                class="form-control input-readonly"
+                name="scheduled_prog"
+                id="scheduled_prog"
+                formControlName="scheduled_prog"
+                [value]="avProg() | percent: '1.2-2'"
+              />
+            </div>
+            <div class="col-sm-6 subt-row mt-1">
+              Real Acumulado
+            </div>
+            <div class="col-sm-6 subt-cell mt-1">
+              <input
+                type="text"
+                class="form-control input-readonly"
+                name="sum_progress"
+                id="sum_progress"
+                formControlName="sum_progress"
+                [value]="sum_progress.value | percent: '1.2-2'"
+              />
+            </div>
+            <div class="col-sm-6 subt-row mt-1">
+              Real Actual
+            </div>
+            <div class="col-sm-6 subt-cell mt-1">
+              <select
+                class="form-control"
+                name="progress"
+                id="progress"
+                formControlName="progress"
+                required
+                [ngClass]="{'is-invalid': ftracking.get('progress').invalid && ftracking.get('progress').touched}">
+                <option selected value="0">0</option>
+                <option *ngFor="let prog of percent" [value]="prog">
+                  {{ prog | percent: '1.2-2'}}
+                </option>
+              </select>
+              <div class="invalid-tooltip">
+                {{ 'msj_vselect' | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</mat-dialog-content>
+
+<!-- Resto del código HTML... -->
+
+
+  <!-- Acciones del Dialog -->
+  <mat-dialog-actions align="end" class="footer-dialog">
+    <!-- Container Bootstrap del contenido del las Acciones del Dialog -->
+    <div class="container-fluid">
+      <div class="row justify-content-end">
+        <div class="col-auto me-auto">
+          <!-- Boton de Cancelar -->
+          <button
+            mat-button
+            mat-dialog-close
+            class="btn btn-secondary">
+            Cancelar
+          </button>
+        </div>
+        <div class="col-auto">
+          <!-- Boton de Guardar -->
+          <button
+            type="submit"
+            mat-button
+            [mat-dialog-close]="true"
+            cdkFocusInitial
+            class="btn btn-primary"
+            >
+            Salvar
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-actions>
+</form>
+

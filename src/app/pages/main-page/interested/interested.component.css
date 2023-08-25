@@ -1,0 +1,59 @@
+th{
+    color: #FFFFFF;
+    font-weight: normal;
+    font-size: 12px;
+}
+td {
+    color: #595959;
+    font-weight: normal;
+    font-size: 11px;
+}
+tr.element-row:hover {
+    background: whitesmoke;
+}
+.fila-tabla{
+    height: 30px;
+}
+.header-tabla {
+    height: 40px;
+    background-color: #19747e;
+}
+.mat-column-numberposition{
+    width: 10%;
+    max-width: 50px;
+    min-width: 30px;
+}
+.mat-column-displayName{
+    
+    width: fit-content;
+    /*max-width: 200px;
+    min-width: 160px;*/
+}
+.mat-column-position {
+    width: fit-content;
+        /*max-width: 200px;
+        min-width: 160px;*/
+}
+.mat-column-phone {
+    width: fit-content;
+        /*max-width: 200px;
+        min-width: 160px;*/
+}
+.mat-column-email {
+    width: fit-content;
+        /*max-width: 200px;
+        min-width: 160px;*/
+}
+.mat-column-actions {
+    width: fit-content;
+        /*max-width: 200px;
+        min-width: 160px;*/
+}
+.paginador{
+    font-size: 10px;
+    /* Ajusta aquí el tamaño de fuente deseado */
+}
+.mat-paginator select{
+    font-size: 10px;
+    /* Ajusta aquí el tamaño de fuente deseado */
+}

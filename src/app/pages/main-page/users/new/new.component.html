@@ -1,0 +1,448 @@
+<!-- Este el nuevo de Users -->
+<mat-dialog-content>
+
+  <div class="card card-warning">
+
+     <div class="card-header">
+       <h2 class="card-title mb-0">{{ 'new' | translate }}</h2>
+        <button type="button" class="close" mat-dialog-close></button>
+      </div>
+
+        <div *ngIf="data.formType === 'fusuarios'">
+
+             <form autocomplete="off"
+             [formGroup]="fusuarios"
+             (ngSubmit)="saveUsers()">
+            <div class="card-body">
+
+                      <ng-container *ngIf="!loadData">
+                          <mat-dialog-actions>
+
+                          <div class="form-group col-md-6 mb-6">
+
+                                          <input
+                                            type="text"
+                                            id="InputName"
+                                            class="form-control"
+                                            placeholder="{{ 'name' | translate }}"
+                                            formControlName="displayName"
+                                            [ngClass]="{ 'is-invalid': namef.invalid && (namef.dirty || namef.touched) }"    />
+                                            <div *ngIf="namef.invalid && (namef.dirty || namef.touched)" class="invalid-feedback">
+                                              <div *ngIf="namef.errors['required']" >
+                                                Name Required
+                                              </div>
+                                            </div>
+
+
+                                          <input
+                                          type="number"
+                                          id="Inputage"
+                                          class="form-control"
+                                          placeholder="{{ 'age' | translate }}"
+                                          formControlName="age"
+                                          [ngClass]="{ 'is-invalid': agef.invalid && (agef.dirty || agef.touched) }" />
+                                        <div *ngIf="agef.invalid && (agef.dirty || agef.touched)" class="invalid-feedback">
+                                          <div *ngIf="agef.errors['required']" >
+                                            Please enter an age.</div>
+                                          <div *ngIf="agef.errors['pattern']" >
+                                            Please valid age between 18 and 69.
+                                          </div>
+                                        </div>
+
+
+                                        <input
+                                        type="email"
+                                        id="InputEmail"
+                                        class="form-control"
+                                        placeholder="{{ 'email' | translate }}"
+                                        autocomplete="on"
+                                        formControlName="emailu"
+                                        (blur)="checkEmailExists()"
+                                        [ngClass]="{ 'is-invalid': fusuarios.controls.emailu.invalid && (fusuarios.controls.emailu.dirty || fusuarios.controls.emailu.touched) || emailExists }"
+                                      />
+                                      <div *ngIf="fusuarios.controls.emailu.invalid && (fusuarios.controls.emailu.dirty || fusuarios.controls.emailu.touched)" class="invalid-feedback">
+                                        <div *ngIf="fusuarios.controls.emailu.errors['required']" class="invalid-feedback">
+                                          Required Email address.
+                                        </div>
+                                        <div *ngIf="fusuarios.controls.emailu.errors['email']" class="invalid-feedback">
+                                          Please enter a valid email address.
+                                        </div>
+                                      </div>
+                                      <div *ngIf="emailExists">
+                                        Email already exist.
+                                      </div>
+
+                                      <input
+                                      type="password"
+                                      class="form-control"
+                                      placeholder="{{ 'password' | translate }}"
+                                      formControlName="passnew"
+                                      autocomplete="on"
+                                      [ngClass]="{ 'is-invalid': fusuarios.controls.passnew.invalid && (fusuarios.controls.passnew.dirty || fusuarios.controls.passnew.touched) }"
+                                    />
+                                    <div *ngIf="fusuarios.controls.passnew.invalid && (fusuarios.controls.passnew.dirty || fusuarios.controls.passnew.touched)" class="invalid-feedback">
+                                      Password Required
+                                    </div>
+
+
+                                    <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="{{ 'phone' | translate }}"
+                                    formControlName="phone" />
+                                    <div *ngIf="fusuarios.get('phone').invalid && (fusuarios.get('phone').dirty || fusuarios.get('phone').touched)" class="invalid-feedback">
+                                      <div *ngIf="fusuarios.get('phone').errors['required']">
+                                        Phone Required
+                                      </div>
+                                      <div *ngIf="fusuarios.get('phone').errors['pattern']">
+                                        Number phone 10 digit.
+                                      </div>
+                                    </div>
+
+                          </div>
+
+
+                          <div class="form-group col-md-6 mb-3">
+
+                              <div class="card card-primary card-img">
+                                  <div class="text-center">
+                                      <label for="pictureUpload" class="mb-3">
+                                      <img [src]="imageUrl" width="100" height="100" *ngIf="imageUrl">
+                                      {{ 'Avatar/Foto' | translate }}
+                                    </label>
+                                    <input type="file" id="pictureUpload" (change)="uploadImage($event)" style="display: none;">
+                                  </div>
+                                </div>
+
+                                <input
+                                type="text"
+                                class="form-control"
+                                placeholder="{{ 'country' | translate }}"
+                                formControlName="country"
+                                [ngClass]="{ 'is-invalid': countryfu.invalid && (countryfu.dirty || countryfu.touched) }"    />
+                                <div *ngIf="countryfu.invalid && (countryfu.dirty || countryfu.touched)" class="invalid-feedback">
+                                  <div *ngIf="countryfu.errors['required']" >
+                                      Country Required
+                                  </div>
+                                </div>
+
+                                      <select id="organ"
+                                          class="form-control"
+                                          formControlName="organization">
+                                          <option value=''>{{'organ' | translate}}</option>
+                                      <option *ngFor="let item of organizationData"
+                                          [value]="item.organization">{{ item.organization }}
+                                        </option>
+                                    </select>
+
+
+                                  <input
+                                  type="text"
+                                    class="form-control"
+                                    placeholder="{{ 'position' | translate }}"
+                                    formControlName="position"
+                                    [ngClass]="{ 'is-invalid': positionfu.invalid && (positionfu.dirty || positionfu.touched) }"    />
+                                  <div *ngIf="positionfu.invalid && (positionfu.dirty || positionfu.touched)" class="invalid-feedback">
+                                      <div *ngIf="positionfu.errors['required']" >
+                                        Position Required
+                                      </div>
+                                  </div>
+
+                          </div>
+
+                          </mat-dialog-actions>
+              </ng-container>
+
+          </div>
+
+          <div class="card-footer">
+              <button mat-dialog-close class="btn btn-secondary float-right">Cancelar</button>
+              <button type="submit" class="btn btn-warning float-right" [disabled]="fusuarios.invalid">Salvar</button>
+          </div>
+
+              </form>
+        </div>
+
+        <div *ngIf="data.formType === 'fcompanys'">
+          <form autocomplete="off" [formGroup]="fcompanys" (ngSubmit)="saveCompanys()">
+            <div class="card-body">
+              <ng-container *ngIf="!loadData">
+                <mat-dialog-actions>
+
+                 <div class="row">
+
+                    <div class="col-md-12">
+
+                      <div class="form-group mb-3">
+                        <input type="text" id="InputName" class="form-control" placeholder="{{ 'name' | translate }} {{ 'company' | translate }}" formControlName="displayNamec" [ngClass]="{ 'is-invalid': namefc.invalid && (namefc.dirty || namefc.touched) }" />
+                        <div *ngIf="namefc.invalid && (namefc.dirty || namefc.touched)" class="invalid-feedback">
+                          <div *ngIf="namefc.errors['required']">
+                            {{ 'req' | translate}}  {{ 'name' | translate }}
+                          </div>
+                        </div>
+
+                        <input type="text" class="form-control" placeholder="{{ 'address' | translate }}" formControlName="addressc" />
+
+                        <input type="email" id="InputEmail" class="form-control" placeholder="{{ 'email' | translate }}" autocomplete="on" formControlName="emailc" />
+                        <div *ngIf="fcompanys.get('emailc').invalid && (fcompanys.get('emailc').dirty || fcompanys.get('emailc').touched)" class="invalid-feedback">
+                          <div *ngIf="fcompanys.get('emailc').errors['required']">
+                            {{ 'req' | translate}}  {{ 'email' | translate }}
+                          </div>
+                          <div *ngIf="fcompanys.get('emailc').errors['email']">
+                            Please enter a valid email address.
+                          </div>
+                        </div>
+
+                        <input type="text" class="form-control" placeholder="{{ 'rfc' | translate }}" formControlName="rfcc" />
+                        <div *ngIf="fcompanys.get('rfcc').invalid && (fcompanys.get('rfcc').dirty || fcompanys.get('rfcc').touched)" class="invalid-feedback">
+                          <div *ngIf="fcompanys.get('rfcc').errors['required']">
+                            {{ 'req' | translate}}  {{ 'rfc' | translate }}
+                          </div>
+                        </div>
+
+                        <input type="text" class="form-control" placeholder="{{ 'phone' | translate }}" formControlName="phonec" />
+                        <div *ngIf="fcompanys.get('phonec').invalid && (fcompanys.get('phonec').dirty || fcompanys.get('phonec').touched)" class="invalid-feedback">
+                          <div *ngIf="fcompanys.get('phonec').errors['required']">
+                            {{ 'req' | translate}}  {{ 'phone' | translate }}
+                          </div>
+                          <div *ngIf="fcompanys.get('phonec').errors['pattern']">
+                            Number phone 10 digit.
+                          </div>
+                         </div>
+
+                         <input type="text" class="form-control" placeholder="{{ 'format' | translate }}" formControlName="formatrep" />
+                         <div *ngIf="fcompanys.get('formatrep').invalid && (fcompanys.get('formatrep').dirty || fcompanys.get('formatrep').touched)" class="invalid-feedback">
+                            <div *ngIf="fcompanys.get('formatrep').errors['required']">
+                               {{ 'req' | translate}}  {{ 'format' | translate }}
+                            </div>
+                          </div>
+
+                      </div>
+
+                 </div>
+
+                    <div class="col-md-6">
+
+                      <div class="form-group mb-3">
+                        <div class="card card-primary card-img">
+                          <div class="text-center">
+                            <label for="pictureUpload" class="mb-3">
+                              <img [src]="imageUrl" width="100" height="100" *ngIf="imageUrl">
+                              {{ 'Avatar/Foto' | translate }}
+                            </label>
+                            <input type="file" id="pictureUpload" (change)="uploadImage($event)" style="display: none;">
+                          </div>
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                        <div class="row">
+
+                          <div class="col-md-12">
+
+                            <div class="form-group mb-3">
+                                  <input type="text" class="form-control" placeholder="{{ 'city' | translate }}" formControlName="cityc" [ngClass]="{ 'is-invalid': cityfc.invalid && (cityfc.dirty || cityfc.touched) }" />
+                                  <div *ngIf="cityfc.invalid && (cityfc.dirty || cityfc.touched)" class="invalid-feedback">
+                                    <div *ngIf="cityfc.errors['required']">
+                                      {{ 'req' | translate}}  {{ 'city' | translate }}
+                                    </div>
+                                  </div>
+
+                                  <select id="sta" class="form-control" formControlName="state">
+                                    <option value=''>{{'sta' | translate}}</option>
+                                    <option *ngFor="let item of stateData" [value]="item.sNombre">{{ item.sNombre }}</option>
+                                  </select>
+
+                                  <input type="text" class="form-control" placeholder="{{ 'country' | translate }}" formControlName="countryc" [ngClass]="{ 'is-invalid': countryfc.invalid && (countryfc.dirty || countryfc.touched) }" />
+                                  <div *ngIf="countryfc.invalid && (countryfc.dirty || countryfc.touched)" class="invalid-feedback">
+                                    <div *ngIf="countryfc.errors['required']">
+                                      {{ 'req' | translate}}  {{ 'country' | translate }}
+                                    </div>
+                                  </div>
+
+                             </div>
+                          </div>
+                        </div>
+
+                  </div>
+
+                </mat-dialog-actions>
+              </ng-container>
+
+            </div>
+
+            <div class="card-footer">
+              <button mat-dialog-close class="btn btn-secondary float-right">Cancelar</button>
+              <button type="submit" class="btn btn-warning float-right" [disabled]="fcompanys.invalid">Salvar</button>
+            </div>
+
+          </form>
+        </div>
+
+        <div *ngIf="data.formType === 'fbranchs'">
+          <form autocomplete="off"
+             [formGroup]="fbranchs"
+             (ngSubmit)="saveBranchs()">
+             <div class="card-body">
+
+                     <ng-container *ngIf="!loadData">
+                         <mat-dialog-actions>
+
+                         <div class="form-group col-md-12 mb-10">
+
+                                         <input
+                                           type="text"
+                                           class="form-control"
+                                           placeholder="{{ 'name' | translate }} {{ 'branch' | translate}}  "
+                                           formControlName="dnameb" />
+
+
+                                           <div *ngIf="fbranchs.get('dnameb').invalid && (fbranchs.get('dnameb').dirty || fbranchs.get('dnameb').touched)" class="invalid-feedback">
+                                            {{ 'req' | translate}}  {{ 'name' | translate }}
+                                          </div>
+
+
+                                           <input
+                                             type="text"
+                                             class="form-control"
+                                             placeholder="{{ 'address' | translate }}"
+                                             formControlName="streetb" />
+
+                                          <input
+                                             type="number"
+                                             class="form-control"
+                                             placeholder="{{ 'cp' | translate }}"
+                                             formControlName="cpb" />
+
+                                         <input
+                                             type="text"
+                                             class="form-control"
+                                             placeholder="{{ 'colony' | translate }}"
+                                             formControlName="colonyb" />
+
+
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="{{ 'city' | translate }}"
+                                            formControlName="localityb" />
+                                            <div *ngIf="fbranchs.get('localityb').invalid && (fbranchs.get('localityb').dirty || fbranchs.get('localityb').touched)" class="invalid-feedback">
+                                              {{ 'req' | translate}}  {{ 'city' | translate }}
+                                            </div>
+
+
+                                     <select id="sta2" class="form-control" formControlName="stateb">
+                                         <option value=''>{{'sta' | translate}}</option>
+                                     <option *ngFor="let item of stateData"
+                                         [value]="item.sNombre">{{ item.sNombre }}
+                                       </option>
+                                   </select>
+
+                                   <input
+                                     type="text"
+                                     class="form-control"
+                                     placeholder="{{ 'country' | translate }}"
+                                     formControlName="countryb"           />
+
+
+                      </div>
+
+                             </mat-dialog-actions>
+                 </ng-container>
+
+                </div>
+
+                 <div class="card-footer">
+                     <button mat-dialog-close class="btn btn-secondary float-right">Cancelar</button>
+                     <button type="submit" class="btn btn-warning float-right" >Salvar</button>
+                 </div>
+
+          </form>
+        </div>
+
+        <div *ngIf="data.formType === 'fprojects'">
+          <form autocomplete="off" [formGroup]="fprojects" (ngSubmit)="saveProjects()">
+            <div class="card-body">
+              <ng-container *ngIf="!loadData">
+                <mat-dialog-actions>
+
+                  <div class="row">
+                                <div class="col-md-6">
+
+                                  <div class="form-group mb-3">
+                                      <input type="text" class="form-control"
+                                            placeholder="{{ 'code' | translate }} {{ 'project' | translate }}"
+                                            formControlName="codep" />
+
+                                            <div *ngIf="fprojects.get('codep').invalid && (fprojects.get('codep').dirty || fprojects.get('codep').touched)" class="invalid-feedback">
+                                              <div *ngIf="fprojects.get('codep').errors['required']">
+                                                {{ 'req' | translate}}  {{ 'code' | translate }}
+                                              </div>
+                                            </div>
+
+                                      <input type="text" class="form-control"
+                                             placeholder="{{ 'contract' | translate }} {{ 'project' | translate }}"
+                                             formControlName="contractp" />
+                                  </div>
+                                </div>
+
+                                  <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                      <div class="card card-primary card-img">
+                                        <div class="text-center">
+                                          <label for="pictureUpload" class="mb-3">
+                                            <img src="./assets/img/profile.png"   alt="HCO Logo"
+                                                 class="brand-image img-circle elevation-0"
+                                                 style="opacity: 0.8"
+                                            />
+
+                                            {{ 'Avatar/Foto' | translate }}
+                                          </label>
+                                          <input type="file" id="pictureUpload" (change)="uploadImage($event)" style="display: none;" />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                <div class="col-md-12">
+                                  <div class="form-group mb-3">
+
+                                    <input type="text" class="form-control" style="height: 100px;" placeholder="{{ 'description' | translate }} {{ 'project' | translate }}" formControlName="descriptionp" />
+
+                                    <input type="text" class="form-control" placeholder="{{ 'tender' | translate }} " formControlName="tenderp" />
+
+                                    <input type="text" class="form-control" placeholder="{{ 'ubication' | translate }}" formControlName="ubicationp" />
+
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                        <label for="dStart">Date Start</label>
+                                        <input type="date" class="form-control" placeholder="date Start" formControlName="dStart" />
+                                      </div>
+                                      <div class="col-md-6">
+                                        <label for="dStart">Date End</label>
+                                        <input type="date" class="form-control" placeholder="{{ 'date' | translate }}" formControlName="dEnd" />
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                </div>
+
+                  </div>
+                </mat-dialog-actions>
+              </ng-container>
+            </div>
+            <div class="card-footer">
+              <button mat-dialog-close class="btn btn-secondary float-right">Cancelar</button>
+              <button type="submit" class="btn btn-warning float-right">Salvar</button>
+            </div>
+          </form>
+        </div>
+
+
+
+  </div>
+
+</mat-dialog-content>
+

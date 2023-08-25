@@ -1,0 +1,52 @@
+/*
+*-----------------------------------------------------------------------------------------------------------------------------------------*
+* Descripcion:    Hoja de estilos Dialog Edit Seguimiento de acciones de mitigación                                                       *
+* Autor:          Heber Alejandro Arce Sanchez                                                                                            *
+* Version:        1.0a1                                                                                                                   *
+* Fecha Creacion: 10/07/2023                                                                                                              *
+*-----------------------------------------------------------------------------------------------------------------------------------------*
+* Log de Modificación                                                                                                                     *
+*                                                                                                                                         *
+*   Fecha           Programador            Correccion                                     Descripcion                                     *
+*10/07/2023    Heber Alejandro Arce      s/n Solicitud       Se crea hoja de estilos en base a interesados                                *
+*-----------------------------------------------------------------------------------------------------------------------------------------*
+*/
+.h2-dialog{
+  background-color: #4f6d7a;
+  color: #fff;
+  font-family: "Source Sans Pro",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      "Helvetica Neue",
+      Arial,
+      sans-serif,
+      "Apple Color Emoji",
+      "Segoe UI Emoji",
+      "Segoe UI Symbol";
+}
+
+.input-readonly {
+  width: 100%;
+  font-size: 10px;
+  pointer-events: none;
+  background-color: #f3f2f2;
+}
+.footer-dialog {
+  background-color: #a6a6a6;
+  height: 100%;
+}
+.panel-header {
+  height: 30px;
+  font-size: 11px;
+}
+.icon-btn {
+  font-size: 9px;
+}
+.btn-f {
+  font-size: 9px;
+  font-weight: bold;
+  max-width: 22px;
+  max-height: 18px;
+}

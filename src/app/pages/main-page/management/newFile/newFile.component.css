@@ -1,0 +1,72 @@
+/*
+*-----------------------------------------------------------------------------------------------------------------------------------------*
+* Descripcion:    Hoja de estilos Dialog Nuevo File                                                                                       *
+* Autor:          Heber Alejandro Arce Sanchez                                                                                            *
+* Version:        1.0a1                                                                                                                   *
+* Fecha Creacion: 03/08/2023                                                                                                              *
+*-----------------------------------------------------------------------------------------------------------------------------------------*
+* Log de Modificación                                                                                                                     *
+*                                                                                                                                         *
+*   Fecha           Programador            Correccion                                     Descripcion                                     *
+*03/08/2023    Heber Alejandro Arce      s/n Solicitud       Se crea hoja de estilos en base a interesados                                *
+*-----------------------------------------------------------------------------------------------------------------------------------------*
+*/
+.h2-dialog{
+  background-color: #4f6d7a;
+  color: #fff;
+  font-family: "Source Sans Pro",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      "Helvetica Neue",
+      Arial,
+      sans-serif,
+      "Apple Color Emoji",
+      "Segoe UI Emoji",
+      "Segoe UI Symbol";
+}
+
+.input-readonly {
+  width: 100%;
+  font-size: 10px;
+  pointer-events: none;
+  background-color: #f3f2f2;
+}
+.footer-dialog {
+  background-color: #a6a6a6;
+  height: 100%;
+}
+.panel-header {
+  height: 30px;
+  font-size: 11px;
+}
+.icon-btn {
+  font-size: 9px;
+}
+.btn-f {
+  font-size: 9px;
+  font-weight: bold;
+  max-width: 22px;
+  max-height: 18px;
+}
+.item-mail {
+  font-size: 10px; /* Ajusta aquí el tamaño de fuente deseado */
+}
+.item-content {
+  font-size: 12px; /* Ajusta aquí el tamaño de fuente deseado */
+  align-items: flex-start;
+}
+.mat-horizontal-stepper {
+  max-height: 700px; /* Ajusta el valor de altura según tus necesidades */
+}
+.t1{
+  text-align: start;
+  font-weight: bold;
+}
+.input-readonly {
+  width: 100%;
+  font-size: 10px;
+  pointer-events: none;
+  background-color: #f3f2f2;
+}

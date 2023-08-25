@@ -1,0 +1,113 @@
+<aside class="main-sidebar sidebar-light-warning elevation-4">
+  <!-- Brand Logo -->
+  <a [routerLink]="['/']" class="brand-link navbar-warning">
+    <img src="../../assets/img/template/hco.jpg" alt="Be" class="brand-image img-circle" style="opacity: .8">
+    <!-- <span class="brand-text font-weight-light">AdminLTE 3</span> -->
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user (optional) -->
+
+ <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+  <div >
+
+    <p>
+
+        <select id="company"
+          (change)="onSelectCompany()"
+          [(ngModel)]="selectedCompany"
+          (ngModelChange)="getpermissionxCompanys">
+
+            <option *ngFor="let item of companyData"
+                [value]="item.id_company">{{ item.company }}
+            </option>
+       </select>
+
+     </p>
+
+      <p>
+
+          <select id="branchs"
+          (change)="onSelectBranch()"
+          [(ngModel)]="selectedBranch" >
+            <option *ngFor="let item of branchData"
+                [value]="item.id_branchs">{{ item.branchs }}
+            </option>
+        </select>
+
+      </p>
+
+      <p>
+
+          <select id="projects"
+          (change)="onSelectProject()"
+          [(ngModel)]="selectedProject" >
+            <option *ngFor="let item of projectData"
+              [value]="item.id_projects">{{ item.projects }}
+            </option>
+        </select>
+
+
+      </p>
+
+   </div>
+</div>
+
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
+
+        <!-- Example Code -->
+
+        <button type="button" class="btn btn-primary d-block d-sm-none" (click)="home()">{{'home' | translate}}</button>
+
+        <div class="btn-group d-block d-sm-block">
+          <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+            PMO
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+            <li><button class="dropdown-item" type="button" (click)="navigateToInterested()">{{'menuPM.gi' | translate}}</button></li>
+            <li><button class="dropdown-item" type="button" (click)="navigateToCommunications()">{{'menuPM.gc' | translate}}</button></li>
+
+            <li><button class="dropdown-item" type="button">{{'menuPM.gr' | translate}}</button></li>
+            <li><button class="dropdown-item" type="button">{{'menuPM.gp' | translate}}</button></li>
+            <li><button class="dropdown-item" type="button">{{'menuPM.ll' | translate}}</button></li>
+            <li><button class="dropdown-item" type="button">{{'menuPM.gt' | translate}}</button></li>
+          </ul>
+        </div>
+
+        <div class="btn-group d-block d-sm-block">
+          <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+            PM
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+            <li><button class="dropdown-item" type="button">{{'menuPMO.pt' | translate}}</button></li>
+            <li><button class="dropdown-item" type="button">{{'menuPMO.an' | translate}}</button></li>
+            <li><button class="dropdown-item" type="button">{{'menuPMO.se' | translate}}</button></li>
+            <li><button class="dropdown-item" type="button">{{'menuPMO.gf' | translate}}</button></li>
+          </ul>
+        </div>
+
+        <div class="btn-group d-block d-sm-block">
+          <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+            ADMIN
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+             <button class="dropdown-item" type="button" (click)="navigateToCompanys()"><i class="bi bi-building"></i> {{'company' | translate}}</button>
+             <button class="dropdown-item" type="button" (click)="navigateToUsers()"><i class="bi bi-people"></i> {{'user' | translate}}</button>
+             <button class="dropdown-item" type="button"><i class="bi bi-shield-lock"></i> {{'perm' | translate}}</button>
+             <button class="dropdown-item" type="button" (click)="navigateToBranchs()"><i class="bi bi-gear"></i>{{'branchs' | translate}}</button>
+             <button class="dropdown-item" type="button" (click)="authService.logout()"><i class="bi bi-gear"></i>{{'logout' | translate}}</button>
+          </ul>
+        </div>
+
+
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>
