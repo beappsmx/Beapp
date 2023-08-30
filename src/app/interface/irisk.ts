@@ -10,7 +10,7 @@ export interface Irisk {
   imp_score        :  number; // score of the impact (probability*imp_score)+(probability*imp_time)+(probability*imp_cost)+(probability*imp_quality)
   imp_time         :  number; // time of the impact
   observations     :  string; // observation of the risk
-  owner            :  string; // owner of the risk
+  owner            :  string[]; // owner of the risk
   phase            :  string; // phase of the risk
   pos              :  number; // position of the record
   probability      :  number; // probability of the risk

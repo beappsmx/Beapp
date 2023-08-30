@@ -34,6 +34,7 @@ export class NewriskComponent {
   interestedList  : any[] = [];
   conceptsList    : any[] = [];
   selectedOptions : any[] = [];
+  selectedOwner   : string[] = [];
   selectedRinteres: Irinteres[] = [];
   numbers         : number[] = [1, 2, 3, 4, 5];
   cost            : number = 0;
@@ -108,6 +109,10 @@ export class NewriskComponent {
     }));
   }
 
+  onOwnerSelectionChange(event: MatSelectionListChange): void {
+    this.selectedOwner = event.source.selectedOptions.selected.map(option => option.value.name);
+  }
+
   ngOnInit() {
 
     this.getInt();
@@ -135,7 +140,8 @@ export class NewriskComponent {
       imp_score        :  this.calcularScore(),
       imp_time         :  this.form_risk.get('formArray').get('1').get('imp_time').value ?? '',
       observations     :  "" ?? '',
-      owner            :  this.form_risk.get('formArray').get('2').get('owner').value ?? '',
+      // owner            :  this.form_risk.get('formArray').get('2').get('owner').value ?? '',
+      owner            :  this.selectedOwner,
       phase            :  this.phase ?? '',
       pos              :  this.data.idpos + 1,
       probability      :  this.form_risk.get('formArray').get('1').get('probability').value ?? '',

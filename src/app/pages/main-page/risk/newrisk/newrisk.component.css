@@ -62,11 +62,27 @@
 }
 .t1{
   text-align: start;
-  font-weight: bold;
 }
 .input-readonly {
   width: 100%;
   font-size: 10px;
   pointer-events: none;
   background-color: #f3f2f2;
+}
+.subt-cell{
+  font-size: 9px;
+  background-color: #fff;
+}
+.subt-cell2{
+  font-size: 9px;
+  background-color: #fff8ec;
+}
+.subt-row{
+  font-size: 9px;
+  background-color: #f3f2f2;
+}
+.subt-head{
+  font-size: 10px;
+  color: #fff;
+  background-color: #4b3f72;
 }

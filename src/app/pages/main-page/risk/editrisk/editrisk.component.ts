@@ -35,6 +35,7 @@ export class EditriskComponent {
   conceptsList    : any[] = [];
   selectedOptions : any[] = [];
   selectedOwners  : string[] = [];
+  selectedOwner   : string[] = [];
   selectedInteres : string[] = [];
   numbers         : number[] = [1, 2, 3, 4, 5];
   rcost           : number = 0;
@@ -156,13 +157,14 @@ export class EditriskComponent {
         this.observations.setValue(resp.observations);
         //this.owner.setValue(resp.owner);
         this.closing_incharge.setValue(resp.closing_incharge);
-        this.selectedOwners = resp.owner || [];
+        this.selectedOwners = Array.isArray(resp.owner) ? resp.owner : [resp.owner];
         this.owner.setValue(this.selectedOwners);
+        this.selectedOwner = [...this.selectedOwners];
 
       }
     );
     this.getRint();
-
+    this.selectedOwner = this.selectedOwners.map(owner => owner);
   }
 
   calcularScore(): number {
@@ -191,6 +193,10 @@ export class EditriskComponent {
       name: option.value.name,
       email: option.value.email
     }));
+  }
+
+  onOwnerSelectionChange(event: MatSelectionListChange): void {
+    this.selectedOwner = event.source.selectedOptions.selected.map(option => option.value.name);
   }
 
   async getInt() {
@@ -230,6 +236,10 @@ export class EditriskComponent {
     });
   }
 
+  getOwner(name: string): boolean {
+    return this.selectedOwners.includes(name);
+  }
+
   editRisk(){
     if(this.form_risk.get('formArray').get('0').get('phase').value === 'Otros'){
       this.ophase = this.form_risk.get('formArray').get('0').get('oPhase').value;
@@ -248,7 +258,7 @@ export class EditriskComponent {
       imp_score         :  this.calcularScore(),
       imp_time          :  this.form_risk.get('formArray').get('1').get('imp_time').value ?? '',
       observations      :  this.form_risk.get('formArray').get('2').get('observations').value ?? '',
-      owner             :  this.form_risk.get('formArray').get('2').get('owner').value ?? '',
+      owner             :  this.selectedOwner,
       phase             :  this.ophase ?? '',
       pos               :  this.form_risk.get('formArray').get('0').get('pos').value ?? '',
       probability       :  this.form_risk.get('formArray').get('1').get('probability').value ?? '',
