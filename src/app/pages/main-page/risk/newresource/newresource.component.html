@@ -11,11 +11,11 @@
 * 10/07/2023    Heber Alejandro Arce      s/n Solicitud      Creación del dialog                                                          *
 *-----------------------------------------------------------------------------------------------------------------------------------------*
 -->
-<h2 mat-dialog-title class="h2-dialog">{{ 'newresource' | translate }}</h2>
+<h2 mat-dialog-title class="h2-dialog">{{ 'msj_r19' | translate }}</h2>
 <!-- Se inicializa el Formulario -->
 <form
   autocomplete="off"
-  [formGroup]="frisk"
+  [formGroup]="faction"
   (ngSubmit)="saveRisk()"
 >
 <!-- Contenido del dialog -->
@@ -24,16 +24,132 @@
   <ng-container>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-7">
-          <!-- Left Group -->
+        <div class="col-sm-12">
           <div class="form-group">
-
-          </div>
-        </div>
-        <div class="col-sm-5">
-          <!-- Right Group -->
-          <div class="form-group">
-
+            <div class="row row-cols-2 row-cols-md-2 mt-2">
+              <div class="col-md-5 mt-2">
+                <div class="row row-cols-2 row-cols-md-2">
+                  <div class="col-md-12">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="rdescription"
+                      id="rdescription"
+                      formControlName="rdescription"
+                      placeholder="{{ 'resource' | translate }}"
+                    />
+                  </div>
+                  <div class="col-md-6 mt-2">
+                    <input
+                      type="number"
+                      class="form-control"
+                      name="quantity"
+                      id="quantity"
+                      formControlName="quantity"
+                      placeholder="{{ 'quantity' | translate }}"
+                    />
+                  </div>
+                  <div class="col-md-6 mt-2">
+                    <select
+                      id="unit"
+                      class="form-control"
+                      formControlName="unit">
+                      <option selected value="">{{ 'unit' | translate }}</option>
+                      <option *ngFor="let u of units" [value]="u">{{ u }}</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6 mt-2">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                      </div>
+                      <input
+                        type="number"
+                        class="form-control"
+                        name="cost"
+                        id="cost"
+                        formControlName="cost"
+                        placeholder="{{ 'cost' | translate }}"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-2 offset-4 mt-2">
+                    <button
+                      mat-button
+                      matTooltip="{{ 'msj_r14' | translate }}"
+                      class="btn btn-sm btn-warning"
+                      type="button"
+                      (click)="addResource()">
+                      <i class="fas fa-arrow-right"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-7 mt-2">
+                <div class="row row-cols-1 row-cols-md-1">
+                  <div class="col-md-12">
+                    <div class="row row-cols-4 row-cols-md-4">
+                      <div class="col-md-2 subt-head">
+                      </div>
+                      <div class="col-md-3 subt-head">
+                        {{ 'resource' | translate }}
+                      </div>
+                      <div class="col-md-2 subt-head">
+                        {{ 'quantity' | translate }}
+                      </div>
+                      <div class="col-md-2 subt-head">
+                        {{ 'unit' | translate }}
+                      </div>
+                      <div class="col-md-3 subt-head">
+                        {{ 'cost' | translate }}
+                      </div>
+                    </div>
+                    <div *ngFor="let res of resources; let i = index">
+                      <div class="row row-cols-4 row-cols-md-4">
+                        <div class="col-md-2 mt-1 resources">
+                          <button
+                            mat-button
+                            matTooltip="{{ 'msj_r14' | translate }}"
+                            class="btn btn-sm btn-danger"
+                            type="button"
+                            (click)="deleteResource(i)">
+                            <i class="fas fa-minus"></i>
+                          </button>
+                        </div>
+                        <div class="col-md-3 mt-1 subt-row">
+                          {{ res.rdescription }}
+                        </div>
+                        <div class="col-md-2 mt-1 subt-row">
+                          {{ res.quantity }}
+                        </div>
+                        <div class="col-md-2 mt-1 subt-row">
+                          {{ res.unit }}
+                        </div>
+                        <div class="col-md-3 mt-1 subt-row">
+                          {{ res.cost | currency:'MXN' }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-5 offset-sm-7 mt-2">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">{{ 'total' | translate }} $</span>
+                      </div>
+                      <input
+                        type="number"
+                        class="form-control"
+                        name="total_cost"
+                        id="total_cost"
+                        formControlName="total_cost"
+                        placeholder="{{ 'total' | translate }}"
+                        [value]="sumResource()"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -317,6 +317,9 @@ export class RiskComponent {
   newResource(id:string) {
     const dialogRef = this.dialog.open(NewresourceComponent, {
       width: this.whidthDialog,
+      data: {
+        id: id,
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
