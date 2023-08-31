@@ -26,6 +26,7 @@ import { alerts } from 'src/app/helpers/alerts';
 })
 export class NewactionComponent {
   units           : string[] = ['h','pza','m','g','kg','ton'];
+  monitoring      : string[] = ['Diario','Semanal','Mensual'];
   numbers         : number[] = [1, 2, 3, 4, 5];
   resources       : any[] = [];
   cost            : number = 0;

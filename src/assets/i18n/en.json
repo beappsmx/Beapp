@@ -91,6 +91,7 @@
   "msj_vtxt2"    : "Please enter a valid number",
   "msj_vdte"     : "Please enter a valid date",
   "msj_vtme"     : "Please enter a valid time",
+  "monitoring"   : "Monitoring",
   "name"         : "Name",
   "new"          : "New",
   "newaction"    : "New Mitigation Action",

@@ -175,6 +175,8 @@ export class RiskComponent {
         this.actions.sort((a, b) => a.pos - b.pos);
         const ultimoRegistro = this.actions[this.actions.length - 1];
         this.lastRecordIDa = ultimoRegistro.pos;
+      } else {
+        this.RiskService.updateRiskStatus(this.profile.id, 'Abierto');
       }
       console.log(this.lastRecordIDa);
       this.dataSourceActions = new MatTableDataSource(this.actions); // Creamos el dataSource

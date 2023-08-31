@@ -8,7 +8,7 @@
     }
   },
   "hosting": {
-    "public": "dist/Beapp",
+    "public": "dist/beapp",
     "ignore": [
       "firebase.json",
       "**/.*",

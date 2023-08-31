@@ -83,19 +83,20 @@
                     </div>
                   </div>
                   <div class="col-sm-6">
-                    <h5>Fecha de monitoreo</h5>
+                    <h5>Frecuencia de monitoreo</h5>
                   </div>
                   <div class="col-sm-6 mt-2">
-                    <input
-                      type="date"
-                      class="form-control"
-                      name="monitoring_date"
+                    <select
                       id="monitoring_date"
+                      class="form-control"
                       formControlName="monitoring_date"
                       required
-                      [ngClass]="{'is-invalid': faction.get('formArray').get('0').get('monitoring_date').invalid && (faction.get('formArray').get('0').get('monitoring_date').dirty || faction.get('formArray').get('0').get('monitoring_date').touched)}"/>
+                      [ngClass]="{'is-invalid': faction.get('formArray').get('0').get('monitoring_date').invalid && faction.get('formArray').get('0').get('monitoring_date').touched}">
+                      <option selected value="">{{ 'monitoring' | translate }}</option>
+                      <option *ngFor="let m of monitoring" [value]="m">{{ m }}</option>
+                    </select>
                     <div class="invalid-tooltip">
-                      {{ 'msj_vdte' | translate }}
+                      {{ 'msj_vselect' | translate }}
                     </div>
                   </div>
                 </div>

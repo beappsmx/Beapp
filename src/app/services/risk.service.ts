@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 
 import { Irisk, Irinteres, Iactions, Iresources } from '../interface/irisk';
 import { Observable, catchError, map } from 'rxjs';
@@ -10,7 +11,10 @@ import { Observable, catchError, map } from 'rxjs';
 })
 export class RiskService {
 
-  constructor(public http : HttpClient) { }
+  constructor(
+    public http : HttpClient,
+    private db: AngularFireDatabase
+  ) { }
 
   getInterested(valor) {
     const apiUrl = `${environment.urlFirebase}interested.json?orderBy="id_project"&equalTo="${valor}"`;
@@ -167,6 +171,16 @@ export class RiskService {
 
   patchDataAction(id: string, data: object, token: any) {
     return this.http.patch(`${environment.urlFirebase}actions/${id}.json?auth=${token}`, data);
+  }
+
+  async updateRiskStatus(riskId: string, newStatus: string) {
+    try {
+      const riskRef = this.db.object(`risk/${riskId}`);
+      await riskRef.update({ status: newStatus });
+      console.log('Campo "status" actualizado exitosamente');
+    } catch (error) {
+      console.error('Error al actualizar el campo "status"', error);
+    }
   }
 
   deleteTracking(id:string, token: any){

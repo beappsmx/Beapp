@@ -77,6 +77,7 @@
   "msj_vtxt2"    : "Por favor, introduzca un numero válido",
   "msj_vdte"     : "Por favor, introduzca una fecha válida",
   "msj_vtme"     : "Por favor, introduzca una hora válida",
+  "monitoring"   : "Monitoreo",
   "name"         : "Nombre",
   "new"          : "Nuevo",
   "newaction"    : "Nueva Accion de Mitigación",
