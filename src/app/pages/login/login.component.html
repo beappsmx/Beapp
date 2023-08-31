@@ -1,72 +1,63 @@
 <div class="hold-transition login-page">
 	<div class="login-box">
-	  <div class="login-logo">
-	    <img src="../../../assets/img/template/hco.jpg">
-	  </div>
-	  <!-- /.login-logo -->
-	  <div class="card" >
-	    <div class="card-body login-card-body">
-	      <p class="login-box-msg" > {{ 'titlelogin' | translate}} </p>
 
+    <mat-card>
+      <mat-card-content>
+        <div class="login-logo">
+          <img src="../../../assets/img/template/HCO.png" class="logo mb-4">
+        </div>
 
+        <form
+          autocomplete="off"
+          [formGroup]="flogin"
+          (ngSubmit)="login()">
+          <div class="input-group mb-3">
 
-	      <form
-	      	autocomplete="off"
-	      	[formGroup]="flogin"
-	      	(ngSubmit)="login()"
-	      >
+            <input type="email"
+            class="form-control"
+            placeholder="{{ 'email' | translate}}"
+            formControlName="emaillogin"
+            [ngClass]="{'is-invalid': invalidField('emaillogin')}" >
 
-	        <div class="input-group mb-3">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
+            </div>
 
-                <input type="email"
-                class="form-control"
-                placeholder="{{ 'email' | translate}}"
-                formControlName="emaillogin"
-                [ngClass]="{'is-invalid': invalidField('emaillogin')}" >
+            <div class="invalid-feedback">Please fill out this email correctly.</div>
 
-	          <div class="input-group-append">
-	            <div class="input-group-text">
-	              <span class="fas fa-envelope"></span>
-	            </div>
-	          </div>
+          </div>
 
-	          <div class="invalid-feedback">Please fill out this email correctly.</div>
+          <div class="input-group mb-3">
+            <input [type]="hide ? 'password' : 'text'" class="form-control" autocomplete="current-password"
+            formControlName="passwordlogin"
+            [ngClass]="{'is-invalid': invalidField('passwordlogin')}"
+              placeholder="{{'password' | translate}}">
+            <div class="input-group-append">
+              <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+              </div>
 
-	        </div>
+              <button type="button" class="btn btn-default" (click)="toggleHide()">
+                <i class="fas" [ngClass]="{'fa-eye-slash': !hide, 'fa-eye': hide}"></i>
+              </button>
+            </div>
+          </div>
 
-	        <div class="input-group mb-3">
+          <div class="invalid-feedback">Please fill out this field correctly.</div>
 
-	          <input type="password"
-	          class="form-control"
-	          placeholder="{{'password' | translate}}"
-            autocomplete="current-password"
-	          formControlName="passwordlogin"
-	          [ngClass]="{'is-invalid': invalidField('passwordlogin')}">
+          <div class="row">
+            <!-- /.col -->
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            </div>
+            <!-- /.col -->
+          </div>
+        </form>
 
-	          <div class="input-group-append">
-	            <div class="input-group-text">
-	              <span class="fas fa-lock"></span>
-	            </div>
-	          </div>
-
-	           <div class="invalid-feedback">Please fill out this field correctly.</div>
-
-	        </div>
-
-	        <div class="row">
-	          <!-- /.col -->
-	          <div class="col-12">
-	            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-	          </div>
-	          <!-- /.col -->
-	        </div>
-	      </form>
-
-
-	    </div>
-	    <!-- /.login-card-body -->
-	  </div>
-	</div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 	<!-- /.login-box -->
-
 </div>

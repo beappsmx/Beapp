@@ -23,7 +23,7 @@ import { map } from 'rxjs';
 })
 export class LoginComponent implements OnInit{
 
-
+  hide = true;
   emailcapt   : string = '';
 
   displayName : string = '' ;
@@ -57,6 +57,10 @@ export class LoginComponent implements OnInit{
 
   ngOnInit(): void {
 
+  }
+
+  toggleHide() {
+    this.hide = !this.hide;
   }
 
 	/*=============================================
@@ -111,10 +115,10 @@ export class LoginComponent implements OnInit{
                       if (datauser) {
                         const displayName = datauser.displayName;
                         const picture     = datauser.picture;
-                        
+
                         this.trackingService.setnameUser(displayName);
                         this.trackingService.setpictureUser(picture);
-                        
+
                       }
                     },
                     (error) => {

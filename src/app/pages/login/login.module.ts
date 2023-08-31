@@ -9,6 +9,7 @@ import { LoginRoutingModule } from './login-routing.module';
 
 import { TranslateService} from '@ngx-translate/core';
 import { TranslateModule } from '@ngx-translate/core';
+import {MatCardModule} from '@angular/material/card';
 
 
 
@@ -17,8 +18,9 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [
     CommonModule,
     LoginRoutingModule,
-    ReactiveFormsModule, 
-    TranslateModule  
+    ReactiveFormsModule,
+    TranslateModule,
+    MatCardModule
   ]
 
 })
