@@ -1,10 +1,20 @@
 .login-page{
-	background: #fcb800;
+	background: #19647e;
   background-image: url('../../../assets/img/wallppr1.png');
   background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el elemento */
   background-position: center center; /* Centra la imagen horizontal y verticalmente */
   background-repeat: no-repeat; /* Evita que la imagen se repita */
 }
 .logo{
-  width: 200px;
+  width: 220px;
+}
+.btn-hcologin{
+  border: #19647e;
+  background-color: #19647e;
+  color: white;
+  transition: background-color 0.3s; /* Agrega una transición suave */
+}
+
+.btn-hcologin:hover {
+  background-color: #174d60; /* Cambia el color al hacer hover */
 }

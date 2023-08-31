@@ -11,51 +11,57 @@
           autocomplete="off"
           [formGroup]="flogin"
           (ngSubmit)="login()">
-          <div class="input-group mb-3">
 
-            <input type="email"
-            class="form-control"
-            placeholder="{{ 'email' | translate}}"
-            formControlName="emaillogin"
-            [ngClass]="{'is-invalid': invalidField('emaillogin')}" >
-
+          <div class="input-group mb-3 position-relative">
+            <input
+              type="email"
+              class="form-control"
+              placeholder="{{ 'email' | translate}}"
+              formControlName="emaillogin"
+              [ngClass]="{'is-invalid': invalidField('emaillogin')}"
+            >
             <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-envelope"></span>
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <span class="fas fa-envelope"></span>
+                </div>
               </div>
             </div>
-
-            <div class="invalid-feedback">Please fill out this email correctly.</div>
-
+            <div class="invalid-tooltip">Please fill out this email correctly.</div>
           </div>
 
-          <div class="input-group mb-3">
-            <input [type]="hide ? 'password' : 'text'" class="form-control" autocomplete="current-password"
-            formControlName="passwordlogin"
-            [ngClass]="{'is-invalid': invalidField('passwordlogin')}"
-              placeholder="{{'password' | translate}}">
+          <div class="input-group mb-4 position-relative">
+            <input
+              [type]="hide ? 'password' : 'text'"
+              class="form-control"
+              autocomplete="current-password"
+              formControlName="passwordlogin"
+              [ngClass]="{'is-invalid': invalidField('passwordlogin')}"
+              placeholder="{{'password' | translate}}"
+            >
             <div class="input-group-append">
-              <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-              </div>
-
-              <button type="button" class="btn btn-default" (click)="toggleHide()">
-                <i class="fas" [ngClass]="{'fa-eye-slash': !hide, 'fa-eye': hide}"></i>
+              <button type="button" class="btn btn-default position-absolute" (click)="toggleHide()"
+                style="right: 12%; top: 50%; transform: translateY(-50%);">
+                <i class="fas" [ngClass]="{'fa-eye': !hide, 'fa-eye-slash': hide}"></i>
               </button>
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <span class="fas fa-lock"></span>
+                </div>
+              </div>
             </div>
+            <div class="invalid-tooltip">Please fill out this field correctly.</div>
           </div>
 
-          <div class="invalid-feedback">Please fill out this field correctly.</div>
 
           <div class="row">
             <!-- /.col -->
             <div class="col-12">
-              <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+              <button type="submit" class="btn btn-hcologin btn-block">Sign In</button>
             </div>
             <!-- /.col -->
           </div>
         </form>
-
       </mat-card-content>
     </mat-card>
   </div>
