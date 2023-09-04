@@ -324,7 +324,8 @@ export class RiskComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-
+        alerts.basicAlert('Ok', 'The Resources has been saved', 'success');
+        this.getDataActions();
       }
     });
   }

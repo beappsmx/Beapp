@@ -67,6 +67,7 @@ export class RiskService {
 
   }
 
+
   getRinterested(valor) {
     const apiUrl = `${environment.urlFirebase}rinteres.json?orderBy="id_risk"&equalTo="${valor}"`;
     try {
@@ -78,6 +79,25 @@ export class RiskService {
         });
     } catch (error) {
       console.log('Error al Consultar tabla de rInteres', error);
+      return null;
+    }
+  }
+
+  getActionResources(valor) {
+    const apiUrl = `${environment.urlFirebase}actionsres.json?orderBy="id_action"&equalTo="${valor}"`;
+    try {
+      return this.http.get<any>(apiUrl).toPromise()
+        .then(data => {
+          return Object.keys(data).map(key => ({
+            key: key,
+            cost: data[key].cost,
+            quantity: data[key].quantity,
+            rdescription: data[key].rdescription,
+            unit: data[key].unit
+          }));
+        });
+    } catch (error) {
+      console.log('Error al Consultar tabla de actionsres', error);
       return null;
     }
   }
@@ -138,6 +158,16 @@ export class RiskService {
   postSelInterested(data: any, token:any){
     try {
       return this.http.post(`${environment.urlFirebase}rinteres.json?auth=${token}`, data);
+    } catch (error) {
+      console.log('Error al guardar', error);
+      return null;
+    }
+
+  }
+
+  postSelActionres(data: any, token:any){
+    try {
+      return this.http.post(`${environment.urlFirebase}actionsres.json?auth=${token}`, data);
     } catch (error) {
       console.log('Error al guardar', error);
       return null;
@@ -239,6 +269,28 @@ export class RiskService {
 
     } catch (error) {
       console.error("Error al borrar registros relacionados al id_risk", error);
+      throw error;
+    }
+  }
+
+  async deleteActionresByRiskId(idAction: string, token: any): Promise<void> {
+    try {
+      const apiUrl = `${environment.urlFirebase}actionsres.json?orderBy="id_action"&equalTo="${idAction}"&auth=${token}`;
+
+      const dataActionres = await this.http.get<any>(apiUrl).toPromise();
+
+      const deleteRequests: Promise<any>[] = [];
+
+      for (const key of Object.keys(dataActionres)) {
+        const deleteUrl = `${environment.urlFirebase}actionsres/${key}.json?auth=${token}`;
+        const deleteRequest = this.http.delete(deleteUrl).toPromise();
+        deleteRequests.push(deleteRequest);
+      }
+
+      await Promise.all(deleteRequests);
+
+    } catch (error) {
+      console.error("Error al borrar registros relacionados al actionsres", error);
       throw error;
     }
   }
