@@ -5,6 +5,7 @@ import { Iinteres } from 'src/app/interface/interested';
 import { TraductorService} from 'src/app/services/traductor.service';
 import { TrackingService } from 'src/app/services/tracking.service';
 import { PrintreportsService } from 'src/app/services/printreports.service';
+import { PrintpdfService } from 'src/app/services/printpdf.service';
 
 import { MatTableDataSource } from '@angular/material/table';
 import { InteresService } from 'src/app/services/interes.service';
@@ -79,6 +80,7 @@ export class InterestedComponent implements OnInit{
   constructor(public translateService: TraductorService, private trackingService : TrackingService,
               private interesService : InteresService,
               public printReportsService : PrintreportsService,
+              public PrintpdfService: PrintpdfService,
                public dialog : MatDialog,) { }
 
   ngOnInit(): void {
@@ -256,7 +258,7 @@ export class InterestedComponent implements OnInit{
 
 
   printList() {
-    this.printReportsService.listInterested();
+    this.PrintpdfService.listInterested();
   }
 
 }

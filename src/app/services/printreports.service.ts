@@ -115,10 +115,10 @@ lessonslearnedOne() {
         {text: 'Proceso', style: 'headerCellYellow' }
       ];
 
+      console.log("Combined Data", this.combinedData$);
       this.downloadAndProcessImage(imagePath, headerRow, this.combinedData$, 2)
 
 
-    console.log("Combined Data", this.combinedData$);
   });
 }
 
